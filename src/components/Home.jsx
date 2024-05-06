@@ -6,7 +6,8 @@ export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
   const [isVisible2, setIsVisible2] = useState(false);
   const [isVisible3, setIsVisible3] = useState(false);
-  
+  const [isVisible4, setIsVisible4] = useState(false);
+    
   useEffect(() => {
     const handleScroll = () => {
       const brandArea = document.getElementById('style-lIcJX'); // Replace 'style-lIcJX' with the actual ID of your brand area element
@@ -30,7 +31,14 @@ export default function Home() {
       }, 100);
      }
 
+     const mintLifts = document.getElementById("style=mintLift")
+     if(!isVisible4 && isElementInViewport(mintLifts)){
+      setTimeout(() => {
+        setIsVisible4(true)
+      }, 300);
+     }
 
+     
     };
 
      
@@ -44,7 +52,7 @@ export default function Home() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isVisible,isVisible2,isVisible3]);
+  }, [isVisible,isVisible2,isVisible3,isVisible4]);
 
   // Function to check if element is in viewport
   const isElementInViewport = (el) => {
@@ -810,8 +818,9 @@ export default function Home() {
                             </div>
                           </div>
                           <div
-                            className="mint__lits-wrapper"
+                            className={`mint__lits-wrapper ${isVisible4? "visible" : ""}`}
                             data-anime="targets: > *; opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 300;"
+                            id="style=mintLift"
                           >
                             <img
                               decoding="async"

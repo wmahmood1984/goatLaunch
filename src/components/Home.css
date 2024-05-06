@@ -3350,6 +3350,17 @@
     transform: scale(1);
   }
 
+  .mint__lits-wrapper  {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .mint__lits-wrapper .visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
 
  
   #style-yXmib.style-yXmib {  
