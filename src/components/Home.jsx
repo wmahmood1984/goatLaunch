@@ -1,9 +1,68 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Home.css";
 
 export default function Home() {
+
+  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible2, setIsVisible2] = useState(false);
+  const [isVisible3, setIsVisible3] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const brandArea = document.getElementById('style-lIcJX'); // Replace 'style-lIcJX' with the actual ID of your brand area element
+      if (!isVisible && isElementInViewport(brandArea)) {
+         setTimeout(() => {
+          setIsVisible(true);
+        }, 300);
+      }
+
+      const dividerArea = document.getElementById("style-dvooP")
+     if(!isVisible2 && isElementInViewport(dividerArea)){
+      setTimeout(() => {
+        setIsVisible2(true)
+      }, 400);
+     }
+
+     const mintArea = document.getElementById("style-nLQQO")
+     if(!isVisible3 && isElementInViewport(mintArea)){
+      setTimeout(() => {
+        setIsVisible3(true)
+      }, 100);
+     }
+
+
+    };
+
+     
+
+
+
+    // Listen for scroll events
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup function to remove event listener
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isVisible,isVisible2,isVisible3]);
+
+  // Function to check if element is in viewport
+  const isElementInViewport = (el) => {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  };
+
+  console.log("first",isVisible3)
+
+
   return (
     <div
+
       className="home page-template page-template-elementor_header_footer page page-id-24 wp-embed-responsive no-sidebar elementor-default elementor-template-full-width elementor-kit-24416 elementor-page elementor-page-24 e--ua-blink e--ua-chrome e--ua-webkit snipcss-68ioz"
       data-elementor-device-mode="desktop"
       cz-shortcut-listen="true"
@@ -289,7 +348,9 @@ export default function Home() {
           </div>
         </div>
       </header>
-      <main className="fix">
+      <main 
+
+      className="fix">
         <div className="gradient-position ">
           <img
             src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/gradient-circle.svg"
@@ -307,6 +368,7 @@ export default function Home() {
           />
         </div>
         <div
+
           data-elementor-type="wp-page"
           data-elementor-id="24"
           className="elementor elementor-24"
@@ -328,31 +390,42 @@ export default function Home() {
             </div>
           </section>
           <section
+
             className="elementor-section elementor-top-section elementor-element elementor-element-4956fbe elementor-section-full_width elementor-section-height-default"
             data-id="4956fbe"
             data-element_type="section"
           >
             <div className="elementor-container elementor-column-gap-no">
               <div
+
                 className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-cd51e57"
                 data-id="cd51e57"
                 data-element_type="column"
               >
-                <div className="elementor-widget-wrap elementor-element-populated">
+                <div 
+
+                className="elementor-widget-wrap elementor-element-populated">
                   <div
+
                     className="elementor-element elementor-element-e0f2df0 elementor-widget elementor-widget-hero-banner"
                     data-id="e0f2df0"
                     data-element_type="widget"
                     data-widget_type="hero-banner.default"
                   >
-                    <div className="elementor-widget-container">
+                    <div 
+
+                    className="elementor-widget-container">
                       <section
+
                         id="home"
                         className="banner-area banner-padding tg-section position-relative"
                       >
                         <div className="banner__background-wrap">
                           <div
                             className="background style-cIhzi"
+                            style={{
+                                backgroundImage: `url(${'https://web3.edulabs.ai/wp-content/uploads/2022/12/gradient_bg01.png'})`}}
+
                             data-background="https://web3.edulabs.ai/wp-content/uploads/2022/12/gradient_bg01.png"
                             id="style-cIhzi"
                           ></div>
@@ -361,8 +434,8 @@ export default function Home() {
                           <div className="row">
                             <div className="col-lg-6">
                               <div
-                                style={{border:"1px solid red",textAlign:"left"}}
-                                className="banner__content tg-content style-J5LIM"
+
+                                className="banner__content"
                                 data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;"
                                 id="style-J5LIM"
                               >
@@ -393,10 +466,12 @@ export default function Home() {
                                   id="style-4QzrH"
                                   className="style-4QzrH"
                                 />
-                                <h2 className="title"
-
+                                <h2 
+                                
+                                className="title"
+                                style={{fontWeight:"900px"}}
                                 >
-                                  Web 3.0 Student-Centric Tool
+                                  Web 3.0 <br/>Student-Centric Tool
                                 </h2>
                                 <p className="desc">
                                   An educational productivity tool designed for
@@ -502,8 +577,10 @@ export default function Home() {
                                         d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
                                       ></path>
                                     </defs>
-                                    <text font-size="11.75">
-                                      <textPath xlink:href="#circle">
+                                    <text font-size="11.75px">
+                                      <textPath 
+                                      style={{}}
+                                      xlink:href="#circle">
                                         view in web3 • view in web3 •
                                       </textPath>
                                     </text>
@@ -522,6 +599,7 @@ export default function Home() {
             </div>
           </section>
           <section
+            
             className="elementor-section elementor-top-section elementor-element elementor-element-fbdf678 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
             data-id="fbdf678"
             data-element_type="section"
@@ -541,14 +619,17 @@ export default function Home() {
                   >
                     <div className="elementor-widget-container">
                       <div
-                        className="brand-area style-lIcJX"
+                        className={`brand-area ${isVisible ? 'visible' : ''}`}
+                        //className="brand-area style-lIcJX"
                         data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 300;"
                         id="style-lIcJX"
                       >
                         <div className="container">
                           <div className="row justify-content-center">
                             <div className="col-xl-10 col-12">
-                              <h6 className="brand__title">
+                              <h6 
+                              
+                              className="brand__title">
                                 POWERED BY AMAZING PARTNERS:
                               </h6>
                               <div className="brand__list">
@@ -673,7 +754,7 @@ export default function Home() {
                   >
                     <div className="elementor-widget-container">
                       <div
-                        className="section-divider style-dvooP"
+                        className={`section-divider style-dvooP ${isVisible2? "visible" : ""}`}
                         data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
                         id="style-dvooP"
                       >
@@ -709,10 +790,12 @@ export default function Home() {
                     data-widget_type="features.default"
                   >
                     <div className="elementor-widget-container">
-                      <section className="mint-area">
+                      <section 
+                      
+                      className='mint-area'>
                         <div className="container">
                           <div
-                            className="row justify-content-center style-nLQQO"
+                            className={`mint-area2 row justify-content-center style-nLQQO ${isVisible3? "visible" : ""}`}
                             data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 200;"
                             id="style-nLQQO"
                           >

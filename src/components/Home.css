@@ -67,6 +67,12 @@
     /* Add more src lines for other font weights and styles if needed */
 }
 
+@font-face {
+    font-family: 'Mabry Pro';
+    src: url('../fonts/MabryPro-Regular.ttf') format('truetype');
+    /* Add more src lines for other font weights and styles if needed */
+}
+
   body { 
   /* CSS Variables that may have been missed get put on body */ 
       --tg-theme-primary:  #741ff5; 
@@ -233,7 +239,9 @@
       -ms-transform: scale(1.1); 
       -o-transform: scale(1.1); 
       transform: scale(1.1);
-    } 
+    }
+    
+    
   
     .fix { 
       overflow: hidden;
@@ -1178,7 +1186,7 @@
     } 
   
     .position-relative { 
-      position: relative!important;
+      position: relative;
     } 
   
     .banner-padding { 
@@ -1311,7 +1319,7 @@
       width: 100%; 
       min-height: 100vh; 
       pointer-events: none; 
-      z-index: -1;
+      z-index: 9999;
     } 
   
     .banner-area .container  { 
@@ -2464,14 +2472,17 @@
   
     .banner__content .title  { 
       font-family: var(--tg-heading-font-family);
-      font-weight: var(--tg-fw-bold);
+      
+    
       font-size: 72px; 
       line-height: 1; 
       margin: 0 0 23px;
+      
     } 
   
     .banner__content .desc  { 
-      font-size: 24px; 
+      font-family: var(--tg-body-font-family);
+        font-size: 24px; 
       line-height: 1.5; 
       max-width: 75%; 
       margin: 0 0 36px;
@@ -3288,18 +3299,59 @@
       fill: transparent;  
       opacity: .1;  
   }  
+
+  .brand-area {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .brand-area.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
   #style-lIcJX.style-lIcJX {  
      opacity: 0;  
       transform: translateY(24px);  
   }  
-  #style-dvooP.style-dvooP {  
-     opacity: 0;  
-      transform: scale(0);  
-  }  
-  #style-nLQQO.style-nLQQO {  
-     opacity: 0;  
-      transform: translateY(24px);  
-  }  
+
+  .section-divider {
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .section-divider.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+
+  .mint-area2 {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .mint-area2.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-divider {
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .section-divider .visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+
+ 
   #style-yXmib.style-yXmib {  
      top: -16%;  
       left: 8%;  
@@ -3322,10 +3374,7 @@
      opacity: 0;  
       transform: translateY(24px);  
   }  
-  #style-eZUyE.style-eZUyE {  
-     opacity: 0;  
-      transform: scale(0);  
-  }  
+  
   #style-OAvpT.style-OAvpT {  
      bottom: -32%;  
       left: 30%;  
