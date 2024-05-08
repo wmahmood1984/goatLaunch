@@ -14,6 +14,7 @@ export default function Home() {
   const [isVisible9, setIsVisible9] = useState(false);
   const [isVisible10, setIsVisible10] = useState(false);
   const [isVisible11, setIsVisible11] = useState(false);
+  const [sliderState, setSliderState] = useState(0);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -118,7 +119,7 @@ export default function Home() {
     );
   };
 
-  console.log("first",isVisible5)
+  console.log("first",sliderState)
 
 
   return (
@@ -1392,7 +1393,7 @@ export default function Home() {
                             className="swiper roadmap__active swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden"
                             >
                               <div
-                                className="swiper-wrapper"
+                                className={`swiper-wrapper swiper-wrapper${sliderState}`}
                                 data-anime="targets: > * > *; opacity:[0, 1]; scale:[0.5, 1]; onview: -400; delay: anime.stagger(200);"
                                 id="swiper-wrapper-747bd286d24e1eb9"
                                 aria-live="polite"
@@ -1557,29 +1558,41 @@ export default function Home() {
                             </div>
                             <div className="tg-swiper-scrollbar swiper-pagination-progressbar swiper-pagination-horizontal">
                               <span
-                                className="swiper-pagination-progressbar-fill style-c3h58"
+                                className={`swiper-pagination-progressbar-fill style-c3h58${sliderState}`}
                                 id="style-c3h58"
                               ></span>
                             </div>
                             <a
+                              onClick={()=>{
+                                if(sliderState>0){
+                                  setSliderState(sliderState-1)
+                                }
+
+                              }}
                               aria-label="Previous slide"
-                              href="#prev"
-                              className="tg-swiper-prev swiper-button-disabled"
+                              
+                              className={`tg-swiper-prev ${sliderState===0 ? "swiper-button-disabled" : ""}`}
                               tabindex="-1"
                               role="button"
                               aria-controls="swiper-wrapper-747bd286d24e1eb9"
-                              aria-disabled="true"
+                              aria-disabled={sliderState===0}
                             >
                               <i className="fas fa-chevron-left"></i>
                             </a>
                             <a
+                              onClick={()=>{
+                                if(sliderState<3){
+                                  setSliderState(sliderState+1)
+                                }
+
+                              }}
                               aria-label="Next slide"
-                              href="#next"
-                              className="tg-swiper-next"
+                              className={`tg-swiper-next ${sliderState===3 ? "swiper-button-disabled" : ""}`}
+                              
                               tabindex="0"
                               role="button"
                               aria-controls="swiper-wrapper-747bd286d24e1eb9"
-                              aria-disabled="false"
+                              aria-disabled={sliderState===3}
                             >
                               <i className="fas fa-chevron-right"></i>
                             </a>
@@ -1591,8 +1604,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </section>
-          
+          </section>          
           <section
             className="elementor-section elementor-top-section elementor-element elementor-element-a2596a3 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
             data-id="a2596a3"
@@ -1831,6 +1843,7 @@ export default function Home() {
               </div>
             </div>
           </section>
+          
           <section
             className="elementor-section elementor-top-section elementor-element elementor-element-301eeba elementor-section-full_width elementor-section-height-default elementor-section-height-default"
             data-id="301eeba"

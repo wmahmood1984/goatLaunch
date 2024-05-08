@@ -2131,7 +2131,12 @@
     .roadmap__wrapper .tg-swiper-prev.swiper-button-disabled  { 
       cursor: default; 
       opacity: 0.4;
-    } 
+    }
+    
+    .roadmap__wrapper .tg-swiper-next.swiper-button-disabled  { 
+        cursor: default; 
+        opacity: 0.4;
+      }
   
     .roadmap__wrapper .tg-swiper-next  { 
       position: absolute; 
@@ -2372,9 +2377,21 @@
       box-sizing: content-box;
     } 
   
-    .swiper-wrapper { 
+    .swiper-wrapper0 { 
       transform: translate3d(0px,0,0);
-    } 
+    }
+    
+    .swiper-wrapper1 { 
+        transform: translate3d(-400px,0,0);
+      }
+
+      .swiper-wrapper2 { 
+        transform: translate3d(-800px,0,0);
+      }
+
+      .swiper-wrapper3 { 
+        transform: translate3d(-1200px,0,0);
+      }
   
     .swiper .swiper-notification  { 
       position: absolute; 
@@ -3568,10 +3585,22 @@
     opacity: 1;  
      transform: scale(1);  
  } 
-  #style-c3h58.style-c3h58 {  
+  #style-c3h58.style-c3h580 {  
      transform: translate3d(0px, 0px, 0px) scaleX(0.25) scaleY(1);  
       transition-duration: 300ms;  
-  }  
+  }
+  #style-c3h58.style-c3h581 {  
+    transform: translate3d(0px, 0px, 0px) scaleX(0.5) scaleY(1);  
+     transition-duration: 300ms;  
+ }
+ #style-c3h58.style-c3h582 {  
+    transform: translate3d(0px, 0px, 0px) scaleX(0.75) scaleY(1);  
+     transition-duration: 300ms;  
+ }
+ #style-c3h58.style-c3h583 {  
+    transform: translate3d(0px, 0px, 0px) scaleX(1) scaleY(1);  
+     transition-duration: 300ms;  
+ }  
   #style-gVrl1.style-gVrl1 {  
      opacity: 0;  
       transform: scale(0);  

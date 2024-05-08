@@ -1,0 +1,10 @@
+class="swiper-wrapper" data-anime="targets: > * > *; opacity:[0, 1]; scale:[0.5, 1]; onview: -400; delay: anime.stagger(200);" 
+id="swiper-wrapper-747bd286d24e1eb9" 
+aria-live="polite"
+
+
+
+class="swiper-wrapper" data-anime="targets: > * > *; opacity:[0, 1]; scale:[0.5, 1]; onview: -400; delay: anime.stagger(200);"
+ id="swiper-wrapper-4bd7b9afaf8dd4af"
+  aria-live="polite" 
+  style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px)
