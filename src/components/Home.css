@@ -3111,7 +3111,7 @@
     } 
   
     .faq__wrapper .accordion-button::after { 
-      content: "\e946"; 
+      content: "˅"; 
       background: none; 
       font-family: var(--tg-ui-icon-font-family); 
       font-weight: var(--tg-fw-regular); 
@@ -3604,23 +3604,44 @@
   #style-gVrl1.style-gVrl1 {  
      opacity: 0;  
       transform: scale(0);  
-  }  
+  }
+  #style-gVrl1.style-gVrl1.visible {  
+    opacity: 1;  
+     transform: scale(1);  
+ }  
   #style-58aeG.style-58aeG {  
      opacity: 0;  
       transform: scale(0);  
-  }  
+  }
+  
+  #style-58aeG.style-58aeG.visible {  
+    opacity: 1;  
+     transform: scale(1);  
+ }
   #style-mvDDl.style-mvDDl {  
      opacity: 0;  
       transform: translateY(24px);  
-  }  
+  }
+  #style-mvDDl.style-mvDDl.visible {  
+    opacity: 1;  
+     transform: translateY(0);  
+ }  
   #style-SVpWC.style-SVpWC {  
      opacity: 0;  
       transform: translateY(24px);  
-  }  
+  }
+  #style-SVpWC.style-SVpWC.visible {  
+    opacity: 1;  
+     transform: translateY(0);  
+ }  
   #style-eqSEz.style-eqSEz {  
      opacity: 0;  
       transform: scale(0);  
-  }  
+  }
+  #style-eqSEz.style-eqSEz.visible {  
+    opacity: 1;  
+     transform: scale(1);  
+ }  
   #style-8HNFi.style-8HNFi {  
      background-image: url("https://web3.edulabs.ai/wp-content/uploads/2022/12/collection_cta.png");  
   }  
@@ -3643,7 +3664,12 @@
   #style-IHCWU.style-IHCWU {  
      opacity: 0;  
       transform: scale(0);  
-  }  
+  }
+  
+  #style-IHCWU.style-IHCWU.visible {  
+    opacity: 1;  
+     transform: scale(1);  
+ }  
   #style-jMxon.style-jMxon {  
      top: 32%;  
       left: 16%;  

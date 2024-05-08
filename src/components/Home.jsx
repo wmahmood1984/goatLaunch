@@ -14,7 +14,11 @@ export default function Home() {
   const [isVisible9, setIsVisible9] = useState(false);
   const [isVisible10, setIsVisible10] = useState(false);
   const [isVisible11, setIsVisible11] = useState(false);
+  const [isVisible12, setIsVisible12] = useState(false);
+  const [isVisible13, setIsVisible13] = useState(false);
+  const [isVisible14, setIsVisible14] = useState(false);
   const [sliderState, setSliderState] = useState(0);
+  const [faqState, setFAQState] = useState(0);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -91,6 +95,27 @@ export default function Home() {
       if(!isVisible11 && isElementInViewport(divider9)){
        setTimeout(() => {
          setIsVisible11(true)
+       }, 400);
+      }
+
+      const divider10 = document.getElementById("style-58aeG")
+      if(!isVisible12 && isElementInViewport(divider10)){
+       setTimeout(() => {
+         setIsVisible12(true)
+       }, 400);
+      }
+
+      const divider11 = document.getElementById("style-mvDDl")
+      if(!isVisible13 && isElementInViewport(divider11)){
+       setTimeout(() => {
+         setIsVisible13(true)
+       }, 400);
+      }
+
+      const divider12 = document.getElementById("style-eqSEz")
+      if(!isVisible14 && isElementInViewport(divider12)){
+       setTimeout(() => {
+         setIsVisible14(true)
        }, 400);
       }
       
@@ -1625,7 +1650,7 @@ export default function Home() {
                   >
                     <div className="elementor-widget-container">
                       <div
-                        className="section-divider style-gVrl1"
+                        className={`section-divider style-gVrl1 ${isVisible12? "visible":""}`}
                         data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
                         id="style-gVrl1"
                       >
@@ -1843,7 +1868,6 @@ export default function Home() {
               </div>
             </div>
           </section>
-          
           <section
             className="elementor-section elementor-top-section elementor-element elementor-element-301eeba elementor-section-full_width elementor-section-height-default elementor-section-height-default"
             data-id="301eeba"
@@ -1864,7 +1888,7 @@ export default function Home() {
                   >
                     <div className="elementor-widget-container">
                       <div
-                        className="section-divider style-58aeG"
+                        className={`section-divider style-58aeG ${isVisible12? "visible":""}`}
                         data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
                         id="style-58aeG"
                       >
@@ -1902,7 +1926,7 @@ export default function Home() {
                       <section className="faq-area">
                         <div className="container">
                           <div
-                            className="row justify-content-center style-mvDDl"
+                            className={`row justify-content-center style-mvDDl ${isVisible13?"visible":""}`}
                             data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;"
                             id="style-mvDDl"
                           >
@@ -1915,7 +1939,7 @@ export default function Home() {
                           <div className="row justify-content-center">
                             <div className="col-xxl-7 col-xl-9 col-lg-10">
                               <div
-                                className="faq__wrapper style-SVpWC"
+                                className={`faq__wrapper style-SVpWC ${isVisible13?"visible":""}`}
                                 data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;"
                                 id="style-SVpWC"
                               >
@@ -1926,7 +1950,15 @@ export default function Home() {
                                       id="headingOne-0"
                                     >
                                       <button
-                                        className="accordion-button "
+                                        onClick={()=>{
+                                          if(faqState==0){
+                                            setFAQState(null)
+                                          }else{
+                                            setFAQState(0)}
+                                          }
+
+                                        }
+                                        className={`accordion-button ${faqState==0?"":"collapsed"}`}
                                         type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#collapseOne-0"
@@ -1940,7 +1972,7 @@ export default function Home() {
                                     </h2>
                                     <div
                                       id="collapseOne-0"
-                                      className="accordion-collapse collapse show"
+                                      className={`accordion-collapse collapse ${faqState===0?"show":""}`}
                                       aria-labelledby="headingOne-0"
                                       data-bs-parent="#accordionFaq"
                                     >
@@ -1966,7 +1998,15 @@ export default function Home() {
                                       id="headingOne-1"
                                     >
                                       <button
-                                        className="accordion-button collapsed"
+                                        onClick={()=>{
+                                          if(faqState==1){
+                                            setFAQState(null)
+                                          }else{
+                                            setFAQState(1)}
+                                          }
+
+                                        }
+                                        className={`accordion-button ${faqState==1?"":"collapsed"}`}
                                         type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#collapseOne-1"
@@ -1980,7 +2020,7 @@ export default function Home() {
                                     </h2>
                                     <div
                                       id="collapseOne-1"
-                                      className="accordion-collapse collapse "
+                                      className={`accordion-collapse collapse ${faqState===1?"show":""}`}
                                       aria-labelledby="headingOne-1"
                                       data-bs-parent="#accordionFaq"
                                     >
@@ -2005,7 +2045,15 @@ export default function Home() {
                                       id="headingOne-2"
                                     >
                                       <button
-                                        className="accordion-button collapsed"
+                                        onClick={()=>{
+                                          if(faqState==2){
+                                            setFAQState(null)
+                                          }else{
+                                            setFAQState(2)}
+                                          }
+
+                                        }
+                                        className={`accordion-button ${faqState==2?"":"collapsed"}`}
                                         type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#collapseOne-2"
@@ -2020,7 +2068,7 @@ export default function Home() {
                                     </h2>
                                     <div
                                       id="collapseOne-2"
-                                      className="accordion-collapse collapse "
+                                      className={`accordion-collapse collapse ${faqState===2?"show":""}`}
                                       aria-labelledby="headingOne-2"
                                       data-bs-parent="#accordionFaq"
                                     >
@@ -2045,7 +2093,15 @@ export default function Home() {
                                       id="headingOne-3"
                                     >
                                       <button
-                                        className="accordion-button collapsed"
+                                        onClick={()=>{
+                                          if(faqState==3){
+                                            setFAQState(null)
+                                          }else{
+                                            setFAQState(3)}
+                                          }
+
+                                        }
+                                        className={`accordion-button ${faqState==3?"":"collapsed"}`}
                                         type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#collapseOne-3"
@@ -2060,7 +2116,7 @@ export default function Home() {
                                     </h2>
                                     <div
                                       id="collapseOne-3"
-                                      className="accordion-collapse collapse "
+                                      className={`accordion-collapse collapse ${faqState===3?"show":""}`}
                                       aria-labelledby="headingOne-3"
                                       data-bs-parent="#accordionFaq"
                                     >
@@ -2083,7 +2139,15 @@ export default function Home() {
                                       id="headingOne-4"
                                     >
                                       <button
-                                        className="accordion-button collapsed"
+                                        onClick={()=>{
+                                          if(faqState==4){
+                                            setFAQState(null)
+                                          }else{
+                                            setFAQState(4)}
+                                          }
+
+                                        }
+                                        className={`accordion-button ${faqState==4?"":"collapsed"}`}
                                         type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#collapseOne-4"
@@ -2097,7 +2161,7 @@ export default function Home() {
                                     </h2>
                                     <div
                                       id="collapseOne-4"
-                                      className="accordion-collapse collapse "
+                                      className={`accordion-collapse collapse ${faqState===4?"show":""}`}
                                       aria-labelledby="headingOne-4"
                                       data-bs-parent="#accordionFaq"
                                     >
@@ -2122,7 +2186,15 @@ export default function Home() {
                                       id="headingOne-5"
                                     >
                                       <button
-                                        className="accordion-button collapsed"
+                                        onClick={()=>{
+                                          if(faqState==5){
+                                            setFAQState(null)
+                                          }else{
+                                            setFAQState(5)}
+                                          }
+
+                                        }
+                                        className={`accordion-button ${faqState==5?"":"collapsed"}`}
                                         type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#collapseOne-5"
@@ -2136,7 +2208,7 @@ export default function Home() {
                                     </h2>
                                     <div
                                       id="collapseOne-5"
-                                      className="accordion-collapse collapse "
+                                      className={`accordion-collapse collapse ${faqState===5?"show":""}`}
                                       aria-labelledby="headingOne-5"
                                       data-bs-parent="#accordionFaq"
                                     >
@@ -2167,6 +2239,7 @@ export default function Home() {
               </div>
             </div>
           </section>
+
           <section
             className="elementor-section elementor-top-section elementor-element elementor-element-b660c28 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
             data-id="b660c28"
@@ -2187,7 +2260,7 @@ export default function Home() {
                   >
                     <div className="elementor-widget-container">
                       <div
-                        className="section-divider style-eqSEz"
+                        className={`section-divider style-eqSEz ${isVisible14? "visible":""}`}
                         data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
                         id="style-eqSEz"
                       >
