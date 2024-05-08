@@ -7,7 +7,14 @@ export default function Home() {
   const [isVisible2, setIsVisible2] = useState(false);
   const [isVisible3, setIsVisible3] = useState(false);
   const [isVisible4, setIsVisible4] = useState(false);
-    
+  const [isVisible5, setIsVisible5] = useState(false);
+  const [isVisible6, setIsVisible6] = useState(false);
+  const [isVisible7, setIsVisible7] = useState(false);
+  const [isVisible8, setIsVisible8] = useState(false);
+  const [isVisible9, setIsVisible9] = useState(false);
+  const [isVisible10, setIsVisible10] = useState(false);
+  const [isVisible11, setIsVisible11] = useState(false);
+  
   useEffect(() => {
     const handleScroll = () => {
       const brandArea = document.getElementById('style-lIcJX'); // Replace 'style-lIcJX' with the actual ID of your brand area element
@@ -18,30 +25,76 @@ export default function Home() {
       }
 
       const dividerArea = document.getElementById("style-dvooP")
-     if(!isVisible2 && isElementInViewport(dividerArea)){
-      setTimeout(() => {
-        setIsVisible2(true)
-      }, 400);
-     }
+      if(!isVisible2 && isElementInViewport(dividerArea)){
+       setTimeout(() => {
+         setIsVisible2(true)
+       }, 400);
+      }
+ 
+      const mintingArea = document.getElementById("minting")
+      if(!isVisible3 && isElementInViewport(dividerArea)){
+       setTimeout(() => {
+         setIsVisible3(true)
+       }, 400);
+      }
 
-     const mintArea = document.getElementById("style-nLQQO")
-     if(!isVisible3 && isElementInViewport(mintArea)){
-      setTimeout(() => {
-        setIsVisible3(true)
-      }, 100);
-     }
+      const divider2 = document.getElementById("style-eZUyE")
+      if(!isVisible4 && isElementInViewport(divider2)){
+       setTimeout(() => {
+         setIsVisible4(true)
+       }, 400);
+      }
 
-     const mintLifts = document.getElementById("style=mintLift")
-     if(!isVisible4 && isElementInViewport(mintLifts)){
-      setTimeout(() => {
-        setIsVisible4(true)
-      }, 300);
-     }
+      const divider3 = document.getElementById("style-67j2l")
+      if(!isVisible5 && isElementInViewport(divider3)){
+       setTimeout(() => {
+         setIsVisible5(true)
+       }, 400);
+      }
 
-     
+      const divider4 = document.getElementById("style-vEXo7")
+      if(!isVisible6 && isElementInViewport(divider4)){
+       setTimeout(() => {
+         setIsVisible6(true)
+       }, 400);
+      }
+
+      const divider5 = document.getElementById("style-mH626")
+      if(!isVisible7 && isElementInViewport(divider5)){
+       setTimeout(() => {
+         setIsVisible7(true)
+       }, 400);
+      }
+
+      const divider6 = document.getElementById("style-bFDAd")
+      if(!isVisible8 && isElementInViewport(divider6)){
+       setTimeout(() => {
+         setIsVisible8(true)
+       }, 400);
+      }
+      const divider7 = document.getElementById("style-EUZig")
+      if(!isVisible9 && isElementInViewport(divider7)){
+       setTimeout(() => {
+         setIsVisible9(true)
+       }, 400);
+      }
+
+      const divider8 = document.getElementById("style-m5n7U")
+      if(!isVisible10 && isElementInViewport(divider8)){
+       setTimeout(() => {
+         setIsVisible10(true)
+       }, 400);
+      }
+
+      const divider9 = document.getElementById("style-jGYIo")
+      if(!isVisible11 && isElementInViewport(divider9)){
+       setTimeout(() => {
+         setIsVisible11(true)
+       }, 400);
+      }
+      
+      
     };
-
-     
 
 
 
@@ -52,7 +105,7 @@ export default function Home() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isVisible,isVisible2,isVisible3,isVisible4]);
+  }, [isVisible,isVisible2,isVisible3,isVisible4,isVisible5,isVisible6,isVisible7,isVisible8,isVisible9,isVisible10,isVisible11]);
 
   // Function to check if element is in viewport
   const isElementInViewport = (el) => {
@@ -65,7 +118,7 @@ export default function Home() {
     );
   };
 
-  console.log("first",isVisible3)
+  console.log("first",isVisible5)
 
 
   return (
@@ -779,7 +832,7 @@ export default function Home() {
             </div>
           </section>
           <section
-            className="elementor-section elementor-top-section elementor-element elementor-element-acaa241 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+            className={`elementor-section elementor-top-section elementor-element elementor-element-acaa241 elementor-section-full_width elementor-section-height-default elementor-section-height-default`}
             data-id="acaa241"
             data-element_type="section"
             id="minting"
@@ -799,11 +852,10 @@ export default function Home() {
                   >
                     <div className="elementor-widget-container">
                       <section 
-                      
-                      className='mint-area'>
+                      className={`mint-area  ${isVisible3? "visible":""}`} >
                         <div className="container">
                           <div
-                            className={`mint-area2 row justify-content-center style-nLQQO ${isVisible3? "visible" : ""}`}
+                            className="row justify-content-center style-nLQQO"
                             data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 200;"
                             id="style-nLQQO"
                           >
@@ -818,9 +870,9 @@ export default function Home() {
                             </div>
                           </div>
                           <div
-                            className={`mint__lits-wrapper ${isVisible4? "visible" : ""}`}
+                             className={`mint__lits-wrapper  ${isVisible3? "visible":""}`} 
+
                             data-anime="targets: > *; opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 300;"
-                            id="style=mintLift"
                           >
                             <img
                               decoding="async"
@@ -957,7 +1009,7 @@ export default function Home() {
                   >
                     <div className="elementor-widget-container">
                       <div
-                        className="section-divider style-eZUyE"
+                        className={`section-divider style-eZUyE ${isVisible4? "visible" : ""}`}
                         data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
                         id="style-eZUyE"
                       >
@@ -997,7 +1049,7 @@ export default function Home() {
                           <div className="fact__items-wrap position-relative">
                             <img
                               decoding="async"
-                              className="shape style-OAvpT"
+                              //className={`shape style-OAvpT ${isVisible5?"visible":""}`}
                               src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png"
                               width="32"
                               alt=""
@@ -1006,7 +1058,8 @@ export default function Home() {
                             />
                             <img
                               decoding="async"
-                              className="shape style-DtWqF"
+                              //className={`shape style-DtWqF ${isVisible5?"visible":""}`}
+
                               src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-01.png"
                               width="24"
                               alt=""
@@ -1018,19 +1071,22 @@ export default function Home() {
                               data-anime="targets: > *; opacity:[0, 1]; scale:[0.5, 1]; onview: -250; delay: anime.stagger(100);"
                             >
                               <div
-                                className="col-lg-4 col-md-6 col-sm-8 style-67j2l"
+                                className={`col-lg-4 col-md-6 col-sm-8 style-67j2l ${isVisible5?"visible":""}`}
                                 id="style-67j2l"
                               >
                                 <div className="fact__item text-center">
-                                  <h2 className="fact__count tg-text-gradient">
+                                  <h2 
+                                  className="fact__count tg-text-gradient"
+                                  >
                                     4,000+
                                   </h2>
                                   <span className="meta">Users Connected</span>
                                 </div>
                               </div>
                               <div
-                                className="col-lg-4 col-md-6 col-sm-8 style-gWhoj"
-                                id="style-gWhoj"
+                                className={`col-lg-4 col-md-6 col-sm-8 style-67j2l ${isVisible5?"visible":""}`}
+
+                                id="style-67j2l"
                               >
                                 <div className="fact__item text-center">
                                   <h2 className="fact__count tg-text-gradient">
@@ -1042,8 +1098,9 @@ export default function Home() {
                                 </div>
                               </div>
                               <div
-                                className="col-lg-4 col-md-6 col-sm-8 style-yLlKd"
-                                id="style-yLlKd"
+
+                                className={`col-lg-4 col-md-6 col-sm-8 style-67j2l ${isVisible5?"visible":""}`}
+                                id="style-67j2l"
                               >
                                 <div className="fact__item text-center">
                                   <h2 className="fact__count tg-text-gradient">
@@ -1084,7 +1141,7 @@ export default function Home() {
                   >
                     <div className="elementor-widget-container">
                       <div
-                        className="section-divider style-vEXo7"
+                        className={`section-divider style-vEXo7 ${isVisible6? "visible":""}`}
                         data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
                         id="style-vEXo7"
                       >
@@ -1123,7 +1180,7 @@ export default function Home() {
                       <section className="about-area">
                         <div className="container">
                           <div
-                            className="row justify-content-center style-mH626"
+                            className={`row justify-content-center style-mH626 ${isVisible7 ? "visible":""}`}
                             data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;"
                             id="style-mH626"
                           >
@@ -1137,7 +1194,7 @@ export default function Home() {
                             <div className="row align-items-center">
                               <div className="col-lg-6">
                                 <div
-                                  className="about__img style-rvQmG"
+                                  className={`about__img style-rvQmG ${isVisible7 ? "visible":""}`}
                                   data-anime="opacity:[0, 1]; translateX:[-24, 0]; onview: -250; delay: 200;"
                                   id="style-rvQmG"
                                 >
@@ -1150,7 +1207,8 @@ export default function Home() {
                               </div>
                               <div className="col-lg-6">
                                 <div
-                                  className="about__content style-Gom4l"
+                                className={`about__content style-Gom4l ${isVisible7 ? "visible":""}`}
+                                  
                                   data-anime="opacity:[0, 1]; translateX:[24, 0]; onview: -250; delay: 300;"
                                   id="style-Gom4l"
                                 >
@@ -1183,7 +1241,7 @@ export default function Home() {
                             <div className="row align-items-center">
                               <div className="col-lg-6">
                                 <div
-                                  className="about__img style-bFDAd"
+                                  className={`about__img style-bFDAd ${isVisible8?"visible":""}`}
                                   data-anime="opacity:[0, 1]; translateX:[24, 0]; onview: -250; delay: 200;"
                                   id="style-bFDAd"
                                 >
@@ -1196,7 +1254,8 @@ export default function Home() {
                               </div>
                               <div className="col-lg-6">
                                 <div
-                                  className="about__content style-K6gPX"
+                                 className={`about__content style-K6gPX ${isVisible8?"visible":""}`}
+                                  
                                   data-anime="opacity:[0, 1]; translateX:[-24, 0]; onview: -250; delay: 300;"
                                   id="style-K6gPX"
                                 >
@@ -1274,7 +1333,7 @@ export default function Home() {
                   >
                     <div className="elementor-widget-container">
                       <div
-                        className="section-divider style-EUZig"
+                        className={`section-divider style-EUZig ${isVisible9? "visible":""}`}
                         data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
                         id="style-EUZig"
                       >
@@ -1313,7 +1372,7 @@ export default function Home() {
                       <section className="roadmap-area">
                         <div className="container">
                           <div
-                            className="row justify-content-center style-m5n7U"
+                            className={`row justify-content-center style-m5n7U ${isVisible10?"visible":""}`}
                             data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;"
                             id="style-m5n7U"
                           >
@@ -1324,11 +1383,14 @@ export default function Home() {
                             </div>
                           </div>
                           <div
-                            className="roadmap__wrapper style-jGYIo"
+                           
+                            className={`roadmap__wrapper style-jGYIo ${isVisible11?"visible":""}`}
                             data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 200;"
                             id="style-jGYIo"
                           >
-                            <div className="swiper roadmap__active swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
+                            <div 
+                            className="swiper roadmap__active swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden"
+                            >
                               <div
                                 className="swiper-wrapper"
                                 data-anime="targets: > * > *; opacity:[0, 1]; scale:[0.5, 1]; onview: -400; delay: anime.stagger(200);"
@@ -1342,7 +1404,8 @@ export default function Home() {
                                   id="style-troIY"
                                 >
                                   <div
-                                    className="roadmap__card style-Yl7Sq"
+                                  className={`roadmap__card style-Yl7Sq ${isVisible11?"visible":""}`}
+
                                     id="style-Yl7Sq"
                                   >
                                     <div className="roadmap__percent">
@@ -1378,7 +1441,8 @@ export default function Home() {
                                   id="style-cyfCM"
                                 >
                                   <div
-                                    className="roadmap__card style-BY9rJ"
+                                  className={`roadmap__card style-BY9rJ ${isVisible11?"visible":""}`}
+                                    
                                     id="style-BY9rJ"
                                   >
                                     <div className="roadmap__percent">
@@ -1416,7 +1480,7 @@ export default function Home() {
                                   id="style-wozhe"
                                 >
                                   <div
-                                    className="roadmap__card style-7olpZ"
+                                    className={`roadmap__card style-7olpZ ${isVisible11?"visible":""}`}
                                     id="style-7olpZ"
                                   >
                                     <div className="roadmap__percent">
@@ -1453,7 +1517,8 @@ export default function Home() {
                                   id="style-57Gnc"
                                 >
                                   <div
-                                    className="roadmap__card style-pvoIm"
+                                   className={`roadmap__card style-pvoIm ${isVisible11?"visible":""}`}
+
                                     id="style-pvoIm"
                                   >
                                     <div className="roadmap__percent">
@@ -1527,6 +1592,7 @@ export default function Home() {
               </div>
             </div>
           </section>
+          
           <section
             className="elementor-section elementor-top-section elementor-element elementor-element-a2596a3 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
             data-id="a2596a3"
