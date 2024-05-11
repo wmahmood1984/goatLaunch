@@ -427,6 +427,20 @@ export default function Home() {
                           </a>
                         </li>
                         <li>
+                          <a 
+                          onClick={()=>{
+                            activate(injected)
+                            setShowModal(false)
+                          }}
+                          className="connect-meta">
+                            <img
+                              src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/metamask.svg"
+                              alt="MetaMask"
+                            />
+                            Wallet Connect
+                          </a>
+                        </li>
+                        {/* <li>
                           <a href="#">
                             <img
                               src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/bitgo.svg"
@@ -434,8 +448,8 @@ export default function Home() {
                             />
                             BitGo
                           </a>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                           <a href="#">
                             <img
                               src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/trust.svg"
@@ -452,7 +466,7 @@ export default function Home() {
                             />
                             Coinbase
                           </a>
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
                     <p className="privacy-text">
