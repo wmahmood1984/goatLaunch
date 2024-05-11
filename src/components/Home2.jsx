@@ -1,26 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import "./Home2.css"
 
-export default function Home() {
-  const [darkTheme,setDarkTheme] = useState(false)
+export default function Home2({setDarkTheme,darkTheme}) {
     console.log("second",darkTheme)
-  
+    useEffect(()=>{
+        document.body.setAttribute('tg-theme', 'dark')
+    },[])
   return (
-    <div 
-    style={darkTheme? {background:"#0F051D",color:"white"}: {}}
-    className="home page-template page-template-elementor_header_footer page page-id-24 wp-embed-responsive no-sidebar elementor-default elementor-template-full-width elementor-kit-24416 elementor-page elementor-page-24 e--ua-blink e--ua-chrome e--ua-webkit  snipcss-FIMzJ" data-elementor-device-mode="desktop" cz-shortcut-listen="true">
+    <div className="
+    
+    home page-template page-template-elementor_header_footer page page-id-24 wp-embed-responsive no-sidebar elementor-default elementor-template-full-width elementor-kit-24416 elementor-page elementor-page-24 e--ua-blink e--ua-chrome e--ua-webkit  snipcss-FIMzJ" data-elementor-device-mode="desktop" cz-shortcut-listen="true">
     <div className="darkmode-trigger ">
         <label className="modeSwitch ">
             <input 
             onClick={()=>{
-             if(darkTheme){
-              document.body.removeAttribute('tg-theme')
-              setDarkTheme(false)
-             }else{
-              document.body.setAttribute('tg-theme', 'dark')
-              setDarkTheme(true)
-             }   
-              
+                document.body.removeAttribute('tg-theme')
             
             }}
             type="checkbox" className=""/>
@@ -28,9 +22,7 @@ export default function Home() {
         </label>
     </div>
     <header className="">
-        <div 
-        
-        id="sticky-header" className="tg-header__area transparent-header ">
+        <div id="sticky-header" className="tg-header__area transparent-header ">
             <div className="container ">
                 <div className="row ">
                     <div className="col-12 ">

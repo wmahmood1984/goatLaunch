@@ -1,36 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import "./Home2.css"
-
-export default function Home() {
-  const [darkTheme,setDarkTheme] = useState(false)
-    console.log("second",darkTheme)
-  
-  return (
-    <div 
-    style={darkTheme? {background:"#0F051D",color:"white"}: {}}
-    className="home page-template page-template-elementor_header_footer page page-id-24 wp-embed-responsive no-sidebar elementor-default elementor-template-full-width elementor-kit-24416 elementor-page elementor-page-24 e--ua-blink e--ua-chrome e--ua-webkit  snipcss-FIMzJ" data-elementor-device-mode="desktop" cz-shortcut-listen="true">
+<div className="home page-template page-template-elementor_header_footer page page-id-24 wp-embed-responsive no-sidebar elementor-default elementor-template-full-width elementor-kit-24416 elementor-page elementor-page-24 e--ua-blink e--ua-chrome e--ua-webkit  snipcss-FIMzJ" data-elementor-device-mode="desktop" cz-shortcut-listen="true">
     <div className="darkmode-trigger ">
         <label className="modeSwitch ">
-            <input 
-            onClick={()=>{
-             if(darkTheme){
-              document.body.removeAttribute('tg-theme')
-              setDarkTheme(false)
-             }else{
-              document.body.setAttribute('tg-theme', 'dark')
-              setDarkTheme(true)
-             }   
-              
-            
-            }}
-            type="checkbox" className=""/>
+            <input type="checkbox" className="">
             <span className="icon "></span>
         </label>
     </div>
     <header className="">
-        <div 
-        
-        id="sticky-header" className="tg-header__area transparent-header ">
+        <div id="sticky-header" className="tg-header__area transparent-header ">
             <div className="container ">
                 <div className="row ">
                     <div className="col-12 ">
@@ -39,10 +15,10 @@ export default function Home() {
                             <nav className="tgmenu__nav ">
                                 <div className="logo ">
                                     <a className="light-logo " href="https://web3.edulabs.ai/">
-                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/1.png" height="auto" style={{maxWidth: "120px"}} alt="Logo" className=""/>
+                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/1.png" height="auto" style="max-width: 120px" alt="Logo" className="">
                                     </a>
                                     <a className="dark-logo " href="https://web3.edulabs.ai/">
-                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/2.png" height="auto" style={{maxWidth: "120px"}} alt="Logo" className=""/>
+                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/2.png" height="auto" style="max-width: 120px" alt="Logo" className="">
                                     </a>
                                 </div>
                                 <div className="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex ">
@@ -73,10 +49,10 @@ export default function Home() {
                                 <div className="close-btn "><i className="flaticon-close-1 "></i></div>
                                 <div className="nav-logo ">
                                     <a className="light-logo " href="https://web3.edulabs.ai/">
-                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/1.png" height="auto" style={{maxWidth: "120px"}} alt="Logo" className=""/>
+                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/1.png" height="auto" style="max-width: 120px" alt="Logo" className="">
                                     </a>
                                     <a className="dark-logo " href="https://web3.edulabs.ai/">
-                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/2.png" height="auto" style={{maxWidth: "120px"}} alt="Logo" className=""/>
+                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/2.png" height="auto" style="max-width: 120px" alt="Logo" className="">
                                     </a>
                                 </div>
                                 <div className="tgmobile__menu-outer ">
@@ -132,16 +108,16 @@ export default function Home() {
                                 <div className="connect__section ">
                                     <ul className="list-wrap ">
                                         <li className="">
-                                            <a href="#" className="connect-meta "><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/metamask.svg" alt="MetaMask" className=""/>MetaMask</a>
+                                            <a href="#" className="connect-meta "><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/metamask.svg" alt="MetaMask" className="">MetaMask</a>
                                         </li>
                                         <li className="">
-                                            <a href="#" className=""><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/bitgo.svg" alt="BitGo" className=""/>BitGo</a>
+                                            <a href="#" className=""><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/bitgo.svg" alt="BitGo" className="">BitGo</a>
                                         </li>
                                         <li className="">
-                                            <a href="#" className=""><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/trust.svg" alt="Trust" className=""/>Trust Wallet</a>
+                                            <a href="#" className=""><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/trust.svg" alt="Trust" className="">Trust Wallet</a>
                                         </li>
                                         <li className="">
-                                            <a href="#" className=""><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/coinbase.svg" alt="Coinbase" className=""/>Coinbase</a>
+                                            <a href="#" className=""><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/coinbase.svg" alt="Coinbase" className="">Coinbase</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -155,8 +131,8 @@ export default function Home() {
     </header>
     <main className="fix ">
         <div className="gradient-position ">
-            <img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/gradient-circle.svg" width="500" alt="Background Circle" className=" style-ej1SS" id="style-ej1SS"/>
-            <img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/gradient-circle.svg" width="500" alt="Background Circle" className=" style-GqCmz" id="style-GqCmz"/>
+            <img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/gradient-circle.svg" width="500" alt="Background Circle" className=" style-ej1SS" id="style-ej1SS">
+            <img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/gradient-circle.svg" width="500" alt="Background Circle" className=" style-GqCmz" id="style-GqCmz">
         </div>
         <div data-elementor-type="wp-page" data-elementor-id="24" className="elementor elementor-24 " data-elementor-post-type="page">
             <section className="elementor-section elementor-top-section elementor-element elementor-element-3a06ec7 elementor-section-full_width elementor-section-height-default " data-id="3a06ec7" data-element_type="section">
@@ -181,9 +157,9 @@ export default function Home() {
                                             <div className="row ">
                                                 <div className="col-lg-6 ">
                                                     <div className="banner__content tg-content  style-OwtdA" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;" id="style-OwtdA">
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-01.png" width="44" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" className=" style-G8LQy" id="style-G8LQy"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" width="16" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 420;" className=" style-qV4Bo" id="style-qV4Bo"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-03.png" width="24" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;" className=" style-bg6nT" id="style-bg6nT"/>
+                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-01.png" width="44" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" className=" style-G8LQy" id="style-G8LQy">
+                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" width="16" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 420;" className=" style-qV4Bo" id="style-qV4Bo">
+                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-03.png" width="24" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;" className=" style-bg6nT" id="style-bg6nT">
                                                         <h2 className="title ">Web 3.0 Student-Centric Tool</h2>
                                                         <p className="desc ">An educational productivity tool designed for collaboration and efficiency, powered by Web3 technology for secure authentication, transparency, and tailored learning experiences.</p>
                                                         <a href="http://edulabs.ai/#signup" target="_blank" rel="nofollow" className="banner__btn btn gradient-btn ">
@@ -193,17 +169,17 @@ export default function Home() {
                                                 </div>
                                                 <div className="col-lg-6 ">
                                                     <div className="banner__images  style-1RWws" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 200;" id="style-1RWws">
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png" width="44" className="shape  style-6A2KS" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 460;" id="style-6A2KS"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" width="28" className="shape  style-9cEFx" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 480;" id="style-9cEFx"/>
-                                                        <img decoding="async" className="shape dashed-line has-active-light  style-N9AEX" width="300" src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/blob-dashed.svg" alt="Blog dashed" id="style-N9AEX"/>
-                                                        <img decoding="async" className="shape dashed-line has-active-dark  style-UemUB" width="300" src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/blob-dashed-light.svg" alt="Blog dashed" id="style-UemUB"/>
-                                                        <svg style={{top: "-17%", opacity: ".3"}} className="shape " viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png" width="44" className="shape  style-6A2KS" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 460;" id="style-6A2KS">
+                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" width="28" className="shape  style-9cEFx" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 480;" id="style-9cEFx">
+                                                        <img decoding="async" className="shape dashed-line has-active-light  style-N9AEX" width="300" src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/blob-dashed.svg" alt="Blog dashed" id="style-N9AEX">
+                                                        <img decoding="async" className="shape dashed-line has-active-dark  style-UemUB" width="300" src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/blob-dashed-light.svg" alt="Blog dashed" id="style-UemUB">
+                                                        <svg style="top: -17%; opacity: .3;" className="shape " viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill="#F796FF" d="M47.5,-67.2C55.9,-59.3,53.2,-37.9,56.7,-20.1C60.2,-2.3,69.9,11.8,70.8,27.3C71.7,42.9,63.8,59.9,50.6,64.4C37.3,68.9,18.6,60.8,-0.3,61.2C-19.3,61.6,-38.6,70.7,-53.5,66.7C-68.4,62.8,-78.9,45.9,-78.8,29.5C-78.7,13.2,-67.9,-2.7,-59.8,-16.8C-51.6,-31,-46,-43.3,-36.5,-50.9C-27,-58.4,-13.5,-61.1,3,-65.2C19.6,-69.4,39.1,-75.1,47.5,-67.2Z" transform="translate(100 100)">
                                                             </path>
                                                         </svg>
                                                         <div className="banner__images-grid ">
-                                                            <div className="left "><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/art_09.jpg" alt="" className=""/></div>
-                                                            <div className="right "><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/art_06.jpg" alt="" className=""/></div>
+                                                            <div className="left "><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/art_09.jpg" alt="" className=""></div>
+                                                            <div className="right "><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/art_06.jpg" alt="" className=""></div>
                                                         </div>
                                                         <a href="https://web3.edulabs.ai/" target="_blank" rel="nofollow" className="tg-circle-text ">
                                                             <svg className="tg-circle-text-path tg-animation-spin " viewBox="0 0 100 100" width="120" height="120">
@@ -241,24 +217,24 @@ export default function Home() {
                                                     <h6 className="brand__title ">POWERED BY AMAZING PARTNERS:</h6>
                                                     <div className="brand__list ">
                                                         <div className="brand__item ">
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-01.svg" className="has-active-light " alt=""/></a>
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-01.svg" className="has-active-dark " alt=""/></a>
+                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-01.svg" className="has-active-light " alt=""></a>
+                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-01.svg" className="has-active-dark " alt=""></a>
                                                         </div>
                                                         <div className="brand__item ">
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-02.svg" className="has-active-light " alt=""/></a>
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-02.svg" className="has-active-dark " alt=""/></a>
+                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-02.svg" className="has-active-light " alt=""></a>
+                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-02.svg" className="has-active-dark " alt=""></a>
                                                         </div>
                                                         <div className="brand__item ">
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-03.svg" className="has-active-light " alt=""/></a>
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-03.svg" className="has-active-dark " alt=""/></a>
+                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-03.svg" className="has-active-light " alt=""></a>
+                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-03.svg" className="has-active-dark " alt=""></a>
                                                         </div>
                                                         <div className="brand__item ">
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-04.svg" className="has-active-light " alt=""/></a>
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-04.svg" className="has-active-dark " alt=""/></a>
+                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-04.svg" className="has-active-light " alt=""></a>
+                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-04.svg" className="has-active-dark " alt=""></a>
                                                         </div>
                                                         <div className="brand__item ">
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-05.svg" className="has-active-light " alt=""/></a>
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-05.svg" className="has-active-dark " alt=""/></a>
+                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-05.svg" className="has-active-light " alt=""></a>
+                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-05.svg" className="has-active-dark " alt=""></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -278,7 +254,7 @@ export default function Home() {
                             <div className="elementor-element elementor-element-a90de43 elementor-widget elementor-widget-tg-separator " data-id="a90de43" data-element_type="widget" data-widget_type="tg-separator.default">
                                 <div className="elementor-widget-container ">
                                     <div className="section-divider  style-Tq55v" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-Tq55v">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
+                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className="">
                                     </div>
                                 </div>
                             </div>
@@ -303,14 +279,14 @@ export default function Home() {
                                                 </div>
                                             </div>
                                             <div className="mint__lits-wrapper " data-anime="targets: > *; opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 300;">
-                                                <img decoding="async" className="shape  style-4v3bH" width="16" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" alt="" id="style-4v3bH"/>
-                                                <img decoding="async" className="shape  style-yUyQN" width="28" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-02.png" alt="" id="style-yUyQN"/>
-                                                <img decoding="async" className="shape  style-h4wDJ" width="24" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" alt="" id="style-h4wDJ"/>
+                                                <img decoding="async" className="shape  style-4v3bH" width="16" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" alt="" id="style-4v3bH">
+                                                <img decoding="async" className="shape  style-yUyQN" width="28" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-02.png" alt="" id="style-yUyQN">
+                                                <img decoding="async" className="shape  style-h4wDJ" width="24" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" alt="" id="style-h4wDJ">
                                                 <div className="row justify-content-center  style-5oHRf" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: -250; delay: anime.stagger(100);" id="style-5oHRf">
                                                     <div className="col-md-6 col-sm-9 ">
                                                         <div className="mint__item ">
                                                             <div className="mint__icon ">
-                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-01.png" alt=""/>
+                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-01.png" alt="">
                                                             </div>
                                                             <div className="mint__content ">
                                                                 <h2 className="title ">Study Goals</h2>
@@ -321,7 +297,7 @@ export default function Home() {
                                                     <div className="col-md-6 col-sm-9 ">
                                                         <div className="mint__item ">
                                                             <div className="mint__icon ">
-                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-02.png" alt=""/>
+                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-02.png" alt="">
                                                             </div>
                                                             <div className="mint__content ">
                                                                 <h2 className="title ">Manage Assignments</h2>
@@ -332,7 +308,7 @@ export default function Home() {
                                                     <div className="col-md-6 col-sm-9 ">
                                                         <div className="mint__item ">
                                                             <div className="mint__icon ">
-                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-03.png" alt=""/>
+                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-03.png" alt="">
                                                             </div>
                                                             <div className="mint__content ">
                                                                 <h2 className="title ">Task Management</h2>
@@ -343,7 +319,7 @@ export default function Home() {
                                                     <div className="col-md-6 col-sm-9 ">
                                                         <div className="mint__item ">
                                                             <div className="mint__icon ">
-                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-04.png" alt=""/>
+                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-04.png" alt="">
                                                             </div>
                                                             <div className="mint__content ">
                                                                 <h2 className="title ">Study Notes</h2>
@@ -368,7 +344,7 @@ export default function Home() {
                             <div className="elementor-element elementor-element-98fedc9 elementor-widget elementor-widget-tg-separator " data-id="98fedc9" data-element_type="widget" data-widget_type="tg-separator.default">
                                 <div className="elementor-widget-container ">
                                     <div className="section-divider  style-7o3Nf" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-7o3Nf">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
+                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className="">
                                     </div>
                                 </div>
                             </div>
@@ -385,8 +361,8 @@ export default function Home() {
                                     <section className="fact-area ">
                                         <div className="container ">
                                             <div className="fact__items-wrap position-relative ">
-                                                <img decoding="async" className="shape  style-2pln4" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png" width="32" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: -250; delay: 200;" id="style-2pln4"/>
-                                                <img decoding="async" className="shape  style-zl2L2" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-01.png" width="24" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: -250; delay: 200;" id="style-zl2L2"/>
+                                                <img decoding="async" className="shape  style-2pln4" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png" width="32" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: -250; delay: 200;" id="style-2pln4">
+                                                <img decoding="async" className="shape  style-zl2L2" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-01.png" width="24" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: -250; delay: 200;" id="style-zl2L2">
                                                 <div className="row justify-content-center " data-anime="targets: > *; opacity:[0, 1]; scale:[0.5, 1]; onview: -250; delay: anime.stagger(100);">
                                                     <div className="col-lg-4 col-md-6 col-sm-8  style-XPSah" id="style-XPSah">
                                                         <div className="fact__item text-center ">
@@ -423,7 +399,7 @@ export default function Home() {
                             <div className="elementor-element elementor-element-f78a15a elementor-widget elementor-widget-tg-separator " data-id="f78a15a" data-element_type="widget" data-widget_type="tg-separator.default">
                                 <div className="elementor-widget-container ">
                                     <div className="section-divider  style-miqpK" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-miqpK">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
+                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className="">
                                     </div>
                                 </div>
                             </div>
@@ -450,7 +426,7 @@ export default function Home() {
                                                 <div className="row align-items-center ">
                                                     <div className="col-lg-6 ">
                                                         <div className="about__img  style-QAY2S" data-anime="opacity:[0, 1]; translateX:[-24, 0]; onview: -250; delay: 200;" id="style-QAY2S">
-                                                            <img decoding="async" src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/features-03.png" alt="" className=""/>
+                                                            <img decoding="async" src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/features-03.png" alt="" className="">
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-6 ">
@@ -476,7 +452,7 @@ export default function Home() {
                                                 <div className="row align-items-center ">
                                                     <div className="col-lg-6 ">
                                                         <div className="about__img  style-oDnl9" data-anime="opacity:[0, 1]; translateX:[24, 0]; onview: -250; delay: 200;" id="style-oDnl9">
-                                                            <img decoding="async" src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/features-02.png" alt="" className=""/>
+                                                            <img decoding="async" src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/features-02.png" alt="" className="">
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-6 ">
@@ -519,7 +495,7 @@ export default function Home() {
                             <div className="elementor-element elementor-element-4550010 elementor-widget elementor-widget-tg-separator " data-id="4550010" data-element_type="widget" data-widget_type="tg-separator.default">
                                 <div className="elementor-widget-container ">
                                     <div className="section-divider  style-2zPtH" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-2zPtH">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
+                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className="">
                                     </div>
                                 </div>
                             </div>
@@ -655,7 +631,7 @@ export default function Home() {
                             <div className="elementor-element elementor-element-8a51db3 elementor-widget elementor-widget-tg-separator " data-id="8a51db3" data-element_type="widget" data-widget_type="tg-separator.default">
                                 <div className="elementor-widget-container ">
                                     <div className="section-divider  style-4UyDD" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-4UyDD">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
+                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className="">
                                     </div>
                                 </div>
                             </div>
@@ -809,7 +785,7 @@ export default function Home() {
                             <div className="elementor-element elementor-element-a9e5aa4 elementor-widget elementor-widget-tg-separator " data-id="a9e5aa4" data-element_type="widget" data-widget_type="tg-separator.default">
                                 <div className="elementor-widget-container ">
                                     <div className="section-divider  style-sXUZl" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-sXUZl">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
+                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className="">
                                     </div>
                                 </div>
                             </div>
@@ -915,7 +891,7 @@ export default function Home() {
                             <div className="elementor-element elementor-element-8069a0f elementor-widget elementor-widget-tg-separator " data-id="8069a0f" data-element_type="widget" data-widget_type="tg-separator.default">
                                 <div className="elementor-widget-container ">
                                     <div className="section-divider  style-pkNto" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-pkNto">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
+                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className="">
                                     </div>
                                 </div>
                             </div>
@@ -935,10 +911,10 @@ export default function Home() {
                                             <div className="row justify-content-center ">
                                                 <div className="col-xl-6 col-lg-8 ">
                                                     <div className="cta__content text-center ">
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" width="24" alt="" className=" style-gU5jH" id="style-gU5jH"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png" width="48" alt="" className=" style-D4DfI" id="style-D4DfI"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-02.png" width="40" alt="" className=" style-tdpTi" id="style-tdpTi"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" width="24" alt="" className=" style-Fy9or" id="style-Fy9or"/>
+                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" width="24" alt="" className=" style-gU5jH" id="style-gU5jH">
+                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png" width="48" alt="" className=" style-D4DfI" id="style-D4DfI">
+                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-02.png" width="40" alt="" className=" style-tdpTi" id="style-tdpTi">
+                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" width="24" alt="" className=" style-Fy9or" id="style-Fy9or">
                                                         <h2 className="title ">Let's Get Started</h2>
                                                         <a href="http://edulabs.ai/app/login" target="_blank" rel="nofollow" className="btn gradient-btn "> Join community </a>
                                                     </div>
@@ -959,7 +935,7 @@ export default function Home() {
                             <div className="elementor-element elementor-element-6df5371 elementor-widget elementor-widget-tg-separator " data-id="6df5371" data-element_type="widget" data-widget_type="tg-separator.default">
                                 <div className="elementor-widget-container ">
                                     <div className="section-divider  style-VdDIj" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-VdDIj">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
+                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className="">
                                     </div>
                                 </div>
                             </div>
@@ -976,16 +952,16 @@ export default function Home() {
                                     <footer className="footer-area section-py-80 ">
                                         <div className="container ">
                                             <div className="footer__wrapper ">
-                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-01.png" width="32" alt="" className=" style-wJaMW" id="style-wJaMW"/>
-                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" width="16" alt="" className=" style-dkTaS" id="style-dkTaS"/>
-                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" width="16" alt="" className=" style-mlyoR" id="style-mlyoR"/>
-                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-03.png" width="24" alt="" className=" style-2tjiL" id="style-2tjiL"/>
+                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-01.png" width="32" alt="" className=" style-wJaMW" id="style-wJaMW">
+                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" width="16" alt="" className=" style-dkTaS" id="style-dkTaS">
+                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" width="16" alt="" className=" style-mlyoR" id="style-mlyoR">
+                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-03.png" width="24" alt="" className=" style-2tjiL" id="style-2tjiL">
                                                 <div className="row justify-content-center ">
                                                     <div className="col-xl-5 col-lg-7 col-md-9 col-sm-11 ">
                                                         <div className="footer__info text-center ">
                                                             <div className="footer-logo ">
                                                                 <a href="https://web3.edulabs.ai/" className="">
-                                                                    <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2024/05/2.png" width="200" alt="Logo" className=""/>
+                                                                    <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2024/05/2.png" width="200" alt="Logo" className="">
                                                                 </a>
                                                             </div>
                                                             <p className="">Edulabs Web3.0 improves student productivity. It lets students set goals and achieve those efficiently through powerful set of features and tools.</p>
@@ -1029,9 +1005,9 @@ export default function Home() {
             </section>
         </div>
     </main>
-    <link rel="stylesheet" id="e-animations-css" href="https://web3.edulabs.ai/wp-content/plugins/elementor/assets/lib/animations/animations.min.css?ver=3.21.4" type="text/css" media="all" className="72"/>
+    <link rel="stylesheet" id="e-animations-css" href="https://web3.edulabs.ai/wp-content/plugins/elementor/assets/lib/animations/animations.min.css?ver=3.21.4" type="text/css" media="all" className="72">
     <span id="elementor-device-mode" className="elementor-screen-only "></span>
-    <svg style={{display: "none"}} className="e-font-icon-svg-symbols "></svg>
+    <svg style="display: none;" className="e-font-icon-svg-symbols "></svg>
     <div id="loom-companion-mv3" ext-id="liecbddmkiiihnedobmlmillhodjkdmb" className="">
         <section id="shadow-host-companion" className=""></section>
     </div>
@@ -1047,7 +1023,7 @@ export default function Home() {
     <div data-tether-id="1" className=" style-j9n1x" id="style-j9n1x"></div>
     <div id="snipcss-panel-container" className="style-5yGs7">
         <div id="snipcss-button-relative-container">
-            <div className="snipcss_birdcontainer style-zzCzM" id="style-zzCzM"><img className="snipcss_bird style-r3CXr" src="chrome-extension://hbdnoadcmapfbngbodpppofgagiclicf/img/kiwi_transparent_run_text.png" id="style-r3CXr"/></div><button id="snipcss-close" className=""><span id="snipcss-close-svg"><svg viewBox="0 0 24 24" className="close">
+            <div className="snipcss_birdcontainer style-zzCzM" id="style-zzCzM"><img className="snipcss_bird style-r3CXr" src="chrome-extension://hbdnoadcmapfbngbodpppofgagiclicf/img/kiwi_transparent_run_text.png" id="style-r3CXr"></div><button id="snipcss-close" className=""><span id="snipcss-close-svg"><svg viewBox="0 0 24 24" className="close">
                         <path d="M 2 2 L 22 22 M 2 22 L22 2" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
                     </svg></span></button>
         </div>
@@ -1064,5 +1040,3 @@ export default function Home() {
     <div className="edge_builder2 edge_builder_left style-aPCIp" id="style-aPCIp"></div>
     <div data-tether-id="1" id="style-TRV95" className="style-TRV95"></div><canvas width="70" height="70" id="snipcss-kiwi" className="style-hIdem"></canvas>
 </div>
-  )
-}
