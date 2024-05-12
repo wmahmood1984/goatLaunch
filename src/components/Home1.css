@@ -1989,8 +1989,9 @@
     } 
   
     .connect__section .list-wrap li a img  { 
-      max-width: 30px; 
-      max-height: 28px;
+      width: 50px; 
+      height: 50px;
+
     } 
   }     
   

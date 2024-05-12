@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Home1.css";
 import { useWeb3React } from "@web3-react/core";
-import { injected } from "../connectors/connectors";
+import { walletconnect, injected } from "../connectors/connectors";
+import wc from "../assets/walletconnect-seeklogo.svg"
+
+
+
 
 export default function Home() {
 
-    const {account,activate,deactivate} = useWeb3React()
+
 
 
   const [isVisible, setIsVisible] = useState(false);
@@ -151,7 +155,7 @@ export default function Home() {
     );
   };
 
-  console.log("first",account)
+
 
 
   return (
@@ -273,23 +277,9 @@ export default function Home() {
                           </a>
                         </li>
                         <li className="header-btn">
-                          <button
-                            
-                            onClick={()=>{
-                               if(account){
-                                deactivate()
-                               }else{
-                                setShowModal(true)
-                               }
-                               
-
-                            }}
-                            className="btn border-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#connectModal"
-                          >
-                            {account ? `${account.slice(0,5)}...${account.slice(-5)}` : "Connect Wallet"}
-                          </button>
+                        <w3m-button 
+                        balance="hide"
+                        />
                         </li>
                       </ul>
                     </div>
@@ -429,12 +419,13 @@ export default function Home() {
                         <li>
                           <a 
                           onClick={()=>{
-                            activate(injected)
+                            activate(walletconnect)
                             setShowModal(false)
                           }}
                           className="connect-meta">
                             <img
-                              src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/metamask.svg"
+                              
+                              src={wc}
                               alt="MetaMask"
                             />
                             Wallet Connect
