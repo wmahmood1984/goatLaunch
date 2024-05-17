@@ -222,7 +222,7 @@ export default function Home() {
                           id="menu-item-24477"
                           className="menu-item menu-item-type-post_type menu-item-object-page menu-item-24477"
                         >
-                          <a href="https://web3.edulabs.ai/?page_id=30">
+                          <a href="/tokenomics">
                             Tokenomics
                           </a>
                         </li>
