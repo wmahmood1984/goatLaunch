@@ -227,6 +227,14 @@ export default function Home() {
                           </a>
                         </li>
                         <li
+                          id="menu-item-24477"
+                          className="menu-item menu-item-type-post_type menu-item-object-page menu-item-24477"
+                        >
+                          <a href="/swap">
+                            Swap
+                          </a>
+                        </li>
+                        <li
                           id="menu-item-91"
                           className="menu-item menu-item-type-custom menu-item-object-custom menu-item-91"
                         >

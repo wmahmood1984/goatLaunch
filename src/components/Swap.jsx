@@ -1,7 +1,119 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import "./Tokenomics.css"
 
-export default function Tokenomics() {
+const upper = {marginLeft:"10%",width:"80%", height:"45%",marginTop:"5%", boxShadow: "0px 0px 25px 10px #888888", textAlign:"center",borderRadius:"15px" } 
+const lower = {marginLeft:"10%",width:"80%", height:"45%",marginTop:"5%", boxShadow: "0px 0px 25px 10px #888888", textAlign:"center",borderRadius:"15px" }
+
+const TextInput = ({ className, label, ...props }) => {
+  return (
+    <div className="">
+      {label && <div className="">{label}</div>}
+      <div className="">
+        <input className="" {...props} />
+      </div>
+    </div>
+  );
+};
+
+
+export default function Swap() {
+  const [refSwap,setRefswap] = useState (false)
+  const [BUSDBalance,setBUSDBalance] = useState(0)
+
+  const [TVLBalance,setTVLBalance] = useState(0)
+  const [TVLamount,setTVLAmount] = useState()
+
+  const [amount,setAmount] = useState()
+
+
+  const swapTVL = async ()=>{
+    //setTitle("Swapping TVL")
+    try {
+   //   const tx1 = await SwapContract.buyTVL(parseEther(amount),{gasLimit:300000})
+   //   await tx1.wait()
+      // if(tx1){
+      //   setToggle(!toggle)
+      //   setOpen(false)
+      //   setAmount("")
+      // }
+
+    } catch (error) {
+      console.log("Error in approve TVL",error)
+      // setTitle("Transaction in Error")
+      // setOpen(false)
+      
+    }
+  }  
+  
+  
+  
+  
+  const approveTVL = async ()=>{
+    // if(account){
+    //   setOpen(true)
+    //   setTitle("Approving the BUSD")
+    //   try {
+    //     const tx1 = await BUSDContract.approve(TVLSwap,parseEther(amount),{gasLimit:300000})
+    //     await tx1.wait()
+        
+    //     if(tx1){
+    //       swapTVL()
+    //     }
+  
+    //   } catch (error) {
+    //     console.log("Error in approve TVL",error)
+    //   }
+    // }else{
+    //   window.alert("Please connnect your wallet")
+    // }
+
+  }
+
+
+
+  const swapBUSD = async ()=>{
+    // setTitle("Swapping BUSD")
+
+    // try {
+    //   const tx1 = await SwapContract.sellTVL(parseEther(TVLamount),{gasLimit:3000000})
+    //   await tx1.wait()
+    //   if(tx1){
+    //     setToggle(!toggle)
+    //     setOpen(false)
+    //     setTVLAmount("")
+    //   }
+
+    // } catch (error) {
+    //   console.log("Error in approve TVL",error)
+    //   setTitle("Transaction in Error")
+    //   setOpen(false)
+      
+    // }
+  }  
+  
+  
+  
+  
+  const approveBUSD = async ()=>{
+  // if(account){
+  //   setOpen(true)
+  //   setTitle("Approving the TVL")
+  //   try {
+  //     const tx1 = await TVLContract.approve(TVLSwap,parseEther(TVLamount),{gasLimit:3000000})
+  //     await tx1.wait()
+      
+  //     if(tx1){
+  //       swapBUSD()
+  //     }
+
+  //   } catch (error) {
+  //     console.log("Error in approve BUSD",error)
+  //   }
+  // }else{
+  //   window.alert("Please connect your walet")
+  // }
+
+  }
   return (
     <div
       class="page-template page-template-elementor_header_footer page page-id-30 wp-embed-responsive no-sidebar elementor-default elementor-template-full-width elementor-kit-24416 elementor-page elementor-page-30 e--ua-blink e--ua-chrome e--ua-webkit snipcss0-0-0-1 XXsnipcss_extracted_selector_selectionXX tether-element-attached-top tether-element-attached-center tether-target-attached-top tether-target-attached-center"
@@ -399,25 +511,112 @@ export default function Tokenomics() {
                                   style={{bottom: "-16%", right: "16%", opacity: "1", transform: "scale(1)"}}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;"
                                 />
-
-                                <h2 class="title snipcss0-14-92-98">
-                                  Token Utility
-                                </h2>
-                                <p class="desc snipcss0-14-92-99">
-                                  $EDUX is essential to bridge the gap between
-                                  the worlds of blockchain and AI.
-                                </p>
-
-                                <a
-                                  href="#"
-                                  target="_blank"
-                                  rel="nofollow"
-                                  class="banner__btn btn gradient-btn gradient-btn-2 snipcss0-14-92-100"
-                                >
-                                  <span class="snipcss0-15-100-101">
-                                    Browse Token
-                                  </span>
-                                </a>
+{!refSwap? 
+       <div>
+        <strong>Swap BUSD to TVL</strong>
+       <div style={!refSwap? upper : lower}>
+       <h1 style={{marginTop:"10px"}}>Your Existing BUSD balance : {Number(BUSDBalance).toFixed(2)}</h1> 
+         <TextInput
+         
+          style={{width:"80%"}}
+          className=""
+          label="Enter BUSD Value here"
+          name="BUSD Amount"
+          type="number"
+          placeholder="Enter your BUSD Value"
+          value={amount}
+          onChange={async (e) => {
+           setAmount(e.target.value)
+           const _tvlPrice = await SwapContract.getTVLOutputAmount(parseEther(e.target.value))
+           setTVLAmount(formatEther(_tvlPrice))
+         
+         }}
+         />
+         <button 
+         onClick={approveTVL}
+         style={{marginTop:"2%",marginBottom:"10px", width:"30%"}} variant="contained"> SWAP </button>
+ 
+ 
+ 
+       </div>
+       <button onClick={()=>{setRefswap(!refSwap)}}><img width="50px" style={{marginTop:"20px"}} src=""/></button>
+       <div style={!refSwap? lower : upper}>
+       <h1>Your Existing TVL balance : {Number(TVLBalance).toFixed(2)} </h1>
+       <TextInput
+          style={{width:"80%"}}
+          className=""
+          label="Enter TVL Value here"
+          name="TVL Amount"
+          type="number"
+          placeholder="Enter your TVL Value"
+          value={TVLamount}
+          onChange={async (e) => {
+           setTVLAmount(e.target.value)
+           const _BUSDPrice = await SwapContract.getBUSDOutputamount(parseEther( e.target.value))
+           setAmount(formatEther(_BUSDPrice) )
+         
+         }}
+ 
+         />
+ 
+       <button onClick={approveBUSD} style={{marginTop:"2%",marginBottom:"10px", width:"30%"}} variant="contained">Swap</button>
+       </div>
+ 
+       </div> : 
+       <div>
+        <strong>Swap TVL to BUSD</strong>
+       <div style={refSwap? upper : lower}>
+       <h1>Your Existing TVL balance : {Number(TVLBalance).toFixed(2)} </h1>
+       <TextInput
+          style={{width:"80%"}}
+          className=""
+          label="Enter TVL Value here"
+          name="TVL Amount"
+          type="number"
+          placeholder="Enter your TVL Value"
+          value={TVLamount}
+          onChange={async (e) => {
+           setTVLAmount(e.target.value)
+           const _BUSDPrice = await SwapContract.getBUSDOutputamount(parseEther( e.target.value))
+           setAmount(formatEther(_BUSDPrice) )
+         
+         }}
+ 
+         />
+ 
+       <button onClick={approveBUSD} style={{marginTop:"2%",marginBottom:"10px", width:"30%"}} variant="contained"> SWAP </button>
+       </div>
+       <button onClick={()=>{setRefswap(!refSwap)}}><img width="50px" style={{marginTop:"20px"}} src=""/></button>
+       <div style={refSwap? lower : upper}>
+       <h1>Your Existing BUSD balance : {Number(BUSDBalance).toFixed(2)}</h1> 
+         <TextInput
+         
+          style={{width:"80%"}}
+          className=""
+          label="Enter BUSD Value here"
+          name="BUSD Amount"
+          type="number"
+          placeholder="Enter your BUSD Value"
+          value={amount}
+          onChange={async (e) => {
+           setAmount(e.target.value)
+           const _tvlPrice = await SwapContract.getTVLOutputAmount(parseEther(e.target.value))
+           setTVLAmount(formatEther(_tvlPrice))
+         
+         }}
+         />
+         <button 
+         onClick={approveTVL}
+         style={{marginTop:"2%",marginBottom:"10px", width:"30%"}} variant="contained"> SWAP </button>
+ 
+ 
+ 
+       </div>
+       
+ 
+       </div>
+      }
+                                
                               </div>
                             </div>
                           </div>
