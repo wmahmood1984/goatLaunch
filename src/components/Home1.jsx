@@ -3,6 +3,7 @@ import "./Home1.css";
 import { useWeb3React } from "@web3-react/core";
 import { walletconnect, injected } from "../connectors/connectors";
 import wc from "../assets/walletconnect-seeklogo.svg"
+import { Link } from "react-router-dom";
 
 
 
@@ -222,17 +223,17 @@ export default function Home() {
                           id="menu-item-24477"
                           className="menu-item menu-item-type-post_type menu-item-object-page menu-item-24477"
                         >
-                          <a href="/tokenomics">
+                          <Link to="/tokenomics">
                             Tokenomics
-                          </a>
+                          </Link>
                         </li>
                         <li
                           id="menu-item-24477"
                           className="menu-item menu-item-type-post_type menu-item-object-page menu-item-24477"
                         >
-                          <a href="/swap">
+                          <Link href="/swap">
                             Swap
-                          </a>
+                          </Link>
                         </li>
                         <li
                           id="menu-item-91"
