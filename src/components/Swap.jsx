@@ -87,6 +87,7 @@ export default function Swap() {
   console.log("balance",amount)
   
   const swapToken = async () => {
+    if(account){
     console.log("kuch to hua he")
     const _now = Math.floor(new Date().getTime()/1000)  +5000
     setTitle("Swapping Token")
@@ -107,6 +108,9 @@ export default function Swap() {
       // setTitle("Transaction in Error")
       // setOpen(false)
     }
+  }else{
+    window.alert("Please connnect your wallet")
+  }
   };
 
   const approveToken = async () => {
