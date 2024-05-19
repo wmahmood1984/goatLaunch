@@ -1,8 +1,32 @@
-import React, { useState,useEffect } from "react";
-import "./Tokenomics.css"
+import React, { useState, useEffect } from "react";
+import { useWalletInfo } from '@web3modal/wagmi/react'
+import "./Tokenomics.css";
+import Header from "./Header";
+import { useWeb3React } from "@web3-react/core";
+import { ethers } from "ethers";
+import { Contract } from "ethers";
+import { WBNB, defaultRpc, defualtChain, swapV2Abi, swapV2Address, tokenAbi, tokenAddress } from "../config";
+import Web3 from "web3";
+import logo from  "../assets/swap.jpg" //"../../../Img/swap.jpg"
 
-const upper = {marginLeft:"10%",width:"80%", height:"45%",marginTop:"5%", boxShadow: "0px 0px 25px 10px #888888", textAlign:"center",borderRadius:"15px" } 
-const lower = {marginLeft:"10%",width:"80%", height:"45%",marginTop:"5%", boxShadow: "0px 0px 25px 10px #888888", textAlign:"center",borderRadius:"15px" }
+const upper = {
+  marginLeft: "10%",
+  width: "80%",
+  height: "45%",
+  marginTop: "5%",
+  boxShadow: "0px 0px 25px 10px #888888",
+  textAlign: "center",
+  borderRadius: "15px",
+};
+const lower = {
+  marginLeft: "10%",
+  width: "80%",
+  height: "45%",
+  marginTop: "5%",
+  boxShadow: "0px 0px 25px 10px #888888",
+  textAlign: "center",
+  borderRadius: "15px",
+};
 
 const TextInput = ({ className, label, ...props }) => {
   return (
@@ -16,104 +40,131 @@ const TextInput = ({ className, label, ...props }) => {
 };
 
 
+export const getContract = (library, account,add,abi) => {
+	const signer = library?.getSigner(account).connectUnchecked();
+	var contract = new Contract(add,abi, signer);
+	return contract;
+};
+
+
 export default function Swap() {
-  const [refSwap,setRefswap] = useState (false)
-  const [BUSDBalance,setBUSDBalance] = useState(0)
+  const {activate,deactivate,account,library,chainId} = useWeb3React()
+  const wchain = chainId? chainId : defualtChain
+  const web3 = new Web3(new Web3.providers.HttpProvider(defaultRpc))
+  const [refSwap, setRefswap] = useState(false);
+  const [BNBBalance, setBNBBalance] = useState(0);
+  const contractW = getContract(library,account,tokenAddress,tokenAbi)
+  const contractR = new web3.eth.Contract(tokenAbi,tokenAddress)
+  const SwapContract = new web3.eth.Contract(swapV2Abi,swapV2Address)
+  const SwapContractW = getContract(library,account,swapV2Address,swapV2Abi)
+  const [title,setTitle] = useState("")
+  const [TokenBalance, setTokenBalance] = useState(0);
+  const [Tokenamount, setTokenAmount] = useState();
+  const [toggle,setToggle] = useState(false)
+  const [open,setOpen] = useState(false)
 
-  const [TVLBalance,setTVLBalance] = useState(0)
-  const [TVLamount,setTVLAmount] = useState()
 
-  const [amount,setAmount] = useState()
+  const [amount, setAmount] = useState();
+  const [balance, setBalance] = useState(0);
+
+  useEffect(()=>{
+    const abc = async ()=>{
+      if(account){
+        const _balance = await library.getBalance(account)
+        setBalance(Number(ethers.formatEther(_balance._hex)).toFixed(4))  
+
+        const _tokenBalance = await contractR.methods.balanceOf(account).call()
+        setTokenBalance(Number(ethers.formatEther(_tokenBalance)).toFixed(4))
+
+        console.log("first",_tokenBalance)
+      }
+    }
+
+    abc()
 
 
-  const swapTVL = async ()=>{
-    //setTitle("Swapping TVL")
+  },[account,toggle])
+  console.log("balance",amount)
+  
+  const swapToken = async () => {
+    console.log("kuch to hua he")
+    const _now = Math.floor(new Date().getTime()/1000)  +5000
+    setTitle("Swapping Token")
     try {
-   //   const tx1 = await SwapContract.buyTVL(parseEther(amount),{gasLimit:300000})
-   //   await tx1.wait()
-      // if(tx1){
-      //   setToggle(!toggle)
-      //   setOpen(false)
-      //   setAmount("")
-      // }
-
+        const tx1 = await SwapContractW.swapExactETHForTokens("0",
+        [WBNB,tokenAddress]
+        ,account,_now,{gasLimit:300000,value:ethers.parseEther(amount)})
+        tx1.wait()
+      if(tx1){
+        console.log("kuch to hua he",tx1)
+        setToggle(!toggle)
+        setOpen(false)
+        setTokenAmount("")
+        setAmount("")
+      }
     } catch (error) {
-      console.log("Error in approve TVL",error)
+      console.log("Error in swap", error);
       // setTitle("Transaction in Error")
       // setOpen(false)
-      
     }
-  }  
-  
-  
-  
-  
-  const approveTVL = async ()=>{
+  };
+
+  const approveToken = async () => {
+    if(account){
+      setOpen(true)
+      setTitle("Approving the BNB")
+      try {
+        const tx1 = await contractW.approve(swapV2Address,ethers.parseEther(Tokenamount),{gasLimit:300000})
+        const tx2 = tx1.wait()
+        if(tx2){
+          swapBNB()
+        }
+      } catch (error) {
+        console.log("Error in approve Token",error)
+      }
+    }else{
+      window.alert("Please connnect your wallet")
+    }
+  };
+
+  const swapBNB = async () => {
+    const _now = Math.floor(new Date().getTime()/1000)  +5000
+    setTitle("Swapping Token")
+    try {
+        const tx1 = await SwapContractW.swapExactTokensForETH(ethers.parseEther(Tokenamount),"0",
+        [tokenAddress,WBNB]
+        ,account,_now,{gasLimit:300000,value:"0"})
+        const tx2 = tx1.wait()
+      if(tx2){
+        setToggle(!toggle)
+        setOpen(false)
+        setTokenAmount("")
+        setAmount("")
+      }
+    } catch (error) {
+      console.log("Error in swap", error);
+      // setTitle("Transaction in Error")
+      // setOpen(false)
+    }
+  };
+
+  const approveBNB = async () => {
     // if(account){
     //   setOpen(true)
-    //   setTitle("Approving the BUSD")
+    //   setTitle("Approving the Token")
     //   try {
-    //     const tx1 = await BUSDContract.approve(TVLSwap,parseEther(amount),{gasLimit:300000})
+    //     const tx1 = await TokenContract.approve(TokenSwap,parseEther(Tokenamount),{gasLimit:3000000})
     //     await tx1.wait()
-        
     //     if(tx1){
-    //       swapTVL()
+    //       swapBNB()
     //     }
-  
     //   } catch (error) {
-    //     console.log("Error in approve TVL",error)
+    //     console.log("Error in approve BNB",error)
     //   }
     // }else{
-    //   window.alert("Please connnect your wallet")
+    //   window.alert("Please connect your walet")
     // }
-
-  }
-
-
-
-  const swapBUSD = async ()=>{
-    // setTitle("Swapping BUSD")
-
-    // try {
-    //   const tx1 = await SwapContract.sellTVL(parseEther(TVLamount),{gasLimit:3000000})
-    //   await tx1.wait()
-    //   if(tx1){
-    //     setToggle(!toggle)
-    //     setOpen(false)
-    //     setTVLAmount("")
-    //   }
-
-    // } catch (error) {
-    //   console.log("Error in approve TVL",error)
-    //   setTitle("Transaction in Error")
-    //   setOpen(false)
-      
-    // }
-  }  
-  
-  
-  
-  
-  const approveBUSD = async ()=>{
-  // if(account){
-  //   setOpen(true)
-  //   setTitle("Approving the TVL")
-  //   try {
-  //     const tx1 = await TVLContract.approve(TVLSwap,parseEther(TVLamount),{gasLimit:3000000})
-  //     await tx1.wait()
-      
-  //     if(tx1){
-  //       swapBUSD()
-  //     }
-
-  //   } catch (error) {
-  //     console.log("Error in approve BUSD",error)
-  //   }
-  // }else{
-  //   window.alert("Please connect your walet")
-  // }
-
-  }
+  };
   return (
     <div
       class="page-template page-template-elementor_header_footer page page-id-30 wp-embed-responsive no-sidebar elementor-default elementor-template-full-width elementor-kit-24416 elementor-page elementor-page-30 e--ua-blink e--ua-chrome e--ua-webkit snipcss0-0-0-1 XXsnipcss_extracted_selector_selectionXX tether-element-attached-top tether-element-attached-center tether-target-attached-top tether-target-attached-center"
@@ -127,246 +178,7 @@ export default function Swap() {
         </label>
       </div>
 
-      <header class="header-style-two snipcss0-1-1-6">
-        <div
-          id="sticky-header"
-          class="tg-header__area transparent-header snipcss0-2-6-7"
-        >
-          <div class="container snipcss0-3-7-8">
-            <div class="row snipcss0-4-8-9">
-              <div class="col-12 snipcss0-5-9-10">
-                <div class="mobile-nav-toggler snipcss0-6-10-11">
-                  <i class="flaticon-menu-1 snipcss0-7-11-12"></i>
-                </div>
-                <div class="tgmenu__wrap snipcss0-6-10-13">
-                  <nav class="tgmenu__nav snipcss0-7-13-14">
-                    <div class="logo snipcss0-8-14-15">
-                      <a
-                        class="light-logo snipcss0-9-15-16"
-                        href="https://web3.edulabs.ai/"
-                      >
-                        <img
-                          src="https://web3.edulabs.ai/wp-content/uploads/2024/05/1.png"
-                          height="auto"
-                          style={{ maxWidth: "120px" }}
-                          alt="Logo"
-                          class="snipcss0-10-16-17"
-                        />
-                      </a>
-                      <a
-                        class="dark-logo snipcss0-9-15-18"
-                        href="https://web3.edulabs.ai/"
-                      >
-                        <img
-                          src="https://web3.edulabs.ai/wp-content/uploads/2024/05/2.png"
-                          height="auto"
-                          style={{ maxWidth: "120px" }}
-                          alt="Logo"
-                          class="snipcss0-10-18-19"
-                        />
-                      </a>
-                    </div>
-                    <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex snipcss0-8-14-20">
-                      <ul
-                        id="menu-main-menu"
-                        class="navigation snipcss0-9-20-21"
-                      >
-                        <li
-                          id="menu-item-77"
-                          class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-77 snipcss0-10-21-22"
-                        >
-                          <a
-                            href="https://web3.edulabs.ai/"
-                            class="snipcss0-11-22-23"
-                          >
-                            Home
-                          </a>
-                        </li>
-                        <li
-                          id="menu-item-66"
-                          class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-30 current_page_item menu-item-66 snipcss0-10-21-24"
-                        >
-                          <a
-                            href="/swap"
-                            aria-current="page"
-                            class="snipcss0-11-24-25"
-                          >
-                            Swap
-                          </a>
-                        </li>
-                        <li
-                          id="menu-item-66"
-                          class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-30 current_page_item menu-item-66 snipcss0-10-21-24"
-                        >
-                          <a
-                            href="/tokenomics"
-                            aria-current="page"
-                            class="snipcss0-11-24-25"
-                          >
-                            Tokenomics
-                          </a>
-                        </li>
-                        <li
-                          id="menu-item-68"
-                          class="menu-item menu-item-type-custom menu-item-object-custom menu-item-68 snipcss0-10-21-26"
-                        >
-                          <a href="#collection" class="snipcss0-11-26-27">
-                            Collection
-                          </a>
-                        </li>
-                        <li
-                          id="menu-item-67"
-                          class="menu-item menu-item-type-custom menu-item-object-custom menu-item-67 snipcss0-10-21-28"
-                        >
-                          <a href="#about" class="snipcss0-11-28-29">
-                            About
-                          </a>
-                        </li>
-                        <li
-                          id="menu-item-69"
-                          class="menu-item menu-item-type-custom menu-item-object-custom menu-item-69 snipcss0-10-21-30"
-                        >
-                          <a href="#roadmap" class="snipcss0-11-30-31">
-                            Roadmap
-                          </a>
-                        </li>
-                        <li
-                          id="menu-item-84"
-                          class="menu-item menu-item-type-post_type menu-item-object-page menu-item-84 snipcss0-10-21-32"
-                        >
-                          <a
-                            href="https://web3.edulabs.ai/?page_id=34"
-                            class="snipcss0-11-32-33"
-                          >
-                            Blog
-                          </a>
-                        </li>
-                      </ul>{" "}
-                    </div>
-                  </nav>
-                </div>
-
-                <div class="tgmobile__menu snipcss0-6-10-34">
-                  <nav class="tgmobile__menu-box snipcss0-7-34-35">
-                    <div class="close-btn snipcss0-8-35-36">
-                      <i class="flaticon-close-1 snipcss0-9-36-37"></i>
-                    </div>
-                    <div class="nav-logo snipcss0-8-35-38">
-                      <a
-                        class="light-logo snipcss0-9-38-39"
-                        href="https://web3.edulabs.ai/"
-                      >
-                        <img
-                          src="https://web3.edulabs.ai/wp-content/uploads/2024/05/1.png"
-                          height="auto"
-                          style={{ maxWidth: "120px" }}
-                          alt="Logo"
-                          class="snipcss0-10-39-40"
-                        />
-                      </a>
-
-                      <a
-                        class="dark-logo snipcss0-9-38-41"
-                        href="https://web3.edulabs.ai/"
-                      >
-                        <img
-                          src="https://web3.edulabs.ai/wp-content/uploads/2024/05/2.png"
-                          height="auto"
-                          style={{ maxWidth: "120px" }}
-                          alt="Logo"
-                          class="snipcss0-10-41-42"
-                        />
-                      </a>
-                    </div>
-                    <div class="tgmobile__menu-outer snipcss0-8-35-43">
-                      <ul
-                        id="menu-main-menu-1"
-                        class="navigation snipcss0-9-43-44"
-                      >
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-77 snipcss0-10-44-45">
-                          <a
-                            href="https://web3.edulabs.ai/"
-                            class="snipcss0-11-45-46"
-                          >
-                            Home
-                          </a>
-                        </li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-30 current_page_item menu-item-66 snipcss0-10-44-47">
-                          <a
-                            href="https://web3.edulabs.ai/?page_id=30"
-                            aria-current="page"
-                            class="snipcss0-11-47-48"
-                          >
-                            Tokenomics
-                          </a>
-                        </li>
-                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-68 snipcss0-10-44-49">
-                          <a href="#collection" class="snipcss0-11-49-50">
-                            Collection
-                          </a>
-                        </li>
-                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-67 snipcss0-10-44-51">
-                          <a href="#about" class="snipcss0-11-51-52">
-                            About
-                          </a>
-                        </li>
-                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-69 snipcss0-10-44-53">
-                          <a href="#roadmap" class="snipcss0-11-53-54">
-                            Roadmap
-                          </a>
-                        </li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-84 snipcss0-10-44-55">
-                          <a
-                            href="https://web3.edulabs.ai/?page_id=34"
-                            class="snipcss0-11-55-56"
-                          >
-                            Blog
-                          </a>
-                        </li>
-                      </ul>{" "}
-                    </div>
-
-                    <div class="social-links snipcss0-8-35-57">
-                      <ul class="clearfix snipcss0-9-57-58">
-                        <li class="facebook snipcss0-10-58-59">
-                          <a href="#" class="snipcss0-11-59-60">
-                            <i class="fab fa-facebook-f snipcss0-12-60-61"></i>
-                          </a>
-                        </li>
-
-                        <li class="twitter snipcss0-10-58-62">
-                          <a href="#" class="snipcss0-11-62-63">
-                            <i class="fab fa-twitter snipcss0-12-63-64"></i>
-                          </a>
-                        </li>
-
-                        <li class="instagram snipcss0-10-58-65">
-                          <a href="#" class="snipcss0-11-65-66">
-                            <i class="fab fa-instagram snipcss0-12-66-67"></i>
-                          </a>
-                        </li>
-
-                        <li class="discord snipcss0-10-58-68">
-                          <a href="#" class="snipcss0-11-68-69">
-                            <i class="fab fa-discord snipcss0-12-69-70"></i>
-                          </a>
-                        </li>
-
-                        <li class="telegram snipcss0-10-58-71">
-                          <a href="#" class="snipcss0-11-71-72">
-                            <i class="fab fa-telegram-plane snipcss0-12-72-73"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </nav>
-                </div>
-                <div class="tgmobile__menu-backdrop snipcss0-6-10-74"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+    <Header/>
 
       <main class="fix snipcss0-1-1-75">
         <div class="gradient-position snipcss0-2-75-76">
@@ -432,19 +244,16 @@ export default function Swap() {
                             }}
                           ></div>
                         </div>
-                        <div 
-                        
-                        class="container snipcss0-10-86-89">
+                        <div class="container snipcss0-10-86-89">
                           <div class="row justify-content-center snipcss0-11-89-90">
                             <div class="col-xl-7 col-lg-9 snipcss0-12-90-91">
                               <div
-
                                 class="banner__content-two tg-content snipcss0-13-91-92"
                                 data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;"
                                 // style={{
                                 //   opacity: "1",
                                 //   transform: "translateY(0px)",
-                                  
+
                                 // }}
                               >
                                 <img
@@ -498,7 +307,12 @@ export default function Swap() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png"
                                   width="44"
                                   alt=""
-                                  style={{bottom: "-16%", left: "16%", opacity: "1", transform: "scale(1)"}}
+                                  style={{
+                                    bottom: "-16%",
+                                    left: "16%",
+                                    opacity: "1",
+                                    transform: "scale(1)",
+                                  }}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;"
                                 />
 
@@ -508,115 +322,185 @@ export default function Swap() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-03.png"
                                   width="24"
                                   alt=""
-                                  style={{bottom: "-16%", right: "16%", opacity: "1", transform: "scale(1)"}}
+                                  style={{
+                                    bottom: "-16%",
+                                    right: "16%",
+                                    opacity: "1",
+                                    transform: "scale(1)",
+                                  }}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;"
                                 />
-{!refSwap? 
-       <div>
-        <strong>Swap BUSD to TVL</strong>
-       <div style={!refSwap? upper : lower}>
-       <h1 style={{marginTop:"10px"}}>Your Existing BUSD balance : {Number(BUSDBalance).toFixed(2)}</h1> 
-         <TextInput
-         
-          style={{width:"80%"}}
-          className=""
-          label="Enter BUSD Value here"
-          name="BUSD Amount"
-          type="number"
-          placeholder="Enter your BUSD Value"
-          value={amount}
-          onChange={async (e) => {
-           setAmount(e.target.value)
-           const _tvlPrice = await SwapContract.getTVLOutputAmount(parseEther(e.target.value))
-           setTVLAmount(formatEther(_tvlPrice))
-         
-         }}
-         />
-         <button 
-         onClick={approveTVL}
-         style={{marginTop:"2%",marginBottom:"10px", width:"30%"}} variant="contained"> SWAP </button>
- 
- 
- 
-       </div>
-       <button onClick={()=>{setRefswap(!refSwap)}}><img width="50px" style={{marginTop:"20px"}} src=""/></button>
-       <div style={!refSwap? lower : upper}>
-       <h1>Your Existing TVL balance : {Number(TVLBalance).toFixed(2)} </h1>
-       <TextInput
-          style={{width:"80%"}}
-          className=""
-          label="Enter TVL Value here"
-          name="TVL Amount"
-          type="number"
-          placeholder="Enter your TVL Value"
-          value={TVLamount}
-          onChange={async (e) => {
-           setTVLAmount(e.target.value)
-           const _BUSDPrice = await SwapContract.getBUSDOutputamount(parseEther( e.target.value))
-           setAmount(formatEther(_BUSDPrice) )
-         
-         }}
- 
-         />
- 
-       <button onClick={approveBUSD} style={{marginTop:"2%",marginBottom:"10px", width:"30%"}} variant="contained">Swap</button>
-       </div>
- 
-       </div> : 
-       <div>
-        <strong>Swap TVL to BUSD</strong>
-       <div style={refSwap? upper : lower}>
-       <h1>Your Existing TVL balance : {Number(TVLBalance).toFixed(2)} </h1>
-       <TextInput
-          style={{width:"80%"}}
-          className=""
-          label="Enter TVL Value here"
-          name="TVL Amount"
-          type="number"
-          placeholder="Enter your TVL Value"
-          value={TVLamount}
-          onChange={async (e) => {
-           setTVLAmount(e.target.value)
-           const _BUSDPrice = await SwapContract.getBUSDOutputamount(parseEther( e.target.value))
-           setAmount(formatEther(_BUSDPrice) )
-         
-         }}
- 
-         />
- 
-       <button onClick={approveBUSD} style={{marginTop:"2%",marginBottom:"10px", width:"30%"}} variant="contained"> SWAP </button>
-       </div>
-       <button onClick={()=>{setRefswap(!refSwap)}}><img width="50px" style={{marginTop:"20px"}} src=""/></button>
-       <div style={refSwap? lower : upper}>
-       <h1>Your Existing BUSD balance : {Number(BUSDBalance).toFixed(2)}</h1> 
-         <TextInput
-         
-          style={{width:"80%"}}
-          className=""
-          label="Enter BUSD Value here"
-          name="BUSD Amount"
-          type="number"
-          placeholder="Enter your BUSD Value"
-          value={amount}
-          onChange={async (e) => {
-           setAmount(e.target.value)
-           const _tvlPrice = await SwapContract.getTVLOutputAmount(parseEther(e.target.value))
-           setTVLAmount(formatEther(_tvlPrice))
-         
-         }}
-         />
-         <button 
-         onClick={approveTVL}
-         style={{marginTop:"2%",marginBottom:"10px", width:"30%"}} variant="contained"> SWAP </button>
- 
- 
- 
-       </div>
-       
- 
-       </div>
-      }
-                                
+                                {!refSwap ? (
+                                  <div>
+                                    <strong>Swap BNB to Token</strong>
+                                    <div style={!refSwap ? upper : lower}>
+                                      <h1 style={{ marginTop: "10px" }}>
+                                        Your Existing BNB balance : {balance}
+                                        {Number(BNBBalance).toFixed(2)}
+                                      </h1>
+                                      <TextInput
+                                        style={{ width: "80%" }}
+                                        className=""
+                                        label="Enter BNB Value here"
+                                        name="BNB Amount"
+                                        type="number"
+                                        placeholder="Enter your BNB Value"
+                                        value={amount}
+                                        onChange={async (e) => {
+                                          console.log("target",e.target.value)
+                                          setAmount(e.target.value);
+                                          const _TokenPrice =
+                                            await SwapContract.methods.getAmountsOut(
+                                              ethers.parseEther(e.target.value),[WBNB,tokenAddress]
+                                            ).call();
+                                          setTokenAmount(ethers.formatEther(_TokenPrice[1]));
+                                        }}
+                                      />
+                                      <button
+                                        onClick={swapToken}
+                                        style={{
+                                          marginTop: "2%",
+                                          marginBottom: "10px",
+                                          width: "30%",
+                                        }}
+                                        variant="contained"
+                                      >
+                                        {" "}
+                                        SWAP{" "}
+                                      </button>
+                                    </div>
+                                   
+                                      <img
+                                                                            onClick={() => {
+                                                                              setRefswap(!refSwap);
+                                                                            }}
+                                        width="50px"
+                                        style={{cursor:"pointer" }}
+                                        src={logo}
+                                      />
+                                    
+                                    <div style={!refSwap ? lower : upper}>
+                                      <h1>
+                                        Your Existing Token balance :{" "}
+                                        {Number(TokenBalance).toFixed(2)}{" "}
+                                      </h1>
+                                      <TextInput
+                                        style={{ width: "80%" }}
+                                        className=""
+                                        label="Enter Token Value here"
+                                        name="Token Amount"
+                                        type="number"
+                                        placeholder="Enter your Token Value"
+                                        value={Tokenamount}
+                                        onChange={async (e) => {
+                                          setTokenAmount(e.target.value);
+                                          const _BNBPrice =
+                                          await SwapContract.methods.getAmountsOut(
+                                            ethers.parseEther(e.target.value),[tokenAddress,WBNB]
+                                          ).call();
+                                          setAmount(ethers.formatEther(_BNBPrice[1]));
+                                        }}
+                                      />
+
+                                      <button
+                                        onClick={swapToken}
+                                        style={{
+                                          marginTop: "2%",
+                                          marginBottom: "10px",
+                                          width: "30%",
+                                        }}
+                                        variant="contained"
+                                      >
+                                        Swap
+                                      </button>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div>
+                                    <strong>Swap Token to BNB</strong>
+                                    <div style={refSwap ? upper : lower}>
+                                      <h1>
+                                        Your Existing Token balance :{" "}
+                                        {Number(TokenBalance).toFixed(2)}{" "}
+                                      </h1>
+                                      <TextInput
+                                        style={{ width: "80%" }}
+                                        className=""
+                                        label="Enter Token Value here"
+                                        name="Token Amount"
+                                        type="number"
+                                        placeholder="Enter your Token Value"
+                                        value={Tokenamount}
+                                        onChange={async (e) => {
+                                          setTokenAmount(e.target.value);
+                                          const _BNBPrice =
+                                          await SwapContract.methods.getAmountsOut(
+                                            ethers.parseEther(e.target.value),[tokenAddress,WBNB]
+                                          ).call();
+                                          setAmount(ethers.formatEther(_BNBPrice[1]));
+                                        }}
+                                      />
+
+                                      <button
+                                        onClick={approveToken}
+                                        style={{
+                                          marginTop: "2%",
+                                          marginBottom: "10px",
+                                          width: "30%",
+                                        }}
+                                        variant="contained"
+                                      >
+                                        {" "}
+                                        SWAP{" "}
+                                      </button>
+                                    </div>
+
+                                      <img
+                                                                            onClick={() => {
+                                                                              setRefswap(!refSwap);
+                                                                            }}
+                                        width="50px"
+                                        style={{ cursor:"pointer" }}
+                                        src={logo}
+                                      />
+
+                                    <div style={refSwap ? lower : upper}>
+                                      <h1>
+                                        Your Existing BNB balance :{balance}
+                                        {Number(BNBBalance).toFixed(2)}
+                                      </h1>
+                                      <TextInput
+                                        style={{ width: "80%" }}
+                                        className=""
+                                        label="Enter BNB Value here"
+                                        name="BNB Amount"
+                                        type="number"
+                                        placeholder="Enter your BNB Value"
+                                        value={amount}
+                                        onChange={async (e) => {
+                                          setAmount(e.target.value);
+                                          const _TokenPrice =
+                                          await SwapContract.methods.getAmountsOut(
+                                            ethers.parseEther(e.target.value),[WBNB,tokenAddress]
+                                          ).call();
+                                        setTokenAmount(ethers.formatEther(_TokenPrice[1]));
+                                        }}
+                                      />
+                                      <button
+                                        onClick={approveToken}
+                                        style={{
+                                          marginTop: "2%",
+                                          marginBottom: "10px",
+                                          width: "30%",
+                                        }}
+                                        variant="contained"
+                                      >
+                                        {" "}
+                                        SWAP{" "}
+                                      </button>
+                                    </div>
+                                  </div>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -651,7 +535,7 @@ export default function Swap() {
                       <div
                         class="section-divider snipcss0-9-107-108"
                         data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
-                        style={{opacity: "1", transform: "scale(1)"}}
+                        style={{ opacity: "1", transform: "scale(1)" }}
                       >
                         <img
                           decoding="async"
@@ -692,7 +576,10 @@ export default function Swap() {
                           <div
                             class="row justify-content-center snipcss0-11-117-118"
                             data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;"
-                            style={{opacity: "1", transform: "translateY(0px)"}}
+                            style={{
+                              opacity: "1",
+                              transform: "translateY(0px)",
+                            }}
                           >
                             <div class="col-xl-8 col-lg-10 snipcss0-12-118-119">
                               <div class="section__title text-center title-mb-80 snipcss0-13-119-120">
@@ -717,7 +604,10 @@ export default function Swap() {
                                 <div
                                   class="about__content snipcss0-14-125-126"
                                   data-anime="opacity:[0, 1]; translateX:[24, 0]; onview: -250; delay: 300;"
-                                  style={{opacity: "1", transform: "translateX(0px)"}}
+                                  style={{
+                                    opacity: "1",
+                                    transform: "translateX(0px)",
+                                  }}
                                 >
                                   <div class="section__title text-start snipcss0-15-126-127"></div>
                                 </div>
@@ -754,7 +644,7 @@ export default function Swap() {
                       <div
                         class="section-divider snipcss0-9-133-134"
                         data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
-                        style={{opacity: "1", transform: "scale(1)"}}
+                        style={{ opacity: "1", transform: "scale(1)" }}
                       >
                         <img
                           decoding="async"
@@ -798,7 +688,12 @@ export default function Swap() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png"
                                   width="24"
                                   alt=""
-                                  style={{top: "0%", left: "-16%", opacity: "1", transform: "scale(1)"}}
+                                  style={{
+                                    top: "0%",
+                                    left: "-16%",
+                                    opacity: "1",
+                                    transform: "scale(1)",
+                                  }}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
                                   class="snipcss0-14-146-147"
                                 />
@@ -808,7 +703,12 @@ export default function Swap() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png"
                                   width="48"
                                   alt=""
-                                  style={{bottom: "16%", left: "-8%", opacity: "1", transform: "scale(1)"}}
+                                  style={{
+                                    bottom: "16%",
+                                    left: "-8%",
+                                    opacity: "1",
+                                    transform: "scale(1)",
+                                  }}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;"
                                   class="snipcss0-14-146-148"
                                 />
@@ -818,7 +718,12 @@ export default function Swap() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-02.png"
                                   width="40"
                                   alt=""
-                                  style={{top: "0%", right: "-16%", opacity: "1", transform: "scale(1)"}}
+                                  style={{
+                                    top: "0%",
+                                    right: "-16%",
+                                    opacity: "1",
+                                    transform: "scale(1)",
+                                  }}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;"
                                   class="snipcss0-14-146-149"
                                 />
@@ -828,7 +733,12 @@ export default function Swap() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png"
                                   width="24"
                                   alt=""
-                                  style={{bottom: "16%", right: "-8%", opacity: "1", transform: "scale(1)"}}
+                                  style={{
+                                    bottom: "16%",
+                                    right: "-8%",
+                                    opacity: "1",
+                                    transform: "scale(1)",
+                                  }}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 420;"
                                   class="snipcss0-14-146-150"
                                 />
@@ -883,7 +793,10 @@ export default function Swap() {
                         <div
                           class="footer-bg snipcss0-10-160-161"
                           data-background="https://web3.edulabs.ai/wp-content/uploads/2022/12/footer-bg.png"
-                          style={{backgroundImage: 'url("https://web3.edulabs.ai/wp-content/uploads/2022/12/footer-bg.png")'}}
+                          style={{
+                            backgroundImage:
+                              'url("https://web3.edulabs.ai/wp-content/uploads/2022/12/footer-bg.png")',
+                          }}
                         ></div>
 
                         <div class="container snipcss0-10-160-162">
