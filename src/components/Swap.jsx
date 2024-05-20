@@ -5,7 +5,7 @@ import Header from "./Header";
 import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { Contract } from "ethers";
-import { WBNB, defaultRpc, defualtChain, swapV2Abi, swapV2Address, tokenAbi, tokenAddress } from "../config";
+import { BUSD, WBNB, defaultRpc, defualtChain, swapV2Abi, swapV2Address, tokenAbi, tokenAddress } from "../config";
 import Web3 from "web3";
 import logo from  "../assets/swap.jpg" //"../../../Img/swap.jpg"
 
@@ -52,9 +52,10 @@ export default function Swap() {
   const wchain = chainId? chainId : defualtChain
   const web3 = new Web3(new Web3.providers.HttpProvider(defaultRpc))
   const [refSwap, setRefswap] = useState(false);
-  const [BNBBalance, setBNBBalance] = useState(0);
+  const [BUSDBalance, setBUSDBalance] = useState(0);
   const contractW = getContract(library,account,tokenAddress,tokenAbi)
   const contractR = new web3.eth.Contract(tokenAbi,tokenAddress)
+  const BUSDcontractR = new web3.eth.Contract(tokenAbi,BUSD)
   const SwapContract = new web3.eth.Contract(swapV2Abi,swapV2Address)
   const SwapContractW = getContract(library,account,swapV2Address,swapV2Abi)
   const [title,setTitle] = useState("")
@@ -62,6 +63,7 @@ export default function Swap() {
   const [Tokenamount, setTokenAmount] = useState();
   const [toggle,setToggle] = useState(false)
   const [open,setOpen] = useState(false)
+  const [usdBNB,setUsdBNB] = useState("BNB")
 
 
   const [amount, setAmount] = useState();
@@ -71,10 +73,13 @@ export default function Swap() {
     const abc = async ()=>{
       if(account){
         const _balance = await library.getBalance(account)
-        setBalance(Number(ethers.formatEther(_balance._hex)).toFixed(4))  
+        setBalance(Number(ethers.utils.formatEther(_balance._hex)).toFixed(4))  
 
         const _tokenBalance = await contractR.methods.balanceOf(account).call()
-        setTokenBalance(Number(ethers.formatEther(_tokenBalance)).toFixed(4))
+        setTokenBalance(Number(ethers.utils.formatEther(_tokenBalance)).toFixed(4))
+
+        const _BUSDBalance = await BUSDcontractR.methods.balanceOf(account).call()
+        setBUSDBalance(Number(ethers.utils.formatEther(_BUSDBalance)).toFixed(4))
 
         console.log("first",_tokenBalance)
       }
@@ -116,12 +121,17 @@ export default function Swap() {
   const approveToken = async () => {
     if(account){
       setOpen(true)
-      setTitle("Approving the BNB")
+      setTitle("Approving Tokens")
       try {
         const tx1 = await contractW.approve(swapV2Address,ethers.parseEther(Tokenamount),{gasLimit:300000})
         const tx2 = tx1.wait()
         if(tx2){
-          swapBNB()
+          if(usdBNB=="BNB"){
+            swapBNB()
+          }else{
+            swapBUSD()
+          }
+
         }
       } catch (error) {
         console.log("Error in approve Token",error)
@@ -152,7 +162,7 @@ export default function Swap() {
     }
   };
 
-  const approveBNB = async () => {
+  const approveBUSD = async () => {
     // if(account){
     //   setOpen(true)
     //   setTitle("Approving the Token")
@@ -169,6 +179,9 @@ export default function Swap() {
     //   window.alert("Please connect your walet")
     // }
   };
+
+
+
   return (
     <div
       class="page-template page-template-elementor_header_footer page page-id-30 wp-embed-responsive no-sidebar elementor-default elementor-template-full-width elementor-kit-24416 elementor-page elementor-page-30 e--ua-blink e--ua-chrome e--ua-webkit snipcss0-0-0-1 XXsnipcss_extracted_selector_selectionXX tether-element-attached-top tether-element-attached-center tether-target-attached-top tether-target-attached-center"
@@ -334,21 +347,39 @@ export default function Swap() {
                                   }}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;"
                                 />
+                                <div
+                                style={{border:"1px solid black",margin:"auto",width:"50%",height:"60px",marginBottom:"50px",borderRadius:"25px"}}
+                                >
+                                 <div
+                                 onClick={()=>{
+                                  if(usdBNB==="BNB"){
+                                    setUsdBNB("BUSD")
+                                  }else{
+                                    setUsdBNB("BNB")
+                                  }
+                                 }}
+                                 className={`toggle ${usdBNB=="BNB"?"" :"visible"}`}
+                                  
+                                 >
+                                  {usdBNB}
+                                  </div> 
+
+                                </div>
                                 {!refSwap ? (
                                   <div>
-                                    <strong>Swap BNB to Token</strong>
+                                    <strong>Swap {usdBNB} to Token</strong>
                                     <div style={!refSwap ? upper : lower}>
                                       <h1 style={{ marginTop: "10px" }}>
-                                        Your Existing BNB balance : {balance}
-                                        {Number(BNBBalance).toFixed(2)}
+                                        Your Existing {usdBNB} balance : {usdBNB=="BNB"? balance:BUSDBalance}
+                                        
                                       </h1>
                                       <TextInput
                                         style={{ width: "80%" }}
                                         className=""
-                                        label="Enter BNB Value here"
-                                        name="BNB Amount"
+                                        label={`Enter ${usdBNB} Value here`}
+                                        name={`${usdBNB} Amount"`}
                                         type="number"
-                                        placeholder="Enter your BNB Value"
+                                        placeholder={`Enter your ${usdBNB} Value`}
                                         value={amount}
                                         onChange={async (e) => {
                                           console.log("target",e.target.value)
@@ -357,7 +388,16 @@ export default function Swap() {
                                             await SwapContract.methods.getAmountsOut(
                                               ethers.parseEther(e.target.value),[WBNB,tokenAddress]
                                             ).call();
-                                          setTokenAmount(ethers.formatEther(_TokenPrice[1]));
+
+                                          const _TokenPriceBUSD = await SwapContract.methods.getAmountsOut(
+                                            ethers.parseEther(e.target.value),[BUSD,tokenAddress]
+                                          ).call();
+                                          if(usdBNB=="BNB"){
+                                            setTokenAmount(ethers.formatEther(_TokenPrice[1]));
+                                          }else{
+                                            setTokenAmount(ethers.formatEther(_TokenPriceBUSD[1]));
+                                          }
+
                                         }}
                                       />
                                       <button
@@ -402,7 +442,21 @@ export default function Swap() {
                                           await SwapContract.methods.getAmountsOut(
                                             ethers.parseEther(e.target.value),[tokenAddress,WBNB]
                                           ).call();
-                                          setAmount(ethers.formatEther(_BNBPrice[1]));
+
+                                          const _BUSDPrice =
+                                          await SwapContract.methods.getAmountsOut(
+                                            ethers.parseEther(e.target.value),[tokenAddress,WBNB]
+                                          ).call();
+
+                                          
+                                          const _TokenPriceBUSD = await SwapContract.methods.getAmountsOut(
+                                            ethers.parseEther(e.target.value),[tokenAddress,BUSD]
+                                          ).call();
+                                          if(usdBNB=="BNB"){
+                                            setAmount(ethers.formatEther(_BUSDPrice[1]));
+                                          }else{
+                                            setAmount(ethers.formatEther(_TokenPriceBUSD[1]));
+                                          }
                                         }}
                                       />
 
@@ -421,7 +475,7 @@ export default function Swap() {
                                   </div>
                                 ) : (
                                   <div>
-                                    <strong>Swap Token to BNB</strong>
+                                    <strong>Swap Token to {usdBNB}</strong>
                                     <div style={refSwap ? upper : lower}>
                                       <h1>
                                         Your Existing Token balance :{" "}
@@ -441,7 +495,15 @@ export default function Swap() {
                                           await SwapContract.methods.getAmountsOut(
                                             ethers.parseEther(e.target.value),[tokenAddress,WBNB]
                                           ).call();
-                                          setAmount(ethers.formatEther(_BNBPrice[1]));
+                                          
+                                          const _TokenPriceBUSD = await SwapContract.methods.getAmountsOut(
+                                            ethers.parseEther(e.target.value),[tokenAddress,BUSD]
+                                          ).call();
+                                          if(usdBNB=="BNB"){
+                                            setAmount(ethers.formatEther(_BNBPrice[1]));
+                                          }else{
+                                            setAmount(ethers.formatEther(_TokenPriceBUSD[1]));
+                                          }
                                         }}
                                       />
 
@@ -470,16 +532,16 @@ export default function Swap() {
 
                                     <div style={refSwap ? lower : upper}>
                                       <h1>
-                                        Your Existing BNB balance :{balance}
-                                        {Number(BNBBalance).toFixed(2)}
+                                        Your Existing {usdBNB} balance :{usdBNB=="BNB"?balance:BUSDBalance}
+                                        
                                       </h1>
                                       <TextInput
                                         style={{ width: "80%" }}
                                         className=""
-                                        label="Enter BNB Value here"
-                                        name="BNB Amount"
+                                        label={`Enter ${usdBNB} Value here`}
+                                        name={`${usdBNB} Amount`}
                                         type="number"
-                                        placeholder="Enter your BNB Value"
+                                        placeholder={`Enter your ${usdBNB} Value`}
                                         value={amount}
                                         onChange={async (e) => {
                                           setAmount(e.target.value);
@@ -487,7 +549,15 @@ export default function Swap() {
                                           await SwapContract.methods.getAmountsOut(
                                             ethers.parseEther(e.target.value),[WBNB,tokenAddress]
                                           ).call();
-                                        setTokenAmount(ethers.formatEther(_TokenPrice[1]));
+                                          
+                                          const _TokenPriceBUSD = await SwapContract.methods.getAmountsOut(
+                                            ethers.parseEther(e.target.value),[BUSD,tokenAddress]
+                                          ).call();
+                                          if(usdBNB=="BNB"){
+                                            setTokenAmount(ethers.formatEther(_TokenPrice[1]));
+                                          }else{
+                                            setTokenAmount(ethers.formatEther(_TokenPriceBUSD[1]));
+                                          }
                                         }}
                                       />
                                       <button

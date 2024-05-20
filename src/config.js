@@ -549,6 +549,7 @@ export const tokenAbi = [
 export const tokenAddress = "0xB84B60b31cf851330A74FAc1F02B921545bA3C03"
 export const defualtChain = "97"
 export const WBNB = "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+export const BUSD = "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee"
 export const defaultRpc  = "https://endpoints.omniatech.io/v1/bsc/testnet/public"
 
 export const swapV2Address = "0xD99D1c33F9fC3444f8101754aBC46c52416550D1"

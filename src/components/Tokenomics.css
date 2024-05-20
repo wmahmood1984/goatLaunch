@@ -803,7 +803,34 @@
       align-items: center;
 
     } 
-  
+  .toggle {
+    border:1px solid red;
+    width:50%;
+    height:100%;
+    border-radius:25px;
+    align-content:center;
+    cursor: pointer;
+    border: 2px solid rgba(0, 0, 0, 0.15); 
+    background: var(--tg-theme-primary) none repeat scroll 0 0;
+    color: var(--tg-common-color-white); 
+    padding: 12px 24px;
+  }
+
+  .toggle.visible {
+    border:1px solid red;
+    width:50%;
+    height:100%;
+    border-radius:25px;
+    align-content:center;
+    transform: translateX(100%);
+    cursor: pointer;
+    color: var(--tg-common-color-white); 
+    border: 2px solid rgba(0, 0, 0, 0.15); 
+
+    padding: 12px 24px;
+  }
+
+
     div.section-divider { 
       text-align: center;
     } 
