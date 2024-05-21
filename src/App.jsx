@@ -5,7 +5,8 @@ import "./App.css";
 import { Routes, Route } from "react-router";
 import Home from "./components/Home1";
 import Tokenomics from "./components/Tokenomics";
-import Swap from "./components/Swap"
+// import Swap from "./components/Swap"
+import Upload from "./components/Upload";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -15,7 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="tokenomics" element={<Tokenomics />}></Route>
-        <Route path="swap" element={<Swap></Swap>}></Route>
+        {/* <Route path="swap" element={<Swap></Swap>}></Route> */}
+        <Route path="mint" element={<Upload />}></Route>
       </Routes>
     </>
   );

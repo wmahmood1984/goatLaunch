@@ -830,6 +830,31 @@
     padding: 12px 24px;
   }
 
+  .file{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 182px;
+    margin-top: 16px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #8c52ff;
+    opacity: 0.5;
+  }
+
+  .load {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 400px;
+    opacity: 0;
+  }
+  .format{
+    color: white;
+  }
+
 
     div.section-divider { 
       text-align: center;

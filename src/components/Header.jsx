@@ -62,8 +62,8 @@ export default function Header() {
                           id="menu-item-24477"
                           className="menu-item menu-item-type-post_type menu-item-object-page menu-item-24477"
                         >
-                          <Link to="/swap">
-                            Swap
+                          <Link to="/mint">
+                            Mint NFT
                           </Link>
                         </li>
                         <li
