@@ -3,50 +3,90 @@ import "./Tokenomics.css";
 import Header from "./Header";
 import Icon from "../components/Icon.jsx";
 
-
-
-
 export default function Upload() {
-    const [selectedFile, setSelectedFile] = useState();
-    const changeHandler = (event) => {
-                
-      setSelectedFile(event.target.files[0]);
-    };
-  
-    const captureFile = async (e) => {
-      try {
-        var _file = e.target.files[0]
-        const formData = new FormData();
-        formData.append("file", _file);
-        const metadata = JSON.stringify({
-          name: "file name",
-        });
-        formData.append("pinataMetadata", metadata);
-  
-        const options = JSON.stringify({
-          cidVersion: 0,
-        });
-        formData.append("pinataOptions", options);
-  
-        const res = await fetch(
-          "https://api.pinata.cloud/pinning/pinFileToIPFS",
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4YTg4YWE0Yy0xZWM0LTRiODMtYjk4Mi0xNTYxZWM5MjA0ZmYiLCJlbWFpbCI6IndhcWFzbml6YW1hbmkzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI5ZmY1NWM1ZWNiMjU1ZDliN2U4YSIsInNjb3BlZEtleVNlY3JldCI6IjlhNjcwNjhjYTBjMmI2Yjk0Yzk0MWE4ODBkYWRiMmNhYjA5N2QyMDljYzIwZmU4MWExZTM2YzdkODMxZTZkZDMiLCJpYXQiOjE3MTYzMTc5Njd9.Hum8KDR_Lism_NFlyj-AE8mw1F4XjN_7MSFn7TlefK0`,
-            },
-            body: formData,
-          }
-        );
-        const resData = await res.json();
-        setSelectedFile(resData);
-        console.log(resData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const [selectedFile, setSelectedFile] = useState();
+  const [selectedPic, setSelectedPic] = useState();
+  const [fileName, setFileName] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
 
-    const captureFile2 = null
+  const captureFile = async (e) => {
+    try {
+      console.log("kuch to hua he");
+      var _file = e.target.files[0];
+
+      setFileName(_file.name);
+      const formData = new FormData();
+      formData.append("file", _file);
+      const metadata = JSON.stringify({
+        name: "file name",
+      });
+      formData.append("pinataMetadata", metadata);
+
+      const options = JSON.stringify({
+        cidVersion: 0,
+      });
+      formData.append("pinataOptions", options);
+
+      const res = await fetch(
+        "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4YTg4YWE0Yy0xZWM0LTRiODMtYjk4Mi0xNTYxZWM5MjA0ZmYiLCJlbWFpbCI6IndhcWFzbml6YW1hbmkzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI5ZmY1NWM1ZWNiMjU1ZDliN2U4YSIsInNjb3BlZEtleVNlY3JldCI6IjlhNjcwNjhjYTBjMmI2Yjk0Yzk0MWE4ODBkYWRiMmNhYjA5N2QyMDljYzIwZmU4MWExZTM2YzdkODMxZTZkZDMiLCJpYXQiOjE3MTYzMTc5Njd9.Hum8KDR_Lism_NFlyj-AE8mw1F4XjN_7MSFn7TlefK0`,
+          },
+          body: formData,
+        }
+      );
+      const resData = await res.json();
+      setSelectedFile(
+        `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${resData.IpfsHash}`
+      );
+      console.log(resData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const captureFile2 = async (e) => {
+    try {
+      var _file = e.target.files[0];
+
+      setFileName(e.target.files[0].name);
+      const formData = new FormData();
+      formData.append("file", _file);
+      const metadata = JSON.stringify({
+        name: "file name",
+      });
+      formData.append("pinataMetadata", metadata);
+
+      const options = JSON.stringify({
+        cidVersion: 0,
+      });
+      formData.append("pinataOptions", options);
+
+      const res = await fetch(
+        "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4YTg4YWE0Yy0xZWM0LTRiODMtYjk4Mi0xNTYxZWM5MjA0ZmYiLCJlbWFpbCI6IndhcWFzbml6YW1hbmkzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI5ZmY1NWM1ZWNiMjU1ZDliN2U4YSIsInNjb3BlZEtleVNlY3JldCI6IjlhNjcwNjhjYTBjMmI2Yjk0Yzk0MWE4ODBkYWRiMmNhYjA5N2QyMDljYzIwZmU4MWExZTM2YzdkODMxZTZkZDMiLCJpYXQiOjE3MTYzMTc5Njd9.Hum8KDR_Lism_NFlyj-AE8mw1F4XjN_7MSFn7TlefK0`,
+          },
+          body: formData,
+        }
+      );
+      const resData = await res.json();
+      setSelectedPic(
+        `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${resData.IpfsHash}`
+      );
+      console.log(resData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log("filename", fileName);
 
   return (
     <div
@@ -221,7 +261,6 @@ export default function Upload() {
                                 </p>
 
                                 <div className="">
-
                                   <div className="file">
                                     <input
                                       onChange={captureFile}
@@ -231,9 +270,13 @@ export default function Upload() {
                                     <div className="">
                                       <Icon name="upload-file" size="24" />
                                     </div>
-                                    <div className="format">
-                                      PNG, GIF, WEBP, MP4 or MP3. Max 1Gb.
-                                    </div>
+                                    {selectedFile ? (
+                                      <div className="format">{fileName}</div>
+                                    ) : (
+                                      <div className="format">
+                                        PNG, GIF, WEBP, MP4 or MP3. Max 1Gb.
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
 
@@ -242,7 +285,6 @@ export default function Upload() {
                                 </p>
 
                                 <div className="">
-
                                   <div className="file">
                                     <input
                                       onChange={captureFile2}
@@ -252,8 +294,34 @@ export default function Upload() {
                                     <div className="">
                                       <Icon name="upload-file" size="24" />
                                     </div>
-                                    <div className="format">
-                                      PNG, GIF, WEBP, MP4 or MP3. Max 1Gb.
+                                    {selectedFile ? (
+                                      <div className="format">{fileName}</div>
+                                    ) : (
+                                      <div className="format">
+                                        PNG, GIF, WEBP, MP4 or MP3. Max 1Gb.
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                <p class="desc snipcss0-14-92-99">
+                                  Upload the details
+                                </p>
+
+                                <div className="details">
+                                  <div style={{alignItems:"flex-start",display:"flex",flexDirection:"column"}}>
+                                    {" "}
+                                    <div>
+                                      Name: <input onChange={(e)=>{setName(e.target.value)}} type="text" />
+                                    </div>
+                                    <br />
+                                    <div>
+                                      Description:
+                                      <input type="text" onChange={(e)=>{setDescription(e.target.value)}}/>
+                                    </div>
+                                    <br />
+                                    <div>
+                                      Price:
+                                      <input type="text" onChange={(e)=>{setPrice(e.target.value)}}/>
                                     </div>
                                   </div>
                                 </div>

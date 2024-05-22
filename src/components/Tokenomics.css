@@ -848,11 +848,20 @@
     position: absolute;
     top: 0;
     left: 0;
-    font-size: 400px;
+    font-size: 40px;
     opacity: 0;
   }
   .format{
     color: white;
+  }
+
+  .details{
+    border: 1px solid blue;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
 
