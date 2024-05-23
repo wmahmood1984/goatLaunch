@@ -1,17 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Tokenomics.css";
 import Header from "./Header";
 import Icon from "../components/Icon.jsx";
+import axios from "axios";
+import { useWeb3React } from "@web3-react/core";
+import { BUSD, ERC721ABI, ERC721Address, defaultRpc, defualtChain } from "../config.js";
+import { erc20Abi, erc721Abi } from "viem";
+import Web3 from "web3";
+import { Contract, ethers } from "ethers";
+import CircularProgress from '@mui/material/CircularProgress';
+import { toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
+export const getContract = (library, account,add,abi) => {
+	const signer = library?.getSigner(account).connectUnchecked();
+	var contract = new Contract(add,abi, signer);
+	return contract;
+};
 
 export default function Upload() {
+  const [toggle,setToggle] = useState(false)
+  const [edLoading,setEdLoading] = useState(false)
+  const [tnLoading,setTNLoading] = useState(false)
   const [selectedFile, setSelectedFile] = useState();
   const [selectedPic, setSelectedPic] = useState();
   const [fileName, setFileName] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
+  const [picFileName, setPicFileName] = useState("");
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [price, setPrice] = useState(0);
+  const [tokenId, setTokenId] = useState(0);
+  const {account,library,chainId} = useWeb3React()
+  const contractW = getContract(library,account,ERC721Address,ERC721ABI)
+  const BUSDW = getContract(library,account,BUSD,erc20Abi)
+
+  const wchain = chainId? chainId : defualtChain
+  const web3 = new Web3(new Web3.providers.HttpProvider(defaultRpc))
+  const ERC721ContractR = new web3.eth.Contract(ERC721ABI,ERC721Address)
 
   const captureFile = async (e) => {
+    setEdLoading(true)
     try {
       console.log("kuch to hua he");
       var _file = e.target.files[0];
@@ -41,19 +69,140 @@ export default function Upload() {
       );
       const resData = await res.json();
       setSelectedFile(
-        `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${resData.IpfsHash}`
+        resData.IpfsHash
       );
+      setEdLoading(false)
+
+//      createJson(resData.IpfsHash)
       console.log(resData);
     } catch (error) {
       console.log(error);
+      setEdLoading(false)
     }
   };
 
+
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState(null);
+
+
+
+  useEffect(()=>{
+    const abc = async()=>{
+
+        const _tokenId = await ERC721ContractR.methods.tokenCounter().call()
+        setTokenId(_tokenId)
+
+    }
+    abc()
+
+  },[toggle])
+
+
+  console.log("filename", tokenId);
+
+
+  const mintNFT = async (ipfs) => {
+    if(!selectedFile){
+      toast.error("Educational content not yet uploaded")
+    }else if (!selectedPic){
+      toast.error("Thumbnail pic not yet uploaded")
+    }else if(!name){
+      toast.error("Name not yet entered")
+    }else if(!description){
+      toast.error("Desc not yet entered")
+    }else 
+
+    if(account){
+      setToggle(true)  
+      const apiKey = 'YOUR_PINATA_API_KEY';
+        const apiSecret = 'YOUR_PINATA_SECRET_API_KEY';
+        const url = 'https://api.pinata.cloud/pinning/pinFileToIPFS';
+  
+        // JSON object to be uploaded
+        const jsonObject = {
+          description: description, 
+          external_url: `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${selectedFile}`, 
+          image: `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${selectedPic}`, 
+          name: name,
+          attributes: [ ]
+        };
+  
+        // Convert JSON object to Blob
+        const jsonBlob = new Blob([JSON.stringify(jsonObject)], { type: 'application/json' });
+  
+        // Create FormData and append the Blob
+        const formData = new FormData();
+        formData.append('file', jsonBlob, 'data.json');
+        
+        try {
+            const res = await axios.post(url, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4YTg4YWE0Yy0xZWM0LTRiODMtYjk4Mi0xNTYxZWM5MjA0ZmYiLCJlbWFpbCI6IndhcWFzbml6YW1hbmkzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI5ZmY1NWM1ZWNiMjU1ZDliN2U4YSIsInNjb3BlZEtleVNlY3JldCI6IjlhNjcwNjhjYTBjMmI2Yjk0Yzk0MWE4ODBkYWRiMmNhYjA5N2QyMDljYzIwZmU4MWExZTM2YzdkODMxZTZkZDMiLCJpYXQiOjE3MTYzMTc5Njd9.Hum8KDR_Lism_NFlyj-AE8mw1F4XjN_7MSFn7TlefK0`,
+                }
+            });
+  
+            setResponse(res.data);
+            
+            [tokenId,
+              name,
+              description,
+              ethers.utils.parseEther(price),
+              `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${res.data.IpfsHash}`,
+              account,
+              true
+              ]
+            //  console.log("data",_data)                         
+  
+            mintNFT2(
+              [tokenId,
+                name,
+                description,
+                ethers.utils.parseEther(price),
+                `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${res.data.IpfsHash}`,
+                account,
+                true
+                ]
+            )
+  
+        } catch (err) {
+            setError(err.message);
+        }
+
+    }else{
+      toast.error("Please connect your wallet")
+    }
+
+
+
+
+      
+  };
+
+  const mintNFT2 = async (data)=>{
+    
+    console.log("new called",data)
+    try {
+      const tx1 = await contractW.mint(
+        data
+        ,{gasLimit:3000000})
+      await tx1.wait()
+      if(tx1){
+        setToggle(false)
+      }
+    } catch (error) {
+      console.log(error)
+      setToggle(false)
+    }
+  }
+
   const captureFile2 = async (e) => {
+    setTNLoading(true)
     try {
       var _file = e.target.files[0];
 
-      setFileName(e.target.files[0].name);
+      setPicFileName(e.target.files[0].name);
       const formData = new FormData();
       formData.append("file", _file);
       const metadata = JSON.stringify({
@@ -78,15 +227,17 @@ export default function Upload() {
       );
       const resData = await res.json();
       setSelectedPic(
-        `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${resData.IpfsHash}`
+        resData.IpfsHash
       );
+      setTNLoading(false)
       console.log(resData);
     } catch (error) {
       console.log(error);
+      setTNLoading(false)
     }
   };
 
-  console.log("filename", fileName);
+
 
   return (
     <div
@@ -254,7 +405,7 @@ export default function Upload() {
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;"
                                 />
                                 <h2 class="title snipcss0-14-92-98">
-                                  Mint NFT
+                                    Mint NFT
                                 </h2>
                                 <p class="desc snipcss0-14-92-99">
                                   Upload the education content
@@ -268,7 +419,7 @@ export default function Upload() {
                                       type="file"
                                     />
                                     <div className="">
-                                      <Icon name="upload-file" size="24" />
+                                      {!edLoading ?  <Icon name="upload-file" size="24" /> : <CircularProgress sx={{color:"white"}}/>} 
                                     </div>
                                     {selectedFile ? (
                                       <div className="format">{fileName}</div>
@@ -292,10 +443,10 @@ export default function Upload() {
                                       type="file"
                                     />
                                     <div className="">
-                                      <Icon name="upload-file" size="24" />
+                                    {!tnLoading ?  <Icon name="upload-file" size="24" /> : <CircularProgress sx={{color:"white"}}/>}
                                     </div>
-                                    {selectedFile ? (
-                                      <div className="format">{fileName}</div>
+                                    {selectedPic ? (
+                                      <div className="format">{picFileName}</div>
                                     ) : (
                                       <div className="format">
                                         PNG, GIF, WEBP, MP4 or MP3. Max 1Gb.
@@ -325,6 +476,22 @@ export default function Upload() {
                                     </div>
                                   </div>
                                 </div>
+                                <button
+                                  style={{minWidth:"200px",height:"60px"
+                                  }}
+                                  onClick={mintNFT}
+                                  class="banner__btn btn gradient-btn gradient-btn-2 snipcss0-14-92-100"
+                                >
+                                  <span class="snipcss0-15-100-101">
+                                  {
+                                  !toggle ? <p
+                                  style={{color:"white",marginLeft:"25%",fontSize:"20px",marginTop:"10%"}}
+                                  >Mint NFT</p> : 
+                                   <CircularProgress 
+                                    sx={{width:"50px",color:"white",marginLeft:"100%"}}
+                                  />}
+                                  </span>
+                                </button>
                               </div>
                             </div>
                           </div>

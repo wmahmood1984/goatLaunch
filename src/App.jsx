@@ -7,12 +7,15 @@ import Home from "./components/Home1";
 import Tokenomics from "./components/Tokenomics";
 // import Swap from "./components/Swap"
 import Upload from "./components/Upload";
+import { ToastContainer} from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
+    <>  
+    <ToastContainer/>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="tokenomics" element={<Tokenomics />}></Route>

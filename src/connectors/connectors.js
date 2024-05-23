@@ -23,5 +23,5 @@ export const walletconnect = new WalletConnectConnector({
 
 export const injected = new InjectedConnector({
   // supportedChainIds: [1, 4, 97, 56],
-  supportedChainIds: [97, 5, 1, 56],
+  supportedChainIds: [97, 5, 1, 56,11155111],
 });
