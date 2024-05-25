@@ -1,1068 +1,566 @@
-import React, { useEffect, useState } from 'react'
-import "./Home2.css"
+import React from 'react'
+import "./Home.css"
 
 export default function Home() {
-  const [darkTheme,setDarkTheme] = useState(false)
-    console.log("second",darkTheme)
-  
   return (
-    <div 
-    style={darkTheme? {background:"#0F051D",color:"white"}: {}}
-    className="home page-template page-template-elementor_header_footer page page-id-24 wp-embed-responsive no-sidebar elementor-default elementor-template-full-width elementor-kit-24416 elementor-page elementor-page-24 e--ua-blink e--ua-chrome e--ua-webkit  snipcss-FIMzJ" data-elementor-device-mode="desktop" cz-shortcut-listen="true">
-    <div className="darkmode-trigger ">
-        <label className="modeSwitch ">
-            <input 
-            onClick={()=>{
-             if(darkTheme){
-              document.body.removeAttribute('tg-theme')
-              setDarkTheme(false)
-             }else{
-              document.body.setAttribute('tg-theme', 'dark')
-              setDarkTheme(true)
-             }   
-              
-            
-            }}
-            type="checkbox" className=""/>
-            <span className="icon "></span>
-        </label>
+    <div class="relative h-full snipcss-oFsOI">
+    <div class="fixed -z-10 pointer-events-none inset-0 overflow-hidden">
+        <div class="absolute top-0 left-0 right-0 -u-z-10"><img src="https://www.basejump.pro/blur-02.svg" alt="blur" class="w-full"/></div>
+        <div class="fixed top-0 left-0 right-0 -u-z-10"><img src="https://www.basejump.pro/blur-01.svg" alt="blur" class="w-full"/></div>
     </div>
-    <header className="">
-        <div 
-        
-        id="sticky-header" className="tg-header__area transparent-header ">
-            <div className="container ">
-                <div className="row ">
-                    <div className="col-12 ">
-                        <div className="mobile-nav-toggler "><i className="flaticon-menu-1 "></i></div>
-                        <div className="tgmenu__wrap ">
-                            <nav className="tgmenu__nav ">
-                                <div className="logo ">
-                                    <a className="light-logo " href="https://web3.edulabs.ai/">
-                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/1.png" height="auto" style={{maxWidth: "120px"}} alt="Logo" className=""/>
-                                    </a>
-                                    <a className="dark-logo " href="https://web3.edulabs.ai/">
-                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/2.png" height="auto" style={{maxWidth: "120px"}} alt="Logo" className=""/>
-                                    </a>
-                                </div>
-                                <div className="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex ">
-                                    <ul id="menu-blog-page-menu" className="navigation ">
-                                        <li id="menu-item-90" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-24 current_page_item menu-item-90 "><a href="https://web3.edulabs.ai/" aria-current="page" className="">Home</a></li>
-                                        <li id="menu-item-24477" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-24477 "><a href="https://web3.edulabs.ai/?page_id=30" className="">Tokenomics</a></li>
-                                        <li id="menu-item-91" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-91 "><a className="">Minting</a></li>
-                                        <li id="menu-item-92" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-92 "><a className="">About</a></li>
-                                        <li id="menu-item-93" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-93 "><a className="">Collection</a></li>
-                                        <li id="menu-item-94" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-94 "><a className="">Roadmap</a></li>
-                                        <li id="menu-item-89" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-89 "><a href="https://web3.edulabs.ai/?page_id=34" className="">Blog</a></li>
-                                    </ul>
-                                </div>
-                                <div className="tgmenu__action ">
-                                    <ul className="list-wrap ">
-                                        <li className="header-social ">
-                                            <a href="#" className="d-none d-sm-block "><i className="fab fa-twitter "></i></a>
-                                            <a href="#" className=""><i className="fab fa-telegram "></i></a>
-                                            <a href="#" className="d-blcok d-xl-none " data-bs-toggle="modal" data-bs-target="#connectModal"><i className="fas fa-wallet "></i></a>
-                                        </li>
-                                        <li className="header-btn "><button className="btn border-btn " data-bs-toggle="modal" data-bs-target="#connectModal">Connect wallet</button></li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                        <div className="tgmobile__menu ">
-                            <nav className="tgmobile__menu-box ">
-                                <div className="close-btn "><i className="flaticon-close-1 "></i></div>
-                                <div className="nav-logo ">
-                                    <a className="light-logo " href="https://web3.edulabs.ai/">
-                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/1.png" height="auto" style={{maxWidth: "120px"}} alt="Logo" className=""/>
-                                    </a>
-                                    <a className="dark-logo " href="https://web3.edulabs.ai/">
-                                        <img src="https://web3.edulabs.ai/wp-content/uploads/2024/05/2.png" height="auto" style={{maxWidth: "120px"}} alt="Logo" className=""/>
-                                    </a>
-                                </div>
-                                <div className="tgmobile__menu-outer ">
-                                    <ul id="menu-blog-page-menu-1" className="navigation ">
-                                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-24 current_page_item menu-item-90 "><a href="https://web3.edulabs.ai/" aria-current="page" className="">Home</a></li>
-                                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-24477 "><a href="https://web3.edulabs.ai/?page_id=30" className="">Tokenomics</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-91 "><a className="">Minting</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-92 "><a className="">About</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-93 "><a className="">Collection</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-94 "><a className="">Roadmap</a></li>
-                                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-89 "><a href="https://web3.edulabs.ai/?page_id=34" className="">Blog</a></li>
-                                    </ul>
-                                </div>
-                                <div className="social-links ">
-                                    <ul className="clearfix ">
-                                        <li className="facebook ">
-                                            <a href="#" className=""><i className="fab fa-facebook-f "></i></a>
-                                        </li>
-                                        <li className="twitter ">
-                                            <a href="#" className=""><i className="fab fa-twitter "></i></a>
-                                        </li>
-                                        <li className="instagram ">
-                                            <a href="#" className=""><i className="fab fa-instagram "></i></a>
-                                        </li>
-                                        <li className="discord ">
-                                            <a href="#" className=""><i className="fab fa-discord "></i></a>
-                                        </li>
-                                        <li className="telegram ">
-                                            <a href="#" className=""><i className="fab fa-telegram-plane "></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                        <div className="tgmobile__menu-backdrop "></div>
+    <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 pb-4">
+            <div class="flex h-32 shrink-0 items-center"><a href="/"><img class="h-16 w-auto" src="https://www.basejump.pro/logo.svg" alt="BaseJump"/></a></div>
+            <nav class="flex flex-1 flex-col">
+                <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                    <li>
+                        <ul role="list" class="-mx-2 space-y-1">
+                            <li><a href="/" class="bg-blue-700/50 text-white group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"><span class="h-6 w-6 shrink-0" aria-hidden="true"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house" class="svg-inline--fa fa-house " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                            <path fill="currentColor" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path>
+                                        </svg></span>Dashboard</a></li>
+                            <li><a href="/presale" class="text-gray-400 hover:text-white hover:bg-black/25 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"><span class="h-6 w-6 shrink-0" aria-hidden="true"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                            <path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                        </svg></span>Add Token</a></li>
+                            <li><a href="/leaderboard" class="text-gray-400 hover:text-white hover:bg-black/25 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"><span class="h-6 w-6 shrink-0" aria-hidden="true"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trophy" class="svg-inline--fa fa-trophy " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                            <path fill="currentColor" d="M400 0H176c-26.5 0-48.1 21.8-47.1 48.2c.2 5.3 .4 10.6 .7 15.8H24C10.7 64 0 74.7 0 88c0 92.6 33.5 157 78.5 200.7c44.3 43.1 98.3 64.8 138.1 75.8c23.4 6.5 39.4 26 39.4 45.6c0 20.9-17 37.9-37.9 37.9H192c-17.7 0-32 14.3-32 32s14.3 32 32 32H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H357.9C337 448 320 431 320 410.1c0-19.6 15.9-39.2 39.4-45.6c39.9-11 93.9-32.7 138.2-75.8C542.5 245 576 180.6 576 88c0-13.3-10.7-24-24-24H446.4c.3-5.2 .5-10.4 .7-15.8C448.1 21.8 426.5 0 400 0zM48.9 112h84.4c9.1 90.1 29.2 150.3 51.9 190.6c-24.9-11-50.8-26.5-73.2-48.3c-32-31.1-58-76-63-142.3zM464.1 254.3c-22.4 21.8-48.3 37.3-73.2 48.3c22.7-40.3 42.8-100.5 51.9-190.6h84.4c-5.1 66.3-31.1 111.2-63 142.3z"></path>
+                                        </svg></span>Leaderboard</a></li>
+                        </ul>
+                    </li>
+                    <li class="mt-auto">
+                        <ul role="list" class="-mx-2 space-y-1">
+                            <li><a href="https://twitter.com/basejumpdotpro" class="text-gray-400 hover:text-white hover:bg-black/25 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"><span class="h-6 w-6 shrink-0" aria-hidden="true"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" class="svg-inline--fa fa-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
+                                        </svg></span>Twitter</a></li>
+                            <li><a href="https://t.me/basejumppro" class="text-gray-400 hover:text-white hover:bg-black/25 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"><span class="h-6 w-6 shrink-0" aria-hidden="true"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                            <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                        </svg></span>Telegram</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="lg:pl-72">
+        <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200/10 bg-gray-900/10 px-4 lg:px-0 shadow-sm sm:gap-x-6 sm:pr-6 lg:pr-8"><button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden"><span class="sr-only">Open sidebar</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                </svg></button>
+            <div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true"></div>
+            <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 backdrop-blur-md"><label for="search-field" class="sr-only">Search</label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="pointer-events-none absolute inset-y-0 left-4 h-full w-5 text-gray-400">
+                    <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd"></path>
+                </svg><input id="search-field" class="block h-full w-full border-0 py-0 pl-12 pr-0 text-gray-200 bg-black/25 placeholder:text-gray-400 focus:ring-0 sm:text-sm" placeholder="Search Token... (hit enter)" type="text"/>
+                <div class="flex items-center gap-x-4 lg:gap-x-6">
+                    <div data-tooltip-id="points-tooltip" class="flex items-center gap-x-2 text-yellow-400 font-bold">
+                        <div>⭐</div>
+                        <div>0</div>
                     </div>
+                    <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true"></div>
+                    <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true"></div>
+                    <div><button class="relative inline-flex h-12 overflow-hidden rounded-full p-[1px]"><span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"></span><span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 text-sm font-medium text-white backdrop-blur-3xl  hover:bg-black/50">
+                                <button>Connect</button>
+                            </span></button></div>
                 </div>
             </div>
         </div>
-        <div className="connect__modal ">
-            <div className="modal fade " id="connectModal" tabindex="-1" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered ">
-                    <div className="modal-content ">
-                        <div className="modal__wrapper ">
-                            <div className="modal__header ">
-                                <h2 className="title ">Connect Wallet</h2>
-                                <button data-bs-dismiss="modal" aria-label="Close" className="">
-                                    <i className="flaticon-close-1 "></i>
-                                </button>
-                            </div>
-                            <div className="modal__body text-center ">
-                                <p className="">Please select a wallet to connect for start Minting your eduLab</p>
-                                <div className="connect__section ">
-                                    <ul className="list-wrap ">
-                                        <li className="">
-                                            <a href="#" className="connect-meta "><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/metamask.svg" alt="MetaMask" className=""/>MetaMask</a>
-                                        </li>
-                                        <li className="">
-                                            <a href="#" className=""><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/bitgo.svg" alt="BitGo" className=""/>BitGo</a>
-                                        </li>
-                                        <li className="">
-                                            <a href="#" className=""><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/trust.svg" alt="Trust" className=""/>Trust Wallet</a>
-                                        </li>
-                                        <li className="">
-                                            <a href="#" className=""><img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/icons/coinbase.svg" alt="Coinbase" className=""/>Coinbase</a>
-                                        </li>
-                                    </ul>
+        <main class="py-10 relative">
+            <div class="px-4 sm:px-6 lg:px-8 mx-auto">
+                <div class="flex flex-col gap-y-4 text-xs mb-5 text-black items-center">
+                    <div class="flex gap-x-4">
+                        <div class="items-center flex gap-2 bg-green-200 p-1 pl-2 pr-3 rounded-3xl"><img src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg" class="rounded-full h-8 w-8" alt="Token Image"/>
+                            <div><a class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  " href="profile?address=0x3c39F1E1F53Dd4a8B0A19B82B42781AFf2d7E4E6">d7E4E6</a><span class="font-semibold">0.01</span> ETH of<a class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac">SPELL</a></div><img src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png" class="rounded-full h-8 w-8" alt="Token Image"/>
+                        </div>
+                        <div class="items-center flex gap-2 bg-red-200 p-1 pl-2 pr-3 rounded-3xl"><img src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg" class="rounded-full h-8 w-8" alt="Token Image"/>
+                            <div><a class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  " href="profile?address=0x9de614630f2e756Fb731A789EC64dDe2F99Ef379">9Ef379</a><span class="font-semibold">0.05</span> ETH of<a class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x0b4B6b641fe9151BeB3e733C05BB60Ad7d0a4D0e">$DOGHARAMBE</a></div><img src="https://api.basejump.pro:4000/static/tkn_0x137af2fad1b168f94691ff15874ba91f69f4c01e3bd4b105fa00c7e949db8476.jpg" class="rounded-full h-8 w-8" alt="Token Image"/>
+                        </div>
+                        <div class="items-center flex gap-2 bg-green-200 p-1 pl-2 pr-3 rounded-3xl"><img src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg" class="rounded-full h-8 w-8" alt="Token Image"/>
+                            <div><a class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  " href="profile?address=0x7E42E58d76F0214272b845979466B7d9e34FAcF3">4FAcF3</a><span class="font-semibold">&lt;0.01</span> ETH of<a class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac">SPELL</a></div><img src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png" class="rounded-full h-8 w-8" alt="Token Image"/>
+                        </div>
+                        <div class="items-center flex gap-2 bg-green-200 p-1 pl-2 pr-3 rounded-3xl"><img src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg" class="rounded-full h-8 w-8" alt="Token Image"/>
+                            <div><a class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  " href="profile?address=0x498ff8B3E0Bba856b7D2F037DefA008708339e67">339e67</a><span class="font-semibold">0.02</span> ETH of<a class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac">SPELL</a></div><img src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png" class="rounded-full h-8 w-8" alt="Token Image"/>
+                        </div>
+                        <div class="items-center flex gap-2 bg-green-200 p-1 pl-2 pr-3 rounded-3xl"><img src="https://api.basejump.pro:4000/static/0x7a8E815e5e9753c433b011148a4DD18a3b70F98A-1715446448662.png" class="rounded-full h-8 w-8" alt="Token Image"/>
+                            <div><a class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  " href="profile?address=0x7a8E815e5e9753c433b011148a4DD18a3b70F98A">Chokooos</a><span class="font-semibold">0.04</span> ETH of<a class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac">SPELL</a></div><img src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png" class="rounded-full h-8 w-8" alt="Token Image"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative isolate mb-6">
+                    <div class="mx-auto flex flex-col gap-8 bg-white/5 px-4 py-8 ring-1 ring-white/10 rounded-3xl sm:p-4 lg:mx-0 lg:flex-row lg:items-center lg:py-10 xl:gap-x-12 xl:px-12">
+                        <div class="w-full flex-auto">
+                            <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">We are in beta!</h2>
+                            <div class="mt-6 flex"><button class="text-sm font-semibold leading-6 text-indigo-400">How it works <span aria-hidden="true">→</span></button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center gap-20">
+                    <div>
+                        <h2 class="text-2xl mb-4 font-bold tracking-tight text-white sm:text-2xl mt-6 text-center">🏆 Top 🏆</h2>
+                        <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mb-6">
+                            <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-4 sm:min-w-[20rem] style-cGSC2" id="style-cGSC2">
+                                <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac">SPELL</a>
+                                    <div class="text-yellow-400 text-xs"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"></path>
+                                        </svg><span class="ml-1">13</span></div>
+                                </div><img src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png" class="rounded-full h-20 w-20 m-auto mt-4" alt="Token Image"/>
+                                <div class="flex justify-between mb-5">
+                                    <div class="flex gap-x-4">
+                                        <div class="min-w-0 flex-auto">
+                                            <div class="mt-1">
+                                                <div class="text-sm">0.98 / 1.58 ETH</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col sm:items-end flex-shrink-0">
+                                        <div class="mt-1 flex justify-start space-x-2"><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://spellspectra.xyz/"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="window-maximize" class="svg-inline--fa fa-window-maximize " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
+                                                </svg></a><a class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://t.me/spellspectra_base"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                                    <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                                </svg></a><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://x.com/SpellSpectra"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                                </svg></a></div>
+                                    </div>
                                 </div>
-                                <p className="privacy-text ">By connecting your wallet, you agree to our Terms of Service and our Privacy Policy</p>
+                                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                                    <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-O1xiV" id="style-O1xiV">61.98%</div>
+                                </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac"></a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac">View</a>
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <h2 class="text-2xl mb-4 font-bold tracking-tight text-white sm:text-2xl mt-6 text-center">🪂 Latest Jump 🪂</h2>
+                        <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mb-6">
+                            <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-4 sm:min-w-[20rem] style-BIi8N" id="style-BIi8N">
+                                <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0x5EF159cfac8960c21B2219c789E5B810C6951B29">BOOTY</a> </div><img src="https://api.basejump.pro:4000/static/tkn_0x84a808eedd95473c024ee918344cd10aafb1c5837c7788a809b287e87ae3ee37.jpg" class="rounded-full h-20 w-20 m-auto mt-4" alt="Token Image"/>
+                                <div class="flex justify-between mb-5">
+                                    <div class="flex gap-x-4">
+                                        <div class="min-w-0 flex-auto">
+                                            <div class="mt-1">
+                                                <div class="text-sm">5.05 / 5.00 ETH</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col sm:items-end flex-shrink-0">
+                                        <div class="mt-1 flex justify-start space-x-2"><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://www.bootyonbase.com"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="window-maximize" class="svg-inline--fa fa-window-maximize " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
+                                                </svg></a><a class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://t.me/BootyonBase"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                                    <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                                </svg></a><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://x.com/coopsnicoops"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                                </svg></a></div>
+                                    </div>
+                                </div>
+                                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                                    <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-QM7Fx" id="style-QM7Fx">100.00%</div>
+                                </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x5EF159cfac8960c21B2219c789E5B810C6951B29"></a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0x5EF159cfac8960c21B2219c789E5B810C6951B29">View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <section aria-labelledby="filter-heading" class="grid items-center border-b border-t border-gray-200/10" data-headlessui-state="">
+                        <h2 id="filter-heading" class="sr-only">Filters</h2>
+                        <div class="relative col-start-1 row-start-1 py-4">
+                            <div class="mx-auto flex max-w-7xl space-x-6 divide-x divide-gray-200 px-4 text-sm sm:px-6 lg:px-8">
+                                <div><button class="group flex items-center font-medium text-white" id="headlessui-disclosure-button-:Raimkda:" type="button" aria-expanded="false" data-headlessui-state=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="mr-2 h-5 w-5 flex-none text-white group-hover:text-blue-500">
+                                            <path fill-rule="evenodd" d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 0 1 .628.74v2.288a2.25 2.25 0 0 1-.659 1.59l-4.682 4.683a2.25 2.25 0 0 0-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 0 1 8 18.25v-5.757a2.25 2.25 0 0 0-.659-1.591L2.659 6.22A2.25 2.25 0 0 1 2 4.629V2.34a.75.75 0 0 1 .628-.74Z" clip-rule="evenodd"></path>
+                                        </svg>Filter</button></div>
+                            </div>
+                        </div>
+                        <div class="col-start-1 row-start-1 py-4">
+                            <div class="mx-auto flex max-w-7xl justify-end px-4 sm:px-6 lg:px-8">
+                                <div class="relative inline-block" data-headlessui-state="">
+                                    <div class="flex"><button class="group inline-flex justify-center text-sm font-medium text-white hover:text-blue-500" id="headlessui-menu-button-:Rcimkda:" type="button" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="">Sort: Recent Activity<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500">
+                                                <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path>
+                                            </svg></button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="relative  z-1 flex flex-wrap flex-col justify-center gap-6 sm:flex-row sm:justify-between">
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac">SPELL</a>
+                            <div class="text-yellow-400 text-xs"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"></path>
+                                </svg><span class="ml-1">13</span></div>
+                        </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.98 / 1.58 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://spellspectra.xyz/"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="window-maximize" class="svg-inline--fa fa-window-maximize " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
+                                        </svg></a><a class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://t.me/spellspectra_base"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                            <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                        </svg></a><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://x.com/SpellSpectra"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                        </svg></a></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-8UWQr" id="style-8UWQr">61.98%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-GVGEc" id="style-GVGEc"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-PS196" id="style-PS196"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac">View</a>
+                    </div>
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0x0b4B6b641fe9151BeB3e733C05BB60Ad7d0a4D0e">$DOGHARAMBE</a>
+                            <div class="text-yellow-400 text-xs"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"></path>
+                                </svg><span class="ml-1">3</span></div>
+                        </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.03 / 1.00 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-1Gwal" id="style-1Gwal">3.27%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x0b4B6b641fe9151BeB3e733C05BB60Ad7d0a4D0e">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-XS31R" id="style-XS31R"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-j9oLN" id="style-j9oLN"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://api.basejump.pro:4000/static/tkn_0x137af2fad1b168f94691ff15874ba91f69f4c01e3bd4b105fa00c7e949db8476.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://api.basejump.pro:4000/static/tkn_0x137af2fad1b168f94691ff15874ba91f69f4c01e3bd4b105fa00c7e949db8476.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0x0b4B6b641fe9151BeB3e733C05BB60Ad7d0a4D0e">View</a>
+                    </div>
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0xC0Bd6f5662a698dc088Cf66A8D4969475A25d461">STONER</a>
+                            <div class="text-yellow-400 text-xs"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"></path>
+                                </svg><span class="ml-1">10</span></div>
+                        </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.08 / 2.69 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://stonerpp.com/"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="window-maximize" class="svg-inline--fa fa-window-maximize " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
+                                        </svg></a><a class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://t.me/stonerpepetg"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                            <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                        </svg></a><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://x.com/StonerPepeCoin"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                        </svg></a></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-IBrt8" id="style-IBrt8">2.80%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0xC0Bd6f5662a698dc088Cf66A8D4969475A25d461">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-j6iKn" id="style-j6iKn"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-CXmhh" id="style-CXmhh"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://api.basejump.pro:4000/static/tkn_0x047cb600fff6d854dff848f9a66cc8c4ddf35d3ab5ee6f63f6d9a45f36933a5e.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://api.basejump.pro:4000/static/tkn_0x047cb600fff6d854dff848f9a66cc8c4ddf35d3ab5ee6f63f6d9a45f36933a5e.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0xC0Bd6f5662a698dc088Cf66A8D4969475A25d461">View</a>
+                    </div>
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0x9555A43e60125f9d2A7b5aAf1cc93FCdb1906aa2">vbucks</a>
+                            <div class="text-yellow-400 text-xs"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"></path>
+                                </svg><span class="ml-1">2</span></div>
+                        </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.01 / 1.00 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-SBs4D" id="style-SBs4D">0.69%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x9555A43e60125f9d2A7b5aAf1cc93FCdb1906aa2">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-gxnXw" id="style-gxnXw"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-eqGfz" id="style-eqGfz"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://api.basejump.pro:4000/static/tkn_0xa840019717f142868488d0db9b7a17e1fcec822148468b537bb535891dff2fb4.gif" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://api.basejump.pro:4000/static/tkn_0xa840019717f142868488d0db9b7a17e1fcec822148468b537bb535891dff2fb4.gif" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0x9555A43e60125f9d2A7b5aAf1cc93FCdb1906aa2">View</a>
+                    </div>
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0xF843a86B0140120dD4cc8Ed4823916F33576b3EA">Kabosu</a>
+                            <div class="text-yellow-400 text-xs"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"></path>
+                                </svg><span class="ml-1">23</span></div>
+                        </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.06 / 2.00 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"><a class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://t.me/kabosubasecto"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                            <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                        </svg></a><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://x.com/KabosubasedCTO"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                        </svg></a></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-2ZPZO" id="style-2ZPZO">2.78%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0xF843a86B0140120dD4cc8Ed4823916F33576b3EA">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-bJZvC" id="style-bJZvC"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-eInCX" id="style-eInCX"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://api.basejump.pro:4000/static/tkn_0xa946373eacc565271875ab7f16ac826d22e757d71e0f9ec987f45a5f03111f7d.jpeg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://api.basejump.pro:4000/static/tkn_0xa946373eacc565271875ab7f16ac826d22e757d71e0f9ec987f45a5f03111f7d.jpeg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0xF843a86B0140120dD4cc8Ed4823916F33576b3EA">View</a>
+                    </div>
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0xaDe81e4ed8131882Bd8f7186A1E0CE718BEdC65e">$LXC</a> </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.00 / 2.00 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://x.com/lennoxxcartel/status/1794164493569966380?s=46&amp;t=8qQ4WX95PNRQ75-XocSCzw"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="window-maximize" class="svg-inline--fa fa-window-maximize " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
+                                        </svg></a><a class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://t.me/raretypeventures"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                            <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                        </svg></a><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://x.com/lennoxxcartel/status/1794164493569966380?s=46&amp;t=8qQ4WX95PNRQ75-XocSCzw"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                        </svg></a></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-q59Xz" id="style-q59Xz">0.00%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0xaDe81e4ed8131882Bd8f7186A1E0CE718BEdC65e">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-ong7t" id="style-ong7t"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-ohTLi" id="style-ohTLi"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0xaDe81e4ed8131882Bd8f7186A1E0CE718BEdC65e">View</a>
+                    </div>
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0x3651E69Be121929D0633c36AbF2F86d246CcDA52">HHG</a>
+                            <div class="text-yellow-400 text-xs"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"></path>
+                                </svg><span class="ml-1">1</span></div>
+                        </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.00 / 5.00 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="www.hiphopgiraffe.com"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="window-maximize" class="svg-inline--fa fa-window-maximize " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
+                                        </svg></a><a class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://t.me/hiphopGiraffe"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                            <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                        </svg></a><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://x.com/GiraffeHop12089?t=AJuqFBZk8PeG5jd71J_F3g&amp;s=09"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                        </svg></a></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-IrdI9" id="style-IrdI9">0.00%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x3651E69Be121929D0633c36AbF2F86d246CcDA52">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-A6d4d" id="style-A6d4d"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-17k7G" id="style-17k7G"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://api.basejump.pro:4000/static/tkn_0x7100f31f6f74bc3685d23145eb07777bbbfcd0fef2695bc18c82bcca4a9052b5.png" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://api.basejump.pro:4000/static/tkn_0x7100f31f6f74bc3685d23145eb07777bbbfcd0fef2695bc18c82bcca4a9052b5.png" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0x3651E69Be121929D0633c36AbF2F86d246CcDA52">View</a>
+                    </div>
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0x4842D9A04700150Bc557fF4B528Edd2D7A6B0b0e">EMOKOI</a>
+                            <div class="text-yellow-400 text-xs"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"></path>
+                                </svg><span class="ml-1">5</span></div>
+                        </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.00 / 2.00 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://emokoi.com"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="window-maximize" class="svg-inline--fa fa-window-maximize " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
+                                        </svg></a><a class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://t.me/+9BnRHwVrxMQ0ZTEx"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                            <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                        </svg></a><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://x.com/EmoKoiBase"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                        </svg></a></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-ogo2K" id="style-ogo2K">0.03%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x4842D9A04700150Bc557fF4B528Edd2D7A6B0b0e">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-Lki51" id="style-Lki51"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-xU8im" id="style-xU8im"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://api.basejump.pro:4000/static/tkn_0x09c42a3ce9c7dd805203fe4c2ee94ca3801a1a115bb79671c00955786e452dc1.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://api.basejump.pro:4000/static/tkn_0x09c42a3ce9c7dd805203fe4c2ee94ca3801a1a115bb79671c00955786e452dc1.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0x4842D9A04700150Bc557fF4B528Edd2D7A6B0b0e">View</a>
+                    </div>
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0x82068E25e0511b6c4c99E8b82961BAAdd372eC90">$LWL</a>
+                            <div class="text-yellow-400 text-xs"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"></path>
+                                </svg><span class="ml-1">17</span></div>
+                        </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.15 / 1.69 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://twitter.com/lennoxxcartel/status/1793853209284366845?t=Aw0Q6gyc1ACshUWi0OK7Kw&amp;s=19"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="window-maximize" class="svg-inline--fa fa-window-maximize " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
+                                        </svg></a><a class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://twitter.com/lennoxxcartel/status/1793853209284366845?t=Aw0Q6gyc1ACshUWi0OK7Kw&amp;s=19"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                            <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                        </svg></a><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://twitter.com/lennoxxcartel/status/1793853209284366845?t=Aw0Q6gyc1ACshUWi0OK7Kw&amp;s=19"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                        </svg></a></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-P1YWy" id="style-P1YWy">9.03%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x82068E25e0511b6c4c99E8b82961BAAdd372eC90">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-JN5jt" id="style-JN5jt"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-zTfm5" id="style-zTfm5"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://api.basejump.pro:4000/static/tkn_0xba14e34fec6d665dcdf8407ab32f84f7114a88925e3144946601099e77aef78f.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://api.basejump.pro:4000/static/tkn_0xba14e34fec6d665dcdf8407ab32f84f7114a88925e3144946601099e77aef78f.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0x82068E25e0511b6c4c99E8b82961BAAdd372eC90">View</a>
+                    </div>
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0xD1C036368FBd4A0F94dce83678fc5989B16752B7">SIGMA</a> </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.00 / 2.00 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-55sZ6" id="style-55sZ6">0.00%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0xD1C036368FBd4A0F94dce83678fc5989B16752B7">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-TgvrY" id="style-TgvrY"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-43OVc" id="style-43OVc"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://api.basejump.pro:4000/static/tkn_0xceed13647e10e13183164c88cf0ea477b597ac4a0acf8816fc4a7db0679844cd.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://api.basejump.pro:4000/static/tkn_0xceed13647e10e13183164c88cf0ea477b597ac4a0acf8816fc4a7db0679844cd.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0xD1C036368FBd4A0F94dce83678fc5989B16752B7">View</a>
+                    </div>
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0x89979Ec194903F88a06416f4bd765c39d2570c75">$KONKE</a>
+                            <div class="text-yellow-400 text-xs"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"></path>
+                                </svg><span class="ml-1">2</span></div>
+                        </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.00 / 4.00 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"><a class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://t.me/jumpKonke"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                            <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                        </svg></a><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://x.com/XKonke"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                        </svg></a></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-SFtmZ" id="style-SFtmZ">0.00%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x89979Ec194903F88a06416f4bd765c39d2570c75">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-Sqzfp" id="style-Sqzfp"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-3gMpc" id="style-3gMpc"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://api.basejump.pro:4000/static/tkn_0xcb47c502893448779c9a9497f200408afc593df31cfd45b8f3f6d9e09f551e57.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://api.basejump.pro:4000/static/tkn_0xcb47c502893448779c9a9497f200408afc593df31cfd45b8f3f6d9e09f551e57.jpg" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0x89979Ec194903F88a06416f4bd765c39d2570c75">View</a>
+                    </div>
+                    <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
+                        <div class="flex gap-x-4 mt-1 justify-center"><a class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  " href="viewpresale?tokenAddress=0x757a7cAba00c68c9a7A0726ba1e628Bd46392921">NICK</a>
+                            <div class="text-yellow-400 text-xs"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"></path>
+                                </svg><span class="ml-1">4</span></div>
+                        </div>
+                        <div class="flex justify-between mb-5">
+                            <div class="flex gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="mt-1">
+                                        <div class="text-sm">0.12 / 2.50 ETH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:items-end flex-shrink-0">
+                                <div class="mt-1 flex justify-start space-x-2"><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://nickonbase.xyz/"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="window-maximize" class="svg-inline--fa fa-window-maximize " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
+                                        </svg></a><a class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://t.me/NickBase"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="telegram" class="svg-inline--fa fa-telegram " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                            <path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"></path>
+                                        </svg></a><a class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  " target="_blank" rel="noopener noreferrer" href="https://x.com/justnickether/"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                        </svg></a></div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                            <div class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-YxB6G" id="style-YxB6G">4.60%</div>
+                        </div><a class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  " href="/viewpresale?tokenAddress=0x757a7cAba00c68c9a7A0726ba1e628Bd46392921">
+                            <div class="relative p-[2px] group flex flex-1 shrink-0">
+                                <div class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-2K4zJ" id="style-2K4zJ"></div>
+                                <div class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-2KkYA" id="style-2KkYA"></div>
+                                <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]"><img src="https://api.basejump.pro:4000/static/tkn_0xc0d91340dcaf751f5bfe649d021a11bd1e546436c6d59052c3c4280ac3c5083e.png" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1" alt="Token Image"/><img src="https://api.basejump.pro:4000/static/tkn_0xc0d91340dcaf751f5bfe649d021a11bd1e546436c6d59052c3c4280ac3c5083e.png" class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5" alt="Token Image"/></div>
+                            </div>
+                        </a><a class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined " href="viewpresale?tokenAddress=0x757a7cAba00c68c9a7A0726ba1e628Bd46392921">View</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-center mt-6 mb-6 text-2xl"><button class="text-green-400 hover:underline font-bold p-4 style-9eDX5" id="style-9eDX5">1</button><button class="text-green-400 hover:underline font-bold p-4 style-3SKCo" id="style-3SKCo">2</button><button class="text-green-400 hover:underline font-bold p-4 style-gsWaJ" id="style-gsWaJ">3</button><button class="text-green-400 hover:underline font-bold p-4 style-NtD9z" id="style-NtD9z">4</button><button class="text-green-400 hover:underline font-bold p-4 style-MqHKf" disabled="" id="style-MqHKf">...</button><button class="text-green-400 hover:underline font-bold p-4 style-AhRV1" id="style-AhRV1">54</button><button class="text-green-400 hover:underline font-bold p-4 style-xij9h" id="style-xij9h">55</button><button class="text-green-400 hover:underline font-bold p-4 style-52jqS" id="style-52jqS">56</button></div>
                 </div>
             </div>
-        </div>
-    </header>
-    <main className="fix ">
-        <div className="gradient-position ">
-            <img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/gradient-circle.svg" width="500" alt="Background Circle" className=" style-ej1SS" id="style-ej1SS"/>
-            <img src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/gradient-circle.svg" width="500" alt="Background Circle" className=" style-GqCmz" id="style-GqCmz"/>
-        </div>
-        <div data-elementor-type="wp-page" data-elementor-id="24" className="elementor elementor-24 " data-elementor-post-type="page">
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-3a06ec7 elementor-section-full_width elementor-section-height-default " data-id="3a06ec7" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-045d5be " data-id="045d5be" data-element_type="column">
-                        <div className="elementor-widget-wrap ">
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-4956fbe elementor-section-full_width elementor-section-height-default " data-id="4956fbe" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-cd51e57 " data-id="cd51e57" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated 127-128">
-                            <div className="elementor-element elementor-element-e0f2df0 elementor-widget elementor-widget-hero-banner " data-id="e0f2df0" data-element_type="widget" data-widget_type="hero-banner.default">
-                                <div className="elementor-widget-container ">
-                                    <section id="home" className="banner-area banner-padding tg-section position-relative ">
-                                        <div className="banner__background-wrap ">
-                                            <div className="background  style-IZbST" data-background="https://web3.edulabs.ai/wp-content/uploads/2022/12/gradient_bg01.png" id="style-IZbST"></div>
-                                        </div>
-                                        <div className="container ">
-                                            <div className="row ">
-                                                <div className="col-lg-6 ">
-                                                    <div className="banner__content tg-content  style-OwtdA" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;" id="style-OwtdA">
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-01.png" width="44" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" className=" style-G8LQy" id="style-G8LQy"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" width="16" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 420;" className=" style-qV4Bo" id="style-qV4Bo"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-03.png" width="24" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;" className=" style-bg6nT" id="style-bg6nT"/>
-                                                        <h2 className="title ">Web 3.0 Student-Centric Tool</h2>
-                                                        <p className="desc ">An educational productivity tool designed for collaboration and efficiency, powered by Web3 technology for secure authentication, transparency, and tailored learning experiences.</p>
-                                                        <a href="http://edulabs.ai/#signup" target="_blank" rel="nofollow" className="banner__btn btn gradient-btn ">
-                                                            <span className="">Get Started</span> <i className="unicon-arrow-right "></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-6 ">
-                                                    <div className="banner__images  style-1RWws" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 200;" id="style-1RWws">
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png" width="44" className="shape  style-6A2KS" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 460;" id="style-6A2KS"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" width="28" className="shape  style-9cEFx" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 480;" id="style-9cEFx"/>
-                                                        <img decoding="async" className="shape dashed-line has-active-light  style-N9AEX" width="300" src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/blob-dashed.svg" alt="Blog dashed" id="style-N9AEX"/>
-                                                        <img decoding="async" className="shape dashed-line has-active-dark  style-UemUB" width="300" src="https://web3.edulabs.ai/wp-content/themes/nerko/assets/img/others/blob-dashed-light.svg" alt="Blog dashed" id="style-UemUB"/>
-                                                        <svg style={{top: "-17%", opacity: ".3"}} className="shape " viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill="#F796FF" d="M47.5,-67.2C55.9,-59.3,53.2,-37.9,56.7,-20.1C60.2,-2.3,69.9,11.8,70.8,27.3C71.7,42.9,63.8,59.9,50.6,64.4C37.3,68.9,18.6,60.8,-0.3,61.2C-19.3,61.6,-38.6,70.7,-53.5,66.7C-68.4,62.8,-78.9,45.9,-78.8,29.5C-78.7,13.2,-67.9,-2.7,-59.8,-16.8C-51.6,-31,-46,-43.3,-36.5,-50.9C-27,-58.4,-13.5,-61.1,3,-65.2C19.6,-69.4,39.1,-75.1,47.5,-67.2Z" transform="translate(100 100)">
-                                                            </path>
-                                                        </svg>
-                                                        <div className="banner__images-grid ">
-                                                            <div className="left "><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/art_09.jpg" alt="" className=""/></div>
-                                                            <div className="right "><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/art_06.jpg" alt="" className=""/></div>
-                                                        </div>
-                                                        <a href="https://web3.edulabs.ai/" target="_blank" rel="nofollow" className="tg-circle-text ">
-                                                            <svg className="tg-circle-text-path tg-animation-spin " viewBox="0 0 100 100" width="120" height="120">
-                                                                <defs className="">
-                                                                    <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0">
-                                                                    </path>
-                                                                </defs>
-                                                                <text font-size="11.75" className="">
-                                                                    <textPath xlink:href="#circle" className="">view in web3 • view in web3 •</textPath>
-                                                                </text>
-                                                            </svg>
-                                                            <i className="unicon-arrow-up-right "></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-fbdf678 elementor-section-full_width elementor-section-height-default " data-id="fbdf678" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6616061 " data-id="6616061" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-82ba7b8 elementor-widget elementor-widget-brand " data-id="82ba7b8" data-element_type="widget" data-widget_type="brand.default">
-                                <div className="elementor-widget-container ">
-                                    <div className="brand-area  style-KPbW2" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 300;" id="style-KPbW2">
-                                        <div className="container ">
-                                            <div className="row justify-content-center ">
-                                                <div className="col-xl-10 col-12 ">
-                                                    <h6 className="brand__title ">POWERED BY AMAZING PARTNERS:</h6>
-                                                    <div className="brand__list ">
-                                                        <div className="brand__item ">
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-01.svg" className="has-active-light " alt=""/></a>
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-01.svg" className="has-active-dark " alt=""/></a>
-                                                        </div>
-                                                        <div className="brand__item ">
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-02.svg" className="has-active-light " alt=""/></a>
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-02.svg" className="has-active-dark " alt=""/></a>
-                                                        </div>
-                                                        <div className="brand__item ">
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-03.svg" className="has-active-light " alt=""/></a>
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-03.svg" className="has-active-dark " alt=""/></a>
-                                                        </div>
-                                                        <div className="brand__item ">
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-04.svg" className="has-active-light " alt=""/></a>
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-04.svg" className="has-active-dark " alt=""/></a>
-                                                        </div>
-                                                        <div className="brand__item ">
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-05.svg" className="has-active-light " alt=""/></a>
-                                                            <a href="#" className=""><img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/wallet-light-05.svg" className="has-active-dark " alt=""/></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-61ba82e elementor-section-full_width elementor-section-height-default " data-id="61ba82e" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-36c28aa " data-id="36c28aa" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-a90de43 elementor-widget elementor-widget-tg-separator " data-id="a90de43" data-element_type="widget" data-widget_type="tg-separator.default">
-                                <div className="elementor-widget-container ">
-                                    <div className="section-divider  style-Tq55v" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-Tq55v">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-acaa241 elementor-section-full_width elementor-section-height-default " data-id="acaa241" data-element_type="section" id="minting">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-e9b5133 " data-id="e9b5133" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-6ccf568 elementor-widget elementor-widget-features " data-id="6ccf568" data-element_type="widget" data-widget_type="features.default">
-                                <div className="elementor-widget-container ">
-                                    <section className="mint-area ">
-                                        <div className="container ">
-                                            <div className="row justify-content-center  style-aoSV3" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 200;" id="style-aoSV3">
-                                                <div className="col-xl-8 col-lg-10 ">
-                                                    <div className="section__title text-center title-mb-80 ">
-                                                        <h2 className="title ">How It Works</h2>
-                                                        <p className="desc ">Edulabs is made to make you more efficient and productive.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="mint__lits-wrapper " data-anime="targets: > *; opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 300;">
-                                                <img decoding="async" className="shape  style-4v3bH" width="16" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" alt="" id="style-4v3bH"/>
-                                                <img decoding="async" className="shape  style-yUyQN" width="28" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-02.png" alt="" id="style-yUyQN"/>
-                                                <img decoding="async" className="shape  style-h4wDJ" width="24" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" alt="" id="style-h4wDJ"/>
-                                                <div className="row justify-content-center  style-5oHRf" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: -250; delay: anime.stagger(100);" id="style-5oHRf">
-                                                    <div className="col-md-6 col-sm-9 ">
-                                                        <div className="mint__item ">
-                                                            <div className="mint__icon ">
-                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-01.png" alt=""/>
-                                                            </div>
-                                                            <div className="mint__content ">
-                                                                <h2 className="title ">Study Goals</h2>
-                                                                <p className="desc ">Set your study goals with this app and track your progress efficiently.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6 col-sm-9 ">
-                                                        <div className="mint__item ">
-                                                            <div className="mint__icon ">
-                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-02.png" alt=""/>
-                                                            </div>
-                                                            <div className="mint__content ">
-                                                                <h2 className="title ">Manage Assignments</h2>
-                                                                <p className="desc ">Manage assignments Create documents. Collaborate with others.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6 col-sm-9 ">
-                                                        <div className="mint__item ">
-                                                            <div className="mint__icon ">
-                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-03.png" alt=""/>
-                                                            </div>
-                                                            <div className="mint__content ">
-                                                                <h2 className="title ">Task Management</h2>
-                                                                <p className="desc ">Manage your tasks and get things done with amazing to-do lists.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6 col-sm-9 ">
-                                                        <div className="mint__item ">
-                                                            <div className="mint__icon ">
-                                                                <img decoding="async" className="light " src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/mint-04.png" alt=""/>
-                                                            </div>
-                                                            <div className="mint__content ">
-                                                                <h2 className="title ">Study Notes</h2>
-                                                                <p className="desc ">Take amazing study notes. Share with classmates. Export as PDF.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-4f9e22e elementor-section-full_width elementor-section-height-default " data-id="4f9e22e" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2a09d4d " data-id="2a09d4d" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-98fedc9 elementor-widget elementor-widget-tg-separator " data-id="98fedc9" data-element_type="widget" data-widget_type="tg-separator.default">
-                                <div className="elementor-widget-container ">
-                                    <div className="section-divider  style-7o3Nf" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-7o3Nf">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-f728a46 elementor-section-full_width elementor-section-height-default " data-id="f728a46" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5541007 " data-id="5541007" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-8694488 elementor-widget elementor-widget-tp-fact " data-id="8694488" data-element_type="widget" data-widget_type="tp-fact.default">
-                                <div className="elementor-widget-container ">
-                                    <section className="fact-area ">
-                                        <div className="container ">
-                                            <div className="fact__items-wrap position-relative ">
-                                                <img decoding="async" className="shape  style-2pln4" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png" width="32" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: -250; delay: 200;" id="style-2pln4"/>
-                                                <img decoding="async" className="shape  style-zl2L2" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-01.png" width="24" alt="" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: -250; delay: 200;" id="style-zl2L2"/>
-                                                <div className="row justify-content-center " data-anime="targets: > *; opacity:[0, 1]; scale:[0.5, 1]; onview: -250; delay: anime.stagger(100);">
-                                                    <div className="col-lg-4 col-md-6 col-sm-8  style-XPSah" id="style-XPSah">
-                                                        <div className="fact__item text-center ">
-                                                            <h2 className="fact__count tg-text-gradient ">4,000+</h2>
-                                                            <span className="meta ">Users Connected</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-4 col-md-6 col-sm-8  style-EQBL8" id="style-EQBL8">
-                                                        <div className="fact__item text-center ">
-                                                            <h2 className="fact__count tg-text-gradient ">20,000+</h2>
-                                                            <span className="meta ">Tasks Recorded every 5 mins.</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-4 col-md-6 col-sm-8  style-cFVmG" id="style-cFVmG">
-                                                        <div className="fact__item text-center ">
-                                                            <h2 className="fact__count tg-text-gradient ">2.5x</h2>
-                                                            <span className="meta ">Estimated Value Back to Users</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-a5fab69 elementor-section-full_width elementor-section-height-default " data-id="a5fab69" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-789c964 " data-id="789c964" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-f78a15a elementor-widget elementor-widget-tg-separator " data-id="f78a15a" data-element_type="widget" data-widget_type="tg-separator.default">
-                                <div className="elementor-widget-container ">
-                                    <div className="section-divider  style-miqpK" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-miqpK">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-5b441aa elementor-section-full_width elementor-section-height-default " data-id="5b441aa" data-element_type="section" id="about">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-e127129 " data-id="e127129" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-d87ac7a elementor-widget elementor-widget-about " data-id="d87ac7a" data-element_type="widget" data-widget_type="about.default">
-                                <div className="elementor-widget-container ">
-                                    <section className="about-area ">
-                                        <div className="container ">
-                                            <div className="row justify-content-center  style-b86IL" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;" id="style-b86IL">
-                                                <div className="col-xl-8 col-lg-10 ">
-                                                    <div className="section__title text-center title-mb-80 ">
-                                                        <h2 className="title ">About the platform</h2>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="about__row-reverse ">
-                                                <div className="row align-items-center ">
-                                                    <div className="col-lg-6 ">
-                                                        <div className="about__img  style-QAY2S" data-anime="opacity:[0, 1]; translateX:[-24, 0]; onview: -250; delay: 200;" id="style-QAY2S">
-                                                            <img decoding="async" src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/features-03.png" alt="" className=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-6 ">
-                                                        <div className="about__content  style-qxJbE" data-anime="opacity:[0, 1]; translateX:[24, 0]; onview: -250; delay: 300;" id="style-qxJbE">
-                                                            <div className="section__title text-start ">
-                                                                <span className="sub-title tg-text-gradient ">OpenAI</span>
-                                                                <h2 className="title ">AI is your friend, not your enemy</h2>
-                                                            </div>
-                                                            <p className="">Study efficiently by leveraging a cutting-edge AI integrated productivity Software!</p>
-                                                            <div className="about__facts-list ">
-                                                                <div className="about__fact-item ">
-                                                                    <h3 className="count ">4,500+</h3>
-                                                                    <p className="">Assignments Completed</p>
-                                                                </div>
-                                                                <div className="about__fact-item ">
-                                                                    <h3 className="count ">2.5x</h3>
-                                                                    <p className="">Estimated User Interaction Value</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row align-items-center ">
-                                                    <div className="col-lg-6 ">
-                                                        <div className="about__img  style-oDnl9" data-anime="opacity:[0, 1]; translateX:[24, 0]; onview: -250; delay: 200;" id="style-oDnl9">
-                                                            <img decoding="async" src="https://themegenix.net/wp/nerko/wp-content/uploads/2022/12/features-02.png" alt="" className=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-6 ">
-                                                        <div className="about__content  style-brExk" data-anime="opacity:[0, 1]; translateX:[-24, 0]; onview: -250; delay: 300;" id="style-brExk">
-                                                            <div className="section__title text-start ">
-                                                                <span className="sub-title tg-text-gradient ">productivity suite:</span>
-                                                                <h2 className="title ">Tools and apps for learners</h2>
-                                                            </div>
-                                                            <p className="">Explore the functionalities of Edulabs, your comprehensive Web3-enabled edtech platform featuring an AI tutor for optimized learning and streamlined task management. Simplify assignments, enhance collaboration, and leverage AI for enhanced productivity.</p>
-                                                            <div className="about__facts-list ">
-                                                                <div className="about__icon-box ">
-                                                                    <div className="icon ">
-                                                                        <i aria-hidden="true" className="tp unicon-select-02 "></i>
-                                                                    </div>
-                                                                    <p className="">Works everywhere, (PC, tablet, or mobile).</p>
-                                                                </div>
-                                                                <div className="about__icon-box ">
-                                                                    <div className="icon ">
-                                                                        <i aria-hidden="true" className="tp unicon-select-window "></i>
-                                                                    </div>
-                                                                    <p className="">No software to install. No updates to install. No hassle.</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-d9c3e5b elementor-section-full_width elementor-section-height-default " data-id="d9c3e5b" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-871835b " data-id="871835b" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-4550010 elementor-widget elementor-widget-tg-separator " data-id="4550010" data-element_type="widget" data-widget_type="tg-separator.default">
-                                <div className="elementor-widget-container ">
-                                    <div className="section-divider  style-2zPtH" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-2zPtH">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-ba1394c elementor-section-full_width elementor-section-height-default " data-id="ba1394c" data-element_type="section" id="roadmap">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-3204e3c " data-id="3204e3c" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-bced05e elementor-widget elementor-widget-roadmap " data-id="bced05e" data-element_type="widget" data-widget_type="roadmap.default">
-                                <div className="elementor-widget-container ">
-                                    <section className="roadmap-area ">
-                                        <div className="container ">
-                                            <div className="row justify-content-center  style-wZQMh" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;" id="style-wZQMh">
-                                                <div className="col-xl-8 col-lg-10 ">
-                                                    <div className="section__title text-center title-mb-75 ">
-                                                        <h2 className="title ">Edulabs's Roadmap</h2>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="roadmap__wrapper  style-xbw1B" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 200;" id="style-xbw1B">
-                                                <div className="swiper roadmap__active swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden ">
-                                                    <div className="swiper-wrapper " data-anime="targets: > * > *; opacity:[0, 1]; scale:[0.5, 1]; onview: -400; delay: anime.stagger(200);" id="swiper-wrapper-2a324e53d120ad2a" aria-live="polite">
-                                                        <div className="swiper-slide swiper-slide-active  style-C9hoA" role="group" aria-label="1 / 4" id="style-C9hoA">
-                                                            <div className="roadmap__card  style-WfUGo" id="style-WfUGo">
-                                                                <div className="roadmap__percent ">
-                                                                    <span className="">0</span>%
-                                                                </div>
-                                                                <div className="roadmap__step ">
-                                                                    <span className="tg-text-gradient d-inline-flex ">Phase 01</span>
-                                                                </div>
-                                                                <h3 className="roadmap__heading ">Planning</h3>
-                                                                <ul className="roadmap__lists list-wrap ">
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> Public release of Discord, Web
-                                                                    </li>
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> Telegram access
-                                                                    </li>
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> Al chat for Educators and Students release
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div className="swiper-slide swiper-slide-next  style-lvz9G" role="group" aria-label="2 / 4" id="style-lvz9G">
-                                                            <div className="roadmap__card  style-G8U8A" id="style-G8U8A">
-                                                                <div className="roadmap__percent ">
-                                                                    <span className="">25</span>%
-                                                                </div>
-                                                                <div className="roadmap__step ">
-                                                                    <span className="tg-text-gradient d-inline-flex ">Phase 02</span>
-                                                                </div>
-                                                                <h3 className="roadmap__heading ">$EDUX launch</h3>
-                                                                <ul className="roadmap__lists list-wrap ">
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> Set up Learning dApp
-                                                                    </li>
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> Develop web social platform &amp; build out community spaces
-                                                                    </li>
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> New DEX listing
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div className="swiper-slide  style-TQno2" role="group" aria-label="3 / 4" id="style-TQno2">
-                                                            <div className="roadmap__card  style-1STHA" id="style-1STHA">
-                                                                <div className="roadmap__percent ">
-                                                                    <span className="">50</span>%
-                                                                </div>
-                                                                <div className="roadmap__step ">
-                                                                    <span className="tg-text-gradient d-inline-flex ">Phase 03</span>
-                                                                </div>
-                                                                <h3 className="roadmap__heading ">Implementation</h3>
-                                                                <ul className="roadmap__lists list-wrap ">
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> Implement Team Sharing measures
-                                                                    </li>
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> Premium functionality public release
-                                                                    </li>
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> New CEX Listings
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div className="swiper-slide  style-G71eZ" role="group" aria-label="4 / 4" id="style-G71eZ">
-                                                            <div className="roadmap__card  style-ODTQ8" id="style-ODTQ8">
-                                                                <div className="roadmap__percent ">
-                                                                    <span className="">75</span>%
-                                                                </div>
-                                                                <div className="roadmap__step ">
-                                                                    <span className="tg-text-gradient d-inline-flex ">Phase 04</span>
-                                                                </div>
-                                                                <h3 className="roadmap__heading ">Beta Release</h3>
-                                                                <ul className="roadmap__lists list-wrap ">
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> Community marketplace Beta
-                                                                    </li>
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> Animation full release for educators
-                                                                    </li>
-                                                                    <li className="">
-                                                                        <i className="unicon-checkmark-outline tg-text-gradient d-inline-flex "></i> New partner integrations
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <span className="swiper-notification " aria-live="assertive" aria-atomic="true"></span>
-                                                </div>
-                                                <div className="tg-swiper-scrollbar swiper-pagination-progressbar swiper-pagination-horizontal "><span className="swiper-pagination-progressbar-fill  style-HVdF6" id="style-HVdF6"></span></div>
-                                                <a aria-label="Previous slide" href="#prev" className="tg-swiper-prev swiper-button-disabled " tabindex="-1" role="button" aria-controls="swiper-wrapper-2a324e53d120ad2a" aria-disabled="true"><i className="fas fa-chevron-left "></i></a>
-                                                <a aria-label="Next slide" href="#next" className="tg-swiper-next " tabindex="0" role="button" aria-controls="swiper-wrapper-2a324e53d120ad2a" aria-disabled="false"><i className="fas fa-chevron-right "></i></a>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-a2596a3 elementor-section-full_width elementor-section-height-default " data-id="a2596a3" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-bce6512 " data-id="bce6512" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-8a51db3 elementor-widget elementor-widget-tg-separator " data-id="8a51db3" data-element_type="widget" data-widget_type="tg-separator.default">
-                                <div className="elementor-widget-container ">
-                                    <div className="section-divider  style-4UyDD" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-4UyDD">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-2b524a05 elementor-section-content-middle elementor-section-boxed elementor-section-height-default " data-id="2b524a05" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-2f411145 " data-id="2f411145" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-7498eab elementor-widget elementor-widget-price-table " data-id="7498eab" data-element_type="widget" data-widget_type="price-table.default">
-                                <div className="elementor-widget-container ">
-                                    <div className="elementor-price-table ">
-                                        <div className="elementor-price-table__header ">
-                                            <h3 className="elementor-price-table__heading "> Starter </h3>
-                                            <span className="elementor-price-table__subheading "> Free Trial </span>
-                                        </div>
-                                        <div className="elementor-price-table__price ">
-                                            <span className="elementor-price-table__currency ">$</span> <span className="elementor-price-table__integer-part "> 0 </span>
-                                        </div>
-                                        <ul className="elementor-price-table__features-list ">
-                                            <li className="elementor-repeater-item-ef37df0 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Create &amp; Share Spreadsheets </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-f5295c0 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Address and Contact Book </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-0258802 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Calendar Integration </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-56490a8 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> AI Tutor </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-bd1ea38 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Image Editor </span>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div className="elementor-price-table__footer ">
-                                            <a className="elementor-price-table__button elementor-button elementor-size-md elementor-animation-grow " href="#"> Get Started </a>
-                                        </div>
-                                    </div>
-                                    <div className="elementor-price-table__ribbon ">
-                                        <div className="elementor-price-table__ribbon-inner "> Free trial </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-ae802d " data-id="ae802d" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-249d8784 elementor-widget elementor-widget-price-table " data-id="249d8784" data-element_type="widget" data-widget_type="price-table.default">
-                                <div className="elementor-widget-container ">
-                                    <div className="elementor-price-table ">
-                                        <div className="elementor-price-table__header ">
-                                            <h3 className="elementor-price-table__heading "> Premium </h3>
-                                            <span className="elementor-price-table__subheading "> All access </span>
-                                        </div>
-                                        <div className="elementor-price-table__price ">
-                                            <span className="elementor-price-table__currency ">$</span> <span className="elementor-price-table__integer-part "> 19 </span>
-                                            <div className="elementor-price-table__after-price ">
-                                                <span className="elementor-price-table__fractional-part "> 99 </span>
-                                                <span className="elementor-price-table__period elementor-typo-excluded ">Month</span>
-                                            </div>
-                                        </div>
-                                        <ul className="elementor-price-table__features-list ">
-                                            <li className="elementor-repeater-item-ef37df0 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Unlimited Users </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-631e16e ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> 10GB Storage </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-6ea3da3 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Create &amp; Share Documents </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-62f2318 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Create &amp; Share Spreadsheets </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-b079460 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Digital Asset Management </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-b36f6d9 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Quick Share </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-80db985 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Image Editor </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-91ae734 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Calendar </span>
-                                                </div>
-                                            </li>
-                                            <li className="elementor-repeater-item-378df87 ">
-                                                <div className="elementor-price-table__feature-inner ">
-                                                    <i className="" aria-hidden="true"></i>
-                                                    <span className=""> Address Book </span>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div className="elementor-price-table__footer ">
-                                            <a className="elementor-price-table__button elementor-button elementor-size-md elementor-animation-grow " href="#"> Get Started </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-301eeba elementor-section-full_width elementor-section-height-default " data-id="301eeba" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-9e29b8a " data-id="9e29b8a" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-a9e5aa4 elementor-widget elementor-widget-tg-separator " data-id="a9e5aa4" data-element_type="widget" data-widget_type="tg-separator.default">
-                                <div className="elementor-widget-container ">
-                                    <div className="section-divider  style-sXUZl" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-sXUZl">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-9c9a94e elementor-section-full_width elementor-section-height-default " data-id="9c9a94e" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-24c40e2 " data-id="24c40e2" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-88d9e37 elementor-widget elementor-widget-tp-faq " data-id="88d9e37" data-element_type="widget" data-widget_type="tp-faq.default">
-                                <div className="elementor-widget-container ">
-                                    <section className="faq-area ">
-                                        <div className="container ">
-                                            <div className="row justify-content-center  style-xw5Ur" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;" id="style-xw5Ur">
-                                                <div className="col-xl-8 col-lg-10 ">
-                                                    <div className="section__title text-center title-mb-75 ">
-                                                        <h2 className="title ">FAQs</h2>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="row justify-content-center ">
-                                                <div className="col-xxl-7 col-xl-9 col-lg-10 ">
-                                                    <div className="faq__wrapper  style-7qNjo" data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;" id="style-7qNjo">
-                                                        <div className="accordion " id="accordionFaq">
-                                                            <div className="accordion-item ">
-                                                                <h2 className="accordion-header " id="headingOne-0">
-                                                                    <button className="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-0" aria-expanded="true" aria-controls="collapseOne-0"> What is Binance Smart Chain, and how does it benefit EdTech platforms?? </button>
-                                                                </h2>
-                                                                <div id="collapseOne-0" className="accordion-collapse collapse show " aria-labelledby="headingOne-0" data-bs-parent="#accordionFaq">
-                                                                    <div className="accordion-body ">
-                                                                        <p className="">Binance Smart Chain is a blockchain network that supports smart contracts and decentralized applications (DApps), offering fast, low-cost transactions and scalability. In EdTech, BSC enables secure and transparent payment processing, tokenized rewards, and data immutability, enhancing user experiences and platform efficiency.</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="accordion-item ">
-                                                                <h2 className="accordion-header " id="headingOne-1">
-                                                                    <button className="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-1" aria-expanded="true" aria-controls="collapseOne-1"> What is Web3 Technology and how does it revolutionize the EdTech Space? </button>
-                                                                </h2>
-                                                                <div id="collapseOne-1" className="accordion-collapse collapse " aria-labelledby="headingOne-1" data-bs-parent="#accordionFaq">
-                                                                    <div className="accordion-body ">
-                                                                        <p className="">Web3 technology represents the decentralized web, emphasizing user ownership of data, transparent transactions, and enhanced security. In EdTech, Web3 enables personalized learning experiences, peer-to-peer interactions, and efficient content distribution, fostering innovation and collaboration.</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="accordion-item ">
-                                                                <h2 className="accordion-header " id="headingOne-2">
-                                                                    <button className="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-2" aria-expanded="true" aria-controls="collapseOne-2"> How does our platform utilize Web3 principles to empower students and educators? </button>
-                                                                </h2>
-                                                                <div id="collapseOne-2" className="accordion-collapse collapse " aria-labelledby="headingOne-2" data-bs-parent="#accordionFaq">
-                                                                    <div className="accordion-body ">
-                                                                        <p className="">Our platform integrates Web3 principles to offer decentralized identity management, data ownership, and peer-to-peer interactions. Students and educators can access secure and transparent learning environments, engage in collaborative projects, and benefit from tokenized incentives for active participation.</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="accordion-item ">
-                                                                <h2 className="accordion-header " id="headingOne-3">
-                                                                    <button className="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-3" aria-expanded="true" aria-controls="collapseOne-3"> Does our web3 platform support both traditional payment methods and blockchain transactions? </button>
-                                                                </h2>
-                                                                <div id="collapseOne-3" className="accordion-collapse collapse " aria-labelledby="headingOne-3" data-bs-parent="#accordionFaq">
-                                                                    <div className="accordion-body ">
-                                                                        <p className="">Yes, our platform supports both traditional payment methods and blockchain transactions. Users have the flexibility to choose between fiat currency payments and cryptocurrency transactions, ensuring accessibility and ease of use for all participants..</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="accordion-item ">
-                                                                <h2 className="accordion-header " id="headingOne-4">
-                                                                    <button className="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-4" aria-expanded="true" aria-controls="collapseOne-4"> What role does Tokenization play in our Web3 EdTech Platform? </button>
-                                                                </h2>
-                                                                <div id="collapseOne-4" className="accordion-collapse collapse " aria-labelledby="headingOne-4" data-bs-parent="#accordionFaq">
-                                                                    <div className="accordion-body ">
-                                                                        <p className="">Tokenization on our platform enables users to earn tokens for completing tasks, contributing content, and engaging in educational activities. These tokens can be used for accessing premium features, participating in governance decisions, and unlocking rewards, enhancing user engagement and loyalty.</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="accordion-item ">
-                                                                <h2 className="accordion-header " id="headingOne-5">
-                                                                    <button className="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-5" aria-expanded="true" aria-controls="collapseOne-5"> How does our platform ensure data privacy policy? </button>
-                                                                </h2>
-                                                                <div id="collapseOne-5" className="accordion-collapse collapse " aria-labelledby="headingOne-5" data-bs-parent="#accordionFaq">
-                                                                    <div className="accordion-body ">
-                                                                        <p className="">Our platform employs advanced encryption, decentralized storage solutions, and strict data privacy policies to protect user data. Web3 principles such as decentralized identity management and encrypted communication ensure that user information remains secure and private at all times.</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-b660c28 elementor-section-full_width elementor-section-height-default " data-id="b660c28" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-67ce644 " data-id="67ce644" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-8069a0f elementor-widget elementor-widget-tg-separator " data-id="8069a0f" data-element_type="widget" data-widget_type="tg-separator.default">
-                                <div className="elementor-widget-container ">
-                                    <div className="section-divider  style-pkNto" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-pkNto">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-199f5ed elementor-section-full_width elementor-section-height-default " data-id="199f5ed" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-78b175c " data-id="78b175c" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-4265c51 elementor-widget elementor-widget-tp-cta " data-id="4265c51" data-element_type="widget" data-widget_type="tp-cta.default">
-                                <div className="elementor-widget-container ">
-                                    <section className="cta-area ">
-                                        <div className="cta-bg  style-vOcT3" data-background="https://web3.edulabs.ai/wp-content/uploads/2022/12/collection_cta.png" id="style-vOcT3"></div>
-                                        <div className="container ">
-                                            <div className="row justify-content-center ">
-                                                <div className="col-xl-6 col-lg-8 ">
-                                                    <div className="cta__content text-center ">
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" width="24" alt="" className=" style-gU5jH" id="style-gU5jH"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png" width="48" alt="" className=" style-D4DfI" id="style-D4DfI"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-02.png" width="40" alt="" className=" style-tdpTi" id="style-tdpTi"/>
-                                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" width="24" alt="" className=" style-Fy9or" id="style-Fy9or"/>
-                                                        <h2 className="title ">Let's Get Started</h2>
-                                                        <a href="http://edulabs.ai/app/login" target="_blank" rel="nofollow" className="btn gradient-btn "> Join community </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-40fe03b elementor-section-full_width elementor-section-height-default " data-id="40fe03b" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-1589518 " data-id="1589518" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-6df5371 elementor-widget elementor-widget-tg-separator " data-id="6df5371" data-element_type="widget" data-widget_type="tg-separator.default">
-                                <div className="elementor-widget-container ">
-                                    <div className="section-divider  style-VdDIj" data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;" id="style-VdDIj">
-                                        <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/divider-01.svg" alt="" className=""/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="elementor-section elementor-top-section elementor-element elementor-element-a1a4c99 elementor-section-full_width elementor-section-height-default " data-id="a1a4c99" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no ">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-624e515 " data-id="624e515" data-element_type="column">
-                        <div className="elementor-widget-wrap elementor-element-populated ">
-                            <div className="elementor-element elementor-element-a77086b elementor-widget elementor-widget-tp-footer " data-id="a77086b" data-element_type="widget" data-widget_type="tp-footer.default">
-                                <div className="elementor-widget-container ">
-                                    <footer className="footer-area section-py-80 ">
-                                        <div className="container ">
-                                            <div className="footer__wrapper ">
-                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-01.png" width="32" alt="" className=" style-wJaMW" id="style-wJaMW"/>
-                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png" width="16" alt="" className=" style-dkTaS" id="style-dkTaS"/>
-                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png" width="16" alt="" className=" style-mlyoR" id="style-mlyoR"/>
-                                                <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-03.png" width="24" alt="" className=" style-2tjiL" id="style-2tjiL"/>
-                                                <div className="row justify-content-center ">
-                                                    <div className="col-xl-5 col-lg-7 col-md-9 col-sm-11 ">
-                                                        <div className="footer__info text-center ">
-                                                            <div className="footer-logo ">
-                                                                <a href="https://web3.edulabs.ai/" className="">
-                                                                    <img decoding="async" src="https://web3.edulabs.ai/wp-content/uploads/2024/05/2.png" width="200" alt="Logo" className=""/>
-                                                                </a>
-                                                            </div>
-                                                            <p className="">Edulabs Web3.0 improves student productivity. It lets students set goals and achieve those efficiently through powerful set of features and tools.</p>
-                                                            <ul className="list-wrap footer__social ">
-                                                                <li className=""><a href="#" className=""><i className="fab fa-twitter "></i></a></li>
-                                                                <li className=""><a href="#" className=""><i className="fab fa-discord "></i></a></li>
-                                                                <li className=""><a href="#" className=""><i className="fab fa-instagram "></i></a></li>
-                                                                <li className=""><a href="#" className=""><i className="fab fa-telegram-plane "></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="copyright__wrapper ">
-                                                    <div className="row ">
-                                                        <div className="col-md-6 ">
-                                                            <div className="copyright__text ">
-                                                                <p className="">© 2024 Edulabs. All rights reserved.</p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-6 ">
-                                                            <div className="copyright__menu ">
-                                                                <ul className="list-wrap ">
-                                                                    <li className=""><a href="http://edulabs.ai/privacy-policy" className="">Privacy policy</a></li>
-                                                                    <li className=""><a href="http://edulabs.ai/terms-of-service" className="">Terms of use</a></li>
-                                                                    <li className="backTop ">
-                                                                        <a href="javascript:void(0)" className="scroll-to-target " data-target="html"><i className="flaticon-arrowhead-up "></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </footer>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-    <link rel="stylesheet" id="e-animations-css" href="https://web3.edulabs.ai/wp-content/plugins/elementor/assets/lib/animations/animations.min.css?ver=3.21.4" type="text/css" media="all" className="72"/>
-    <span id="elementor-device-mode" className="elementor-screen-only "></span>
-    <svg style={{display: "none"}} className="e-font-icon-svg-symbols "></svg>
-    <div id="loom-companion-mv3" ext-id="liecbddmkiiihnedobmlmillhodjkdmb" className="">
-        <section id="shadow-host-companion" className=""></section>
+        </main>
     </div>
-    <div className="edge_builder edge_builder_top  style-e5GFg" id="style-e5GFg"></div>
-    <div className="edge_builder edge_builder_right  style-xUnPQ" id="style-xUnPQ"></div>
-    <div className="edge_builder edge_builder_bottom  style-i2m3p" id="style-i2m3p"></div>
-    <div className="edge_builder edge_builder_left  style-NlAoC" id="style-NlAoC"></div>
-    <div className=" -slide " id="modal-pick-resolution"></div>
-    <div className="edge_builder2 edge_builder_top  style-sCkDG" id="style-sCkDG"></div>
-    <div className="edge_builder2 edge_builder_right  style-ybNfm" id="style-ybNfm"></div>
-    <div className="edge_builder2 edge_builder_bottom  style-YtgPr" id="style-YtgPr"></div>
-    <div className="edge_builder2 edge_builder_left  style-Qj9bd" id="style-Qj9bd"></div>
-    <div data-tether-id="1" className=" style-j9n1x" id="style-j9n1x"></div>
-    <div id="snipcss-panel-container" className="style-5yGs7">
-        <div id="snipcss-button-relative-container">
-            <div className="snipcss_birdcontainer style-zzCzM" id="style-zzCzM"><img className="snipcss_bird style-r3CXr" src="chrome-extension://hbdnoadcmapfbngbodpppofgagiclicf/img/kiwi_transparent_run_text.png" id="style-r3CXr"/></div><button id="snipcss-close" className=""><span id="snipcss-close-svg"><svg viewBox="0 0 24 24" className="close">
-                        <path d="M 2 2 L 22 22 M 2 22 L22 2" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
-                    </svg></span></button>
-        </div>
-        <div className="snipcss-shadowcontainer"></div>
-    </div>
-    <div className=" -slide" id="modal-pick-resolution"></div>
-    <div className="edge_builder edge_builder_top style-5GKbI" id="style-5GKbI"></div>
-    <div className="edge_builder edge_builder_right style-zBHxD" id="style-zBHxD"></div>
-    <div className="edge_builder edge_builder_bottom style-UCwC2" id="style-UCwC2"></div>
-    <div className="edge_builder edge_builder_left style-B7ssb" id="style-B7ssb"></div>
-    <div className="edge_builder2 edge_builder_top style-KYNvT" id="style-KYNvT"></div>
-    <div className="edge_builder2 edge_builder_right style-4ptgU" id="style-4ptgU"></div>
-    <div className="edge_builder2 edge_builder_bottom style-FTnqx" id="style-FTnqx"></div>
-    <div className="edge_builder2 edge_builder_left style-aPCIp" id="style-aPCIp"></div>
-    <div data-tether-id="1" id="style-TRV95" className="style-TRV95"></div><canvas width="70" height="70" id="snipcss-kiwi" className="style-hIdem"></canvas>
 </div>
   )
 }

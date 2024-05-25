@@ -1,17 +1,12 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
 import "./App.css";
 import { Routes, Route } from "react-router";
-import Home from "./components/Home1";
-import Tokenomics from "./components/Tokenomics";
-// import Swap from "./components/Swap"
-import Upload from "./components/Upload";
+import Home from "./components/Home";
+
 import { ToastContainer} from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
-import Marketplace from "./components/Marketplace";
-import Details from "./components/Details";
-import Marketplace2 from "./components/Marketplace2";
+
 import 'react-multi-carousel/lib/styles.css';
 function App() {
   const [count, setCount] = useState(0);
@@ -21,11 +16,7 @@ function App() {
     <ToastContainer/>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="tokenomics" element={<Tokenomics />}></Route>
-        {/* <Route path="swap" element={<Swap></Swap>}></Route> */}
-        <Route path="mint" element={<Upload />}></Route>
-        <Route path="marketplace" element={<Marketplace2 />}></Route>
-        <Route path="details/:id" element={<Details />}></Route>
+
       </Routes>
     </>
   );
