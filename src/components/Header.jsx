@@ -11,7 +11,7 @@ export default function Header() {
   return (
 <header>
         <div id="sticky-header" className="tg-header__area transparent-header">
-          <div className="container">
+          <div className="">
             <div className="row">
               <div className="col-12">
                 <div className="mobile-nav-toggler">
@@ -43,12 +43,9 @@ export default function Header() {
                           id="menu-item-90"
                           className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-24 current_page_item menu-item-90"
                         >
-                          <a
-                            href="https://web3.edulabs.ai/"
-                            aria-current="page"
-                          >
+                          <Link to="/">
                             Home
-                          </a>
+                          </Link>
                         </li>
                         <li
                           id="menu-item-24477"
@@ -56,6 +53,14 @@ export default function Header() {
                         >
                           <Link to="/tokenomics">
                             Tokenomics
+                          </Link>
+                        </li>
+                        <li
+                          id="menu-item-24477"
+                          className="menu-item menu-item-type-post_type menu-item-object-page menu-item-24477"
+                        >
+                          <Link to="/marketplace">
+                            Explore NFTs
                           </Link>
                         </li>
                         <li

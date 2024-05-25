@@ -1,251 +1,61 @@
-import React, { useEffect, useState } from "react";
-import "./Tokenomics.css";
+import React, { useEffect, useState } from 'react'
+import "./Tokenomics.css"
 import Header from "./Header";
-import Icon from "../components/Icon.jsx";
-import axios from "axios";
-import { useWeb3React } from "@web3-react/core";
-import { BUSD, ERC721ABI, ERC721Address, defaultRpc, defualtChain } from "../config.js";
-import { erc20Abi, erc721Abi } from "viem";
-import Web3 from "web3";
-import { Contract, ethers } from "ethers";
-import CircularProgress from '@mui/material/CircularProgress';
-import { toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { useWeb3React } from '@web3-react/core';
+import { ERC721ABI, ERC721Address, defaultRpc, defualtChain } from '../config';
+import Web3 from 'web3';
+import Card from './Card';
 
-export const getContract = (library, account,add,abi) => {
-	const signer = library?.getSigner(account).connectUnchecked();
-	var contract = new Contract(add,abi, signer);
-	return contract;
-};
-
-export default function Upload() {
-  const [toggle,setToggle] = useState(false)
-  const [edLoading,setEdLoading] = useState(false)
-  const [tnLoading,setTNLoading] = useState(false)
-  const [selectedFile, setSelectedFile] = useState();
-  const [selectedPic, setSelectedPic] = useState();
-  const [fileName, setFileName] = useState("");
-  const [picFileName, setPicFileName] = useState("");
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
-  const [price, setPrice] = useState(0);
-  const [tokenId, setTokenId] = useState(0);
-  const {account,library,chainId} = useWeb3React()
-  const contractW = getContract(library,account,ERC721Address,ERC721ABI)
-  const BUSDW = getContract(library,account,BUSD,erc20Abi)
-
-  const wchain = chainId? chainId : defualtChain
-  const web3 = new Web3(new Web3.providers.HttpProvider(defaultRpc))
-  const ERC721ContractR = new web3.eth.Contract(ERC721ABI,ERC721Address)
-
-  const captureFile = async (e) => {
-    setEdLoading(true)
-    try {
-      console.log("kuch to hua he");
-      var _file = e.target.files[0];
-
-      setFileName(_file.name);
-      const formData = new FormData();
-      formData.append("file", _file);
-      const metadata = JSON.stringify({
-        name: "file name",
-      });
-      formData.append("pinataMetadata", metadata);
-
-      const options = JSON.stringify({
-        cidVersion: 0,
-      });
-      formData.append("pinataOptions", options);
-
-      const res = await fetch(
-        "https://api.pinata.cloud/pinning/pinFileToIPFS",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4YTg4YWE0Yy0xZWM0LTRiODMtYjk4Mi0xNTYxZWM5MjA0ZmYiLCJlbWFpbCI6IndhcWFzbml6YW1hbmkzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI5ZmY1NWM1ZWNiMjU1ZDliN2U4YSIsInNjb3BlZEtleVNlY3JldCI6IjlhNjcwNjhjYTBjMmI2Yjk0Yzk0MWE4ODBkYWRiMmNhYjA5N2QyMDljYzIwZmU4MWExZTM2YzdkODMxZTZkZDMiLCJpYXQiOjE3MTYzMTc5Njd9.Hum8KDR_Lism_NFlyj-AE8mw1F4XjN_7MSFn7TlefK0`,
-          },
-          body: formData,
-        }
-      );
-      const resData = await res.json();
-      setSelectedFile(
-        resData.IpfsHash
-      );
-      setEdLoading(false)
-
-//      createJson(resData.IpfsHash)
-      console.log(resData);
-    } catch (error) {
-      console.log(error);
-      setEdLoading(false)
+const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
     }
   };
 
-
-  const [response, setResponse] = useState(null);
-  const [error, setError] = useState(null);
-
-
-
-  useEffect(()=>{
-    const abc = async()=>{
-
-        const _tokenId = await ERC721ContractR.methods.tokenCounter().call()
-        setTokenId(_tokenId)
-
-    }
-    abc()
-
-  },[toggle])
-
-
-  console.log("filename", tokenId);
-
-
-  const mintNFT = async (ipfs) => {
-    if(!selectedFile){
-      toast.error("Educational content not yet uploaded")
-    }else if (!selectedPic){
-      toast.error("Thumbnail pic not yet uploaded")
-    }else if(!name){
-      toast.error("Name not yet entered")
-    }else if(!description){
-      toast.error("Desc not yet entered")
-    }else 
-
-    if(account){
-      setToggle(true)  
-      const apiKey = 'YOUR_PINATA_API_KEY';
-        const apiSecret = 'YOUR_PINATA_SECRET_API_KEY';
-        const url = 'https://api.pinata.cloud/pinning/pinFileToIPFS';
-  
-        // JSON object to be uploaded
-        const jsonObject = {
-          description: description, 
-          external_url: `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${selectedFile}`, 
-          image: `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${selectedPic}`, 
-          name: name,
-          attributes: [ ]
-        };
-  
-        // Convert JSON object to Blob
-        const jsonBlob = new Blob([JSON.stringify(jsonObject)], { type: 'application/json' });
-  
-        // Create FormData and append the Blob
-        const formData = new FormData();
-        formData.append('file', jsonBlob, 'data.json');
-        
-        try {
-            const res = await axios.post(url, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4YTg4YWE0Yy0xZWM0LTRiODMtYjk4Mi0xNTYxZWM5MjA0ZmYiLCJlbWFpbCI6IndhcWFzbml6YW1hbmkzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI5ZmY1NWM1ZWNiMjU1ZDliN2U4YSIsInNjb3BlZEtleVNlY3JldCI6IjlhNjcwNjhjYTBjMmI2Yjk0Yzk0MWE4ODBkYWRiMmNhYjA5N2QyMDljYzIwZmU4MWExZTM2YzdkODMxZTZkZDMiLCJpYXQiOjE3MTYzMTc5Njd9.Hum8KDR_Lism_NFlyj-AE8mw1F4XjN_7MSFn7TlefK0`,
-                }
-            });
-  
-            setResponse(res.data);
-            
-            [tokenId,
-              name,
-              description,
-              ethers.utils.parseEther(price),
-              `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${res.data.IpfsHash}`,
-              account,
-              true
-              ]
-            //  console.log("data",_data)                         
-  
-            mintNFT2(
-              [tokenId,
-                name,
-                description,
-                ethers.utils.parseEther(price),
-                `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${res.data.IpfsHash}`,
-                account,
-                true
-                ]
-            )
-  
-        } catch (err) {
-            setError(err.message);
-        }
-
-    }else{
-      toast.error("Please connect your wallet")
-    }
-
-
-
-
-      
-  };
-
-  const mintNFT2 = async (data)=>{
+export default function Marketplace() {
+    const {activate,deactivate,account,library,chainId} = useWeb3React()
+    const wchain = chainId? chainId : defualtChain
+    const web3 = new Web3(new Web3.providers.HttpProvider(defaultRpc))
+    const contractR = new web3.eth.Contract(ERC721ABI,ERC721Address)
+    const [data,setData] = useState(["0"])
     
-    console.log("new called",data)
-    try {
-      const tx1 = await contractW.mint(
-        data
-        ,{gasLimit:3000000})
-      await tx1.wait()
-      if(tx1){
-        setToggle(false)
-        setSelectedFile("")
-        setSelectedPic("")
-        setName("")
-        setDescription("")
-        setPrice("")
-      }
-    } catch (error) {
-      console.log(error)
-      setToggle(false)
-    }
-  }
+    useEffect(()=>{
+        const abc = async ()=>{
 
-  const captureFile2 = async (e) => {
-    setTNLoading(true)
-    try {
-      var _file = e.target.files[0];
+            const _data = await contractR.methods.getArray().call()
+            setData(_data)  
+    
 
-      setPicFileName(e.target.files[0].name);
-      const formData = new FormData();
-      formData.append("file", _file);
-      const metadata = JSON.stringify({
-        name: "file name",
-      });
-      formData.append("pinataMetadata", metadata);
+    
 
-      const options = JSON.stringify({
-        cidVersion: 0,
-      });
-      formData.append("pinataOptions", options);
 
-      const res = await fetch(
-        "https://api.pinata.cloud/pinning/pinFileToIPFS",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4YTg4YWE0Yy0xZWM0LTRiODMtYjk4Mi0xNTYxZWM5MjA0ZmYiLCJlbWFpbCI6IndhcWFzbml6YW1hbmkzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI5ZmY1NWM1ZWNiMjU1ZDliN2U4YSIsInNjb3BlZEtleVNlY3JldCI6IjlhNjcwNjhjYTBjMmI2Yjk0Yzk0MWE4ODBkYWRiMmNhYjA5N2QyMDljYzIwZmU4MWExZTM2YzdkODMxZTZkZDMiLCJpYXQiOjE3MTYzMTc5Njd9.Hum8KDR_Lism_NFlyj-AE8mw1F4XjN_7MSFn7TlefK0`,
-          },
-          body: formData,
         }
-      );
-      const resData = await res.json();
-      setSelectedPic(
-        resData.IpfsHash
-      );
-      setTNLoading(false)
-      console.log(resData);
-    } catch (error) {
-      console.log(error);
-      setTNLoading(false)
-    }
-  };
-
+    
+        abc()
+    
+    
+      },[account])
+      console.log("data",data)
 
 
   return (
-    <div
+<div
       class="page-template page-template-elementor_header_footer page page-id-30 wp-embed-responsive no-sidebar elementor-default elementor-template-full-width elementor-kit-24416 elementor-page elementor-page-30 e--ua-blink e--ua-chrome e--ua-webkit snipcss0-0-0-1 XXsnipcss_extracted_selector_selectionXX tether-element-attached-top tether-element-attached-center tether-target-attached-top tether-target-attached-center"
       data-elementor-device-mode="desktop"
       cz-shortcut-listen="true"
@@ -257,7 +67,7 @@ export default function Upload() {
         </label>
       </div>
 
-      <Header />
+<Header/>
 
       <main class="fix snipcss0-1-1-75">
         <div class="gradient-position snipcss0-2-75-76">
@@ -323,16 +133,19 @@ export default function Upload() {
                             }}
                           ></div>
                         </div>
-                        <div class="container snipcss0-10-86-89">
+                        <div 
+                        
+                        class="container snipcss0-10-86-89">
                           <div class="row justify-content-center snipcss0-11-89-90">
                             <div class="col-xl-7 col-lg-9 snipcss0-12-90-91">
                               <div
+
                                 class="banner__content-two tg-content snipcss0-13-91-92"
                                 data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;"
                                 // style={{
                                 //   opacity: "1",
                                 //   transform: "translateY(0px)",
-
+                                  
                                 // }}
                               >
                                 <img
@@ -386,12 +199,7 @@ export default function Upload() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png"
                                   width="44"
                                   alt=""
-                                  style={{
-                                    bottom: "-16%",
-                                    left: "16%",
-                                    opacity: "1",
-                                    transform: "scale(1)",
-                                  }}
+                                  style={{bottom: "-16%", left: "16%", opacity: "1", transform: "scale(1)"}}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;"
                                 />
 
@@ -401,104 +209,15 @@ export default function Upload() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-03.png"
                                   width="24"
                                   alt=""
-                                  style={{
-                                    bottom: "-16%",
-                                    right: "16%",
-                                    opacity: "1",
-                                    transform: "scale(1)",
-                                  }}
+                                  style={{bottom: "-16%", right: "16%", opacity: "1", transform: "scale(1)"}}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;"
                                 />
-                                <h2 class="title snipcss0-14-92-98">
-                                    Mint NFT
-                                </h2>
-                                <p class="desc snipcss0-14-92-99">
-                                  Upload the education content
-                                </p>
 
-                                <div className="">
-                                  <div className="file">
-                                    <input
-                                    disabled={toggle}
-                                      onChange={captureFile}
-                                      className="load"
-                                      type="file"
-                                    />
-                                    <div className="">
-                                      {!edLoading ?  <Icon name="upload-file" size="24" /> : <CircularProgress sx={{color:"white"}}/>} 
-                                    </div>
-                                    {selectedFile ? (
-                                      <div className="format">{fileName}</div>
-                                    ) : (
-                                      <div className="format">
-                                        PNG, GIF, WEBP, MP4 or MP3. Max 1Gb.
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-
-                                <p class="desc snipcss0-14-92-99">
-                                  Upload the thumbnail picture
-                                </p>
-
-                                <div className="">
-                                  <div className="file">
-                                    <input
-                                    disabled={toggle}
-                                      onChange={captureFile2}
-                                      className="load"
-                                      type="file"
-                                    />
-                                    <div className="">
-                                    {!tnLoading ?  <Icon name="upload-file" size="24" /> : <CircularProgress sx={{color:"white"}}/>}
-                                    </div>
-                                    {selectedPic ? (
-                                      <div className="format">{picFileName}</div>
-                                    ) : (
-                                      <div className="format">
-                                        PNG, GIF, WEBP, MP4 or MP3. Max 1Gb.
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                                <p class="desc snipcss0-14-92-99">
-                                  Upload the details
-                                </p>
-
-                                <div className="details">
-                                  <div style={{alignItems:"flex-start",display:"flex",flexDirection:"column"}}>
-                                    {" "}
-                                    <div>
-                                      Name: <input disabled={toggle} value={name} onChange={(e)=>{setName(e.target.value)}} type="text" />
-                                    </div>
-                                    <br />
-                                    <div>
-                                      Description:
-                                      <input type="text" disabled={toggle} value={description} onChange={(e)=>{setDescription(e.target.value)}}/>
-                                    </div>
-                                    <br />
-                                    <div>
-                                      Price:
-                                      <input type="text" disabled={toggle} value={price} onChange={(e)=>{setPrice(e.target.value)}}/>
-                                    </div>
-                                  </div>
-                                </div>
-                                <button
-                                  style={{minWidth:"200px",height:"60px"
-                                  }}
-                                  onClick={mintNFT}
-                                  class="banner__btn btn gradient-btn gradient-btn-2 snipcss0-14-92-100"
-                                >
-                                  <span class="snipcss0-15-100-101">
-                                  {
-                                  !toggle ? <p
-                                  style={{color:"white",marginLeft:"25%",fontSize:"20px",marginTop:"10%"}}
-                                  >Mint NFT</p> : 
-                                   <CircularProgress 
-                                    sx={{width:"50px",color:"white",marginLeft:"100%"}}
-                                  />}
-                                  </span>
-                                </button>
+<Carousel responsive={responsive}>
+  {data && data.map((v,e)=>
+  <Card uri={v[4]} id={v[0]}></Card>
+  )}
+</Carousel>;
                               </div>
                             </div>
                           </div>
@@ -533,7 +252,7 @@ export default function Upload() {
                       <div
                         class="section-divider snipcss0-9-107-108"
                         data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
-                        style={{ opacity: "1", transform: "scale(1)" }}
+                        style={{opacity: "1", transform: "scale(1)"}}
                       >
                         <img
                           decoding="async"
@@ -574,10 +293,7 @@ export default function Upload() {
                           <div
                             class="row justify-content-center snipcss0-11-117-118"
                             data-anime="opacity:[0, 1]; translateY:[24, 0]; onview: true; delay: 100;"
-                            style={{
-                              opacity: "1",
-                              transform: "translateY(0px)",
-                            }}
+                            style={{opacity: "1", transform: "translateY(0px)"}}
                           >
                             <div class="col-xl-8 col-lg-10 snipcss0-12-118-119">
                               <div class="section__title text-center title-mb-80 snipcss0-13-119-120">
@@ -602,10 +318,7 @@ export default function Upload() {
                                 <div
                                   class="about__content snipcss0-14-125-126"
                                   data-anime="opacity:[0, 1]; translateX:[24, 0]; onview: -250; delay: 300;"
-                                  style={{
-                                    opacity: "1",
-                                    transform: "translateX(0px)",
-                                  }}
+                                  style={{opacity: "1", transform: "translateX(0px)"}}
                                 >
                                   <div class="section__title text-start snipcss0-15-126-127"></div>
                                 </div>
@@ -642,7 +355,7 @@ export default function Upload() {
                       <div
                         class="section-divider snipcss0-9-133-134"
                         data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
-                        style={{ opacity: "1", transform: "scale(1)" }}
+                        style={{opacity: "1", transform: "scale(1)"}}
                       >
                         <img
                           decoding="async"
@@ -686,12 +399,7 @@ export default function Upload() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/circle-01.png"
                                   width="24"
                                   alt=""
-                                  style={{
-                                    top: "0%",
-                                    left: "-16%",
-                                    opacity: "1",
-                                    transform: "scale(1)",
-                                  }}
+                                  style={{top: "0%", left: "-16%", opacity: "1", transform: "scale(1)"}}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 400;"
                                   class="snipcss0-14-146-147"
                                 />
@@ -701,12 +409,7 @@ export default function Upload() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/bitcoin-01.png"
                                   width="48"
                                   alt=""
-                                  style={{
-                                    bottom: "16%",
-                                    left: "-8%",
-                                    opacity: "1",
-                                    transform: "scale(1)",
-                                  }}
+                                  style={{bottom: "16%", left: "-8%", opacity: "1", transform: "scale(1)"}}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;"
                                   class="snipcss0-14-146-148"
                                 />
@@ -716,12 +419,7 @@ export default function Upload() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/ethereum-02.png"
                                   width="40"
                                   alt=""
-                                  style={{
-                                    top: "0%",
-                                    right: "-16%",
-                                    opacity: "1",
-                                    transform: "scale(1)",
-                                  }}
+                                  style={{top: "0%", right: "-16%", opacity: "1", transform: "scale(1)"}}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 440;"
                                   class="snipcss0-14-146-149"
                                 />
@@ -731,12 +429,7 @@ export default function Upload() {
                                   src="https://web3.edulabs.ai/wp-content/uploads/2022/12/x.png"
                                   width="24"
                                   alt=""
-                                  style={{
-                                    bottom: "16%",
-                                    right: "-8%",
-                                    opacity: "1",
-                                    transform: "scale(1)",
-                                  }}
+                                  style={{bottom: "16%", right: "-8%", opacity: "1", transform: "scale(1)"}}
                                   data-anime="opacity:[0, 1]; scale:[0, 1]; onview: true; delay: 420;"
                                   class="snipcss0-14-146-150"
                                 />
@@ -791,10 +484,7 @@ export default function Upload() {
                         <div
                           class="footer-bg snipcss0-10-160-161"
                           data-background="https://web3.edulabs.ai/wp-content/uploads/2022/12/footer-bg.png"
-                          style={{
-                            backgroundImage:
-                              'url("https://web3.edulabs.ai/wp-content/uploads/2022/12/footer-bg.png")',
-                          }}
+                          style={{backgroundImage: 'url("https://web3.edulabs.ai/wp-content/uploads/2022/12/footer-bg.png")'}}
                         ></div>
 
                         <div class="container snipcss0-10-160-162">
@@ -977,5 +667,5 @@ export default function Upload() {
         class="snipcss0-1-1-225"
       ></div>
     </div>
-  );
+  )
 }

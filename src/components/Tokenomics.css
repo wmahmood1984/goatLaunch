@@ -1114,14 +1114,14 @@
   @media (min-width: 992px){ 
     .col-lg-9 { 
       flex: 0 0 auto; 
-      width: 75%;
+      width: 100%;
     } 
   }     
   
   @media (min-width: 1200px){ 
     .col-xl-7 { 
       flex: 0 0 auto; 
-      width: 58.33333333%;
+      width: 100%;
     } 
   }     
   

@@ -9,6 +9,8 @@ import Tokenomics from "./components/Tokenomics";
 import Upload from "./components/Upload";
 import { ToastContainer} from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+import Marketplace from "./components/Marketplace";
+import Details from "./components/Details";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -21,6 +23,8 @@ function App() {
         <Route path="tokenomics" element={<Tokenomics />}></Route>
         {/* <Route path="swap" element={<Swap></Swap>}></Route> */}
         <Route path="mint" element={<Upload />}></Route>
+        <Route path="marketplace" element={<Marketplace />}></Route>
+        <Route path="details/:id" element={<Details />}></Route>
       </Routes>
     </>
   );
