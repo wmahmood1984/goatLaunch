@@ -11,7 +11,8 @@ import { ToastContainer} from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import Marketplace from "./components/Marketplace";
 import Details from "./components/Details";
-
+import Marketplace2 from "./components/Marketplace2";
+import 'react-multi-carousel/lib/styles.css';
 function App() {
   const [count, setCount] = useState(0);
 
@@ -23,7 +24,7 @@ function App() {
         <Route path="tokenomics" element={<Tokenomics />}></Route>
         {/* <Route path="swap" element={<Swap></Swap>}></Route> */}
         <Route path="mint" element={<Upload />}></Route>
-        <Route path="marketplace" element={<Marketplace />}></Route>
+        <Route path="marketplace" element={<Marketplace2 />}></Route>
         <Route path="details/:id" element={<Details />}></Route>
       </Routes>
     </>

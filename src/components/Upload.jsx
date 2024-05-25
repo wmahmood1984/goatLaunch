@@ -10,7 +10,7 @@ import Web3 from "web3";
 import { Contract, ethers } from "ethers";
 import CircularProgress from '@mui/material/CircularProgress';
 import { toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+  // import 'react-toastify/dist/ReactToastify.css';
 
 export const getContract = (library, account,add,abi) => {
 	const signer = library?.getSigner(account).connectUnchecked();

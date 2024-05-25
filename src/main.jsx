@@ -6,6 +6,7 @@ import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 
+
 // import { createWeb3Modal } from '@web3modal/wagmi/react'
 // import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
 
