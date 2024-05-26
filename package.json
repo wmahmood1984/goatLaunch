@@ -21,6 +21,7 @@
     "@web3-react/walletconnect-connector": "^6.2.13",
     "@web3modal/wagmi": "^4.1.11",
     "axios": "^1.7.2",
+    "buffer": "^6.0.3",
     "ethers": "^5.7.0",
     "eventemitter3": "^5.0.1",
     "ipfs-http-client": "^60.0.1",

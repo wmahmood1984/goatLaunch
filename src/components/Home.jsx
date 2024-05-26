@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Sidebar from "./Sidebar";
 import Search from "./Search";
+import { useWeb3React } from "@web3-react/core";
+import { LaunchAbi, LaunchAddress, defaultRpc, defualtChain } from "../config";
+import Web3 from "web3";
+import { ethers } from "ethers";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  return (
+  const {activate,deactivate,account,library,chainId} = useWeb3React()
+  const wchain = chainId? chainId : defualtChain
+  const web3 = new Web3(new Web3.providers.HttpProvider(defaultRpc))
+  const contractR = new web3.eth.Contract(LaunchAbi,LaunchAddress)
+  const [data,setData] = useState()
+  
+  useEffect(()=>{
+      const abc = async ()=>{
+
+          const _data = await contractR.methods.getTokens().call()
+          setData(_data)  
+  
+
+  
+
+
+      }
+  
+      abc()
+  
+  
+    },[account])
+  //  console.log("data",data)
+  return (data && 
     <div class="relative h-full snipcss-oFsOI">
       <div class="fixed -z-10 pointer-events-none inset-0 overflow-hidden">
         <div class="absolute top-0 left-0 right-0 -u-z-10">
@@ -517,1501 +545,169 @@ export default function Home() {
               </section>
             </div>
             <div class="relative  z-1 flex flex-wrap flex-col justify-center gap-6 sm:flex-row sm:justify-between">
+              {data && data.map((v,e)=>
               <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac"
-                  >
-                    SPELL
-                  </a>
-                  <div class="text-yellow-400 text-xs">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      data-prefix="fas"
-                      data-icon="comment"
-                      class="svg-inline--fa fa-comment "
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"
-                      ></path>
-                    </svg>
-                    <span class="ml-1">13</span>
-                  </div>
-                </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.98 / 1.58 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2">
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://spellspectra.xyz/"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fas"
-                          data-icon="window-maximize"
-                          class="svg-inline--fa fa-window-maximize "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://t.me/spellspectra_base"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="telegram"
-                          class="svg-inline--fa fa-telegram "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 496 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://x.com/SpellSpectra"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="x-twitter"
-                          class="svg-inline--fa fa-x-twitter "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
-                          ></path>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
-                  <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-8UWQr"
-                    id="style-8UWQr"
-                  >
-                    61.98%
-                  </div>
-                </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac"
-                >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-GVGEc"
-                      id="style-GVGEc"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-PS196"
-                      id="style-PS196"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
+              <div class="flex gap-x-4 mt-1 justify-center">
+                {/* <a
+                  class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
                   href="viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac"
                 >
-                  View
-                </a>
-              </div>
-              <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0x0b4B6b641fe9151BeB3e733C05BB60Ad7d0a4D0e"
+                  {v[0]}
+                </a> */}
+                {/* <div class="text-yellow-400 text-xs">
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="comment"
+                    class="svg-inline--fa fa-comment "
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
                   >
-                    $DOGHARAMBE
-                  </a>
-                  <div class="text-yellow-400 text-xs">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      data-prefix="fas"
-                      data-icon="comment"
-                      class="svg-inline--fa fa-comment "
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
+                    <path
+                      fill="currentColor"
+                      d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"
+                    ></path>
+                  </svg>
+                  <span class="ml-1">13</span>
+                </div> */}
+              </div>
+              <div class="flex justify-between mb-5">
+                <div class="flex gap-x-4">
+                  <div class="min-w-0 flex-auto">
+                    <div class="mt-1">
+                      <div class="text-sm">{ethers.utils.formatEther(v.ethCollected)} / 3 ETH</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col sm:items-end flex-shrink-0">
+                  <div class="mt-1 flex justify-start space-x-2">
+                    <a
+                      class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={v[9][0]}
                     >
-                      <path
-                        fill="currentColor"
-                        d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"
-                      ></path>
-                    </svg>
-                    <span class="ml-1">3</span>
-                  </div>
-                </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.03 / 1.00 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2"></div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
-                  <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-1Gwal"
-                    id="style-1Gwal"
-                  >
-                    3.27%
-                  </div>
-                </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0x0b4B6b641fe9151BeB3e733C05BB60Ad7d0a4D0e"
-                >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-XS31R"
-                      id="style-XS31R"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-j9oLN"
-                      id="style-j9oLN"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0x137af2fad1b168f94691ff15874ba91f69f4c01e3bd4b105fa00c7e949db8476.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0x137af2fad1b168f94691ff15874ba91f69f4c01e3bd4b105fa00c7e949db8476.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
-                  href="viewpresale?tokenAddress=0x0b4B6b641fe9151BeB3e733C05BB60Ad7d0a4D0e"
-                >
-                  View
-                </a>
-              </div>
-              <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0xC0Bd6f5662a698dc088Cf66A8D4969475A25d461"
-                  >
-                    STONER
-                  </a>
-                  <div class="text-yellow-400 text-xs">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      data-prefix="fas"
-                      data-icon="comment"
-                      class="svg-inline--fa fa-comment "
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="window-maximize"
+                        class="svg-inline--fa fa-window-maximize "
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
+                        ></path>
+                      </svg>
+                    </a>
+                    <a
+                      class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={v[9][2]}
                     >
-                      <path
-                        fill="currentColor"
-                        d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"
-                      ></path>
-                    </svg>
-                    <span class="ml-1">10</span>
-                  </div>
-                </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.08 / 2.69 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2">
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://stonerpp.com/"
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fab"
+                        data-icon="telegram"
+                        class="svg-inline--fa fa-telegram "
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 496 512"
                       >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fas"
-                          data-icon="window-maximize"
-                          class="svg-inline--fa fa-window-maximize "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://t.me/stonerpepetg"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="telegram"
-                          class="svg-inline--fa fa-telegram "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 496 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://x.com/StonerPepeCoin"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="x-twitter"
-                          class="svg-inline--fa fa-x-twitter "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
-                          ></path>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
-                  <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-IBrt8"
-                    id="style-IBrt8"
-                  >
-                    2.80%
-                  </div>
-                </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0xC0Bd6f5662a698dc088Cf66A8D4969475A25d461"
-                >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-j6iKn"
-                      id="style-j6iKn"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-CXmhh"
-                      id="style-CXmhh"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0x047cb600fff6d854dff848f9a66cc8c4ddf35d3ab5ee6f63f6d9a45f36933a5e.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0x047cb600fff6d854dff848f9a66cc8c4ddf35d3ab5ee6f63f6d9a45f36933a5e.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
-                  href="viewpresale?tokenAddress=0xC0Bd6f5662a698dc088Cf66A8D4969475A25d461"
-                >
-                  View
-                </a>
-              </div>
-              <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0x9555A43e60125f9d2A7b5aAf1cc93FCdb1906aa2"
-                  >
-                    vbucks
-                  </a>
-                  <div class="text-yellow-400 text-xs">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      data-prefix="fas"
-                      data-icon="comment"
-                      class="svg-inline--fa fa-comment "
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
+                        <path
+                          fill="currentColor"
+                          d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"
+                        ></path>
+                      </svg>
+                    </a>
+                    <a
+                      class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={v[9][1]}
                     >
-                      <path
-                        fill="currentColor"
-                        d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"
-                      ></path>
-                    </svg>
-                    <span class="ml-1">2</span>
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fab"
+                        data-icon="x-twitter"
+                        class="svg-inline--fa fa-x-twitter "
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
+                        ></path>
+                      </svg>
+                    </a>
                   </div>
                 </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.01 / 1.00 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2"></div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
-                  <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-SBs4D"
-                    id="style-SBs4D"
-                  >
-                    0.69%
-                  </div>
-                </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0x9555A43e60125f9d2A7b5aAf1cc93FCdb1906aa2"
-                >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-gxnXw"
-                      id="style-gxnXw"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-eqGfz"
-                      id="style-eqGfz"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xa840019717f142868488d0db9b7a17e1fcec822148468b537bb535891dff2fb4.gif"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xa840019717f142868488d0db9b7a17e1fcec822148468b537bb535891dff2fb4.gif"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
-                  href="viewpresale?tokenAddress=0x9555A43e60125f9d2A7b5aAf1cc93FCdb1906aa2"
-                >
-                  View
-                </a>
               </div>
-              <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0xF843a86B0140120dD4cc8Ed4823916F33576b3EA"
-                  >
-                    Kabosu
-                  </a>
-                  <div class="text-yellow-400 text-xs">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      data-prefix="fas"
-                      data-icon="comment"
-                      class="svg-inline--fa fa-comment "
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"
-                      ></path>
-                    </svg>
-                    <span class="ml-1">23</span>
-                  </div>
-                </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.06 / 2.00 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2">
-                      <a
-                        class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://t.me/kabosubasecto"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="telegram"
-                          class="svg-inline--fa fa-telegram "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 496 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://x.com/KabosubasedCTO"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="x-twitter"
-                          class="svg-inline--fa fa-x-twitter "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
-                          ></path>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
-                  <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-2ZPZO"
-                    id="style-2ZPZO"
-                  >
-                    2.78%
-                  </div>
-                </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0xF843a86B0140120dD4cc8Ed4823916F33576b3EA"
+              <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                <div
+                  style={{width:`${ethers.utils.formatEther(v.ethCollected)/3*100}%`}}
+                  class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-8UWQr"
+                  id="style-8UWQr"
                 >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-bJZvC"
-                      id="style-bJZvC"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-eInCX"
-                      id="style-eInCX"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xa946373eacc565271875ab7f16ac826d22e757d71e0f9ec987f45a5f03111f7d.jpeg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xa946373eacc565271875ab7f16ac826d22e757d71e0f9ec987f45a5f03111f7d.jpeg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
-                  href="viewpresale?tokenAddress=0xF843a86B0140120dD4cc8Ed4823916F33576b3EA"
-                >
-                  View
-                </a>
+                  {`${ethers.utils.formatEther(v.ethCollected)/3*100}%`}
+                </div>
               </div>
-              <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0xaDe81e4ed8131882Bd8f7186A1E0CE718BEdC65e"
-                  >
-                    $LXC
-                  </a>{" "}
-                </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.00 / 2.00 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2">
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://x.com/lennoxxcartel/status/1794164493569966380?s=46&amp;t=8qQ4WX95PNRQ75-XocSCzw"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fas"
-                          data-icon="window-maximize"
-                          class="svg-inline--fa fa-window-maximize "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://t.me/raretypeventures"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="telegram"
-                          class="svg-inline--fa fa-telegram "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 496 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://x.com/lennoxxcartel/status/1794164493569966380?s=46&amp;t=8qQ4WX95PNRQ75-XocSCzw"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="x-twitter"
-                          class="svg-inline--fa fa-x-twitter "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
-                          ></path>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+              <a
+                class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
+                //href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac"
+              >
+                <div class="relative p-[2px] group flex flex-1 shrink-0">
                   <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-q59Xz"
-                    id="style-q59Xz"
-                  >
-                    0.00%
-                  </div>
-                </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0xaDe81e4ed8131882Bd8f7186A1E0CE718BEdC65e"
-                >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-ong7t"
-                      id="style-ong7t"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-ohTLi"
-                      id="style-ohTLi"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
-                  href="viewpresale?tokenAddress=0xaDe81e4ed8131882Bd8f7186A1E0CE718BEdC65e"
-                >
-                  View
-                </a>
-              </div>
-              <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0x3651E69Be121929D0633c36AbF2F86d246CcDA52"
-                  >
-                    HHG
-                  </a>
-                  <div class="text-yellow-400 text-xs">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      data-prefix="fas"
-                      data-icon="comment"
-                      class="svg-inline--fa fa-comment "
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"
-                      ></path>
-                    </svg>
-                    <span class="ml-1">1</span>
-                  </div>
-                </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.00 / 5.00 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2">
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="www.hiphopgiraffe.com"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fas"
-                          data-icon="window-maximize"
-                          class="svg-inline--fa fa-window-maximize "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://t.me/hiphopGiraffe"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="telegram"
-                          class="svg-inline--fa fa-telegram "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 496 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://x.com/GiraffeHop12089?t=AJuqFBZk8PeG5jd71J_F3g&amp;s=09"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="x-twitter"
-                          class="svg-inline--fa fa-x-twitter "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
-                          ></path>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
+                    class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-GVGEc"
+                    id="style-GVGEc"
+                  ></div>
                   <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-IrdI9"
-                    id="style-IrdI9"
-                  >
-                    0.00%
+                    class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-PS196"
+                    id="style-PS196"
+                  ></div>
+                  <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
+                    <img
+                      src={
+                        `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${v[9][4]}`
+                        }
+                      class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
+                      alt="Token Image"
+                    />
+                    <img
+                      src={
+                        `https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${v[9][4]}`
+                        }
+                      class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
+                      alt="Token Image"
+                    />
                   </div>
                 </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0x3651E69Be121929D0633c36AbF2F86d246CcDA52"
-                >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-A6d4d"
-                      id="style-A6d4d"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-17k7G"
-                      id="style-17k7G"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0x7100f31f6f74bc3685d23145eb07777bbbfcd0fef2695bc18c82bcca4a9052b5.png"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0x7100f31f6f74bc3685d23145eb07777bbbfcd0fef2695bc18c82bcca4a9052b5.png"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
-                  href="viewpresale?tokenAddress=0x3651E69Be121929D0633c36AbF2F86d246CcDA52"
-                >
-                  View
-                </a>
-              </div>
-              <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0x4842D9A04700150Bc557fF4B528Edd2D7A6B0b0e"
-                  >
-                    EMOKOI
-                  </a>
-                  <div class="text-yellow-400 text-xs">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      data-prefix="fas"
-                      data-icon="comment"
-                      class="svg-inline--fa fa-comment "
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"
-                      ></path>
-                    </svg>
-                    <span class="ml-1">5</span>
-                  </div>
-                </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.00 / 2.00 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2">
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://emokoi.com"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fas"
-                          data-icon="window-maximize"
-                          class="svg-inline--fa fa-window-maximize "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://t.me/+9BnRHwVrxMQ0ZTEx"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="telegram"
-                          class="svg-inline--fa fa-telegram "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 496 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://x.com/EmoKoiBase"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="x-twitter"
-                          class="svg-inline--fa fa-x-twitter "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
-                          ></path>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
-                  <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-ogo2K"
-                    id="style-ogo2K"
-                  >
-                    0.03%
-                  </div>
-                </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0x4842D9A04700150Bc557fF4B528Edd2D7A6B0b0e"
-                >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-Lki51"
-                      id="style-Lki51"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-xU8im"
-                      id="style-xU8im"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0x09c42a3ce9c7dd805203fe4c2ee94ca3801a1a115bb79671c00955786e452dc1.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0x09c42a3ce9c7dd805203fe4c2ee94ca3801a1a115bb79671c00955786e452dc1.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
-                  href="viewpresale?tokenAddress=0x4842D9A04700150Bc557fF4B528Edd2D7A6B0b0e"
-                >
-                  View
-                </a>
-              </div>
-              <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0x82068E25e0511b6c4c99E8b82961BAAdd372eC90"
-                  >
-                    $LWL
-                  </a>
-                  <div class="text-yellow-400 text-xs">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      data-prefix="fas"
-                      data-icon="comment"
-                      class="svg-inline--fa fa-comment "
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"
-                      ></path>
-                    </svg>
-                    <span class="ml-1">17</span>
-                  </div>
-                </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.15 / 1.69 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2">
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://twitter.com/lennoxxcartel/status/1793853209284366845?t=Aw0Q6gyc1ACshUWi0OK7Kw&amp;s=19"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fas"
-                          data-icon="window-maximize"
-                          class="svg-inline--fa fa-window-maximize "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://twitter.com/lennoxxcartel/status/1793853209284366845?t=Aw0Q6gyc1ACshUWi0OK7Kw&amp;s=19"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="telegram"
-                          class="svg-inline--fa fa-telegram "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 496 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://twitter.com/lennoxxcartel/status/1793853209284366845?t=Aw0Q6gyc1ACshUWi0OK7Kw&amp;s=19"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="x-twitter"
-                          class="svg-inline--fa fa-x-twitter "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
-                          ></path>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
-                  <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-P1YWy"
-                    id="style-P1YWy"
-                  >
-                    9.03%
-                  </div>
-                </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0x82068E25e0511b6c4c99E8b82961BAAdd372eC90"
-                >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-JN5jt"
-                      id="style-JN5jt"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-zTfm5"
-                      id="style-zTfm5"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xba14e34fec6d665dcdf8407ab32f84f7114a88925e3144946601099e77aef78f.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xba14e34fec6d665dcdf8407ab32f84f7114a88925e3144946601099e77aef78f.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
-                  href="viewpresale?tokenAddress=0x82068E25e0511b6c4c99E8b82961BAAdd372eC90"
-                >
-                  View
-                </a>
-              </div>
-              <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0xD1C036368FBd4A0F94dce83678fc5989B16752B7"
-                  >
-                    SIGMA
-                  </a>{" "}
-                </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.00 / 2.00 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2"></div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
-                  <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-55sZ6"
-                    id="style-55sZ6"
-                  >
-                    0.00%
-                  </div>
-                </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0xD1C036368FBd4A0F94dce83678fc5989B16752B7"
-                >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-TgvrY"
-                      id="style-TgvrY"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-43OVc"
-                      id="style-43OVc"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xceed13647e10e13183164c88cf0ea477b597ac4a0acf8816fc4a7db0679844cd.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xceed13647e10e13183164c88cf0ea477b597ac4a0acf8816fc4a7db0679844cd.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
-                  href="viewpresale?tokenAddress=0xD1C036368FBd4A0F94dce83678fc5989B16752B7"
-                >
-                  View
-                </a>
-              </div>
-              <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0x89979Ec194903F88a06416f4bd765c39d2570c75"
-                  >
-                    $KONKE
-                  </a>
-                  <div class="text-yellow-400 text-xs">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      data-prefix="fas"
-                      data-icon="comment"
-                      class="svg-inline--fa fa-comment "
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"
-                      ></path>
-                    </svg>
-                    <span class="ml-1">2</span>
-                  </div>
-                </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.00 / 4.00 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2">
-                      <a
-                        class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://t.me/jumpKonke"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="telegram"
-                          class="svg-inline--fa fa-telegram "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 496 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://x.com/XKonke"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="x-twitter"
-                          class="svg-inline--fa fa-x-twitter "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
-                          ></path>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
-                  <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-SFtmZ"
-                    id="style-SFtmZ"
-                  >
-                    0.00%
-                  </div>
-                </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0x89979Ec194903F88a06416f4bd765c39d2570c75"
-                >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-Sqzfp"
-                      id="style-Sqzfp"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-3gMpc"
-                      id="style-3gMpc"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xcb47c502893448779c9a9497f200408afc593df31cfd45b8f3f6d9e09f551e57.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xcb47c502893448779c9a9497f200408afc593df31cfd45b8f3f6d9e09f551e57.jpg"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
-                  href="viewpresale?tokenAddress=0x89979Ec194903F88a06416f4bd765c39d2570c75"
-                >
-                  View
-                </a>
-              </div>
-              <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
-                <div class="flex gap-x-4 mt-1 justify-center">
-                  <a
-                    class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
-                    href="viewpresale?tokenAddress=0x757a7cAba00c68c9a7A0726ba1e628Bd46392921"
-                  >
-                    NICK
-                  </a>
-                  <div class="text-yellow-400 text-xs">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      data-prefix="fas"
-                      data-icon="comment"
-                      class="svg-inline--fa fa-comment "
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"
-                      ></path>
-                    </svg>
-                    <span class="ml-1">4</span>
-                  </div>
-                </div>
-                <div class="flex justify-between mb-5">
-                  <div class="flex gap-x-4">
-                    <div class="min-w-0 flex-auto">
-                      <div class="mt-1">
-                        <div class="text-sm">0.12 / 2.50 ETH</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-end flex-shrink-0">
-                    <div class="mt-1 flex justify-start space-x-2">
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://nickonbase.xyz/"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fas"
-                          data-icon="window-maximize"
-                          class="svg-inline--fa fa-window-maximize "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class="  text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://t.me/NickBase"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="telegram"
-                          class="svg-inline--fa fa-telegram "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 496 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a
-                        class=" text-white hover:text-blue-500  text-[#FFB921] hover:underline font-bold  "
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://x.com/justnickether/"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fab"
-                          data-icon="x-twitter"
-                          class="svg-inline--fa fa-x-twitter "
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
-                          ></path>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
-                  <div
-                    class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-YxB6G"
-                    id="style-YxB6G"
-                  >
-                    4.60%
-                  </div>
-                </div>
-                <a
-                  class=" mt-1 truncate text-xs leading-5 text-gray-400  text-[#FFB921] hover:underline font-bold  "
-                  href="/viewpresale?tokenAddress=0x757a7cAba00c68c9a7A0726ba1e628Bd46392921"
-                >
-                  <div class="relative p-[2px] group flex flex-1 shrink-0">
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] opacity-60 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-2K4zJ"
-                      id="style-2K4zJ"
-                    ></div>
-                    <div
-                      class="absolute inset-0 rounded-lg z-[1] will-change-transform bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)] style-2KkYA"
-                      id="style-2KkYA"
-                    ></div>
-                    <div class="z-10 relative w-full rounded-lg bg-black/75 overflow-hidden h-[15rem]">
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xc0d91340dcaf751f5bfe649d021a11bd1e546436c6d59052c3c4280ac3c5083e.png"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg w-1/2 z-index-1"
-                        alt="Token Image"
-                      />
-                      <img
-                        src="https://api.basejump.pro:4000/static/tkn_0xc0d91340dcaf751f5bfe649d021a11bd1e546436c6d59052c3c4280ac3c5083e.png"
-                        class="absolute left-0 top-0 right-0 bottom-0 m-auto rounded-lg -z-index-10 opacity-5"
-                        alt="Token Image"
-                      />
-                    </div>
-                  </div>
-                </a>
-                <a
-                  class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
-                  href="viewpresale?tokenAddress=0x757a7cAba00c68c9a7A0726ba1e628Bd46392921"
-                >
-                  View
-                </a>
-              </div>
+              </a>
+              <Link
+                class=" flex text-lg text-white font-bold bg-black/25 hover:bg-black/50 p-3 rounded-md mt-5 w-full text-center justify-center undefined "
+                to={`details/${v[10]}`} state={{ data: v }}
+                  
+
+                  
+              >
+                View
+              </Link>
+            </div>
+            )
+
+              }
+              
+              
+
             </div>
             <div>
               <div class="flex justify-center mt-6 mb-6 text-2xl">

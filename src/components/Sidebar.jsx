@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import "./Home.css"
 import { Link } from 'react-router-dom'
+import logo from "../assets/logo.jpeg"
 
 export default function Sidebar({selected,setSelected}) {
-   console.log("sele",selected)
+//   console.log("sele",selected)
   const _selec = "bg-blue-700 text-white group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
   const _nonSelect = "text-gray-400 hover:text-white hover:bg-black/25 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
   return (
@@ -13,7 +14,7 @@ export default function Sidebar({selected,setSelected}) {
             <a href="/">
               <img
                 class="h-16 w-auto"
-                src="https://www.basejump.pro/logo.svg"
+                src={logo}
                 alt="BaseJump"
               />
             </a>

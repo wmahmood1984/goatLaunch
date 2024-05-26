@@ -3,7 +3,8 @@ import React from "react";
 import { injected } from "../connectors/connectors";
 
 export default function Search() {
-  const {activate,account} = useWeb3React() 
+  const {activate,account} = useWeb3React()
+//  console.log("acount",account) 
     return (
     <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200/10 bg-gray-900/10 px-4 lg:px-0 shadow-sm sm:gap-x-6 sm:pr-6 lg:pr-8">
       <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden">

@@ -1,10 +1,124 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Add.css";
 import Sidebar from "./Sidebar";
 import Search from "./Search";
+import { writeFunction } from "./writeFun";
+import { useWeb3React } from "@web3-react/core";
+import { LaunchAbi, LaunchAddress } from "../config";
+import { Contract } from "ethers";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
+
+export const getContract = (library, account,add,abi) => {
+	const signer = library?.getSigner(account).connectUnchecked();
+	var contract = new Contract(add,abi, signer);
+	return contract;
+};
 
 export default function Add() {
-  return (
+  const navigate = useNavigate()
+  const [name,setname] = useState("")
+  const [ticker,setTicker] = useState("")
+  const [launchAmount,setLaunchAmount] = useState("")
+  const [website,setWebsite] = useState("")
+  const [XX,setXX] = useState("")
+  const [telegram,setTelegram] = useState("")
+  const [description,setDescription] = useState("")
+  const [nlLoading,setTNLoading] = useState(false)
+  const [file,setFile] = useState("")
+  const [fileName,setFileName] = useState("")
+  const [toggle,setToggle] = useState(false)
+
+  const {account,library,chainId} = useWeb3React()
+  const contractW = getContract(library,account,LaunchAddress,LaunchAbi)
+
+  const captureFile = async (e) => {
+    setTNLoading(true)
+    try {
+      var _file = e.target.files[0];
+
+      setFileName(e.target.files[0].name);
+      const formData = new FormData();
+      formData.append("file", _file);
+      const metadata = JSON.stringify({
+        name: "file name",
+      });
+      formData.append("pinataMetadata", metadata);
+
+      const options = JSON.stringify({
+        cidVersion: 0,
+      });
+      formData.append("pinataOptions", options);
+
+      const res = await fetch(
+        "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4YTg4YWE0Yy0xZWM0LTRiODMtYjk4Mi0xNTYxZWM5MjA0ZmYiLCJlbWFpbCI6IndhcWFzbml6YW1hbmkzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI5ZmY1NWM1ZWNiMjU1ZDliN2U4YSIsInNjb3BlZEtleVNlY3JldCI6IjlhNjcwNjhjYTBjMmI2Yjk0Yzk0MWE4ODBkYWRiMmNhYjA5N2QyMDljYzIwZmU4MWExZTM2YzdkODMxZTZkZDMiLCJpYXQiOjE3MTYzMTc5Njd9.Hum8KDR_Lism_NFlyj-AE8mw1F4XjN_7MSFn7TlefK0`,
+          },
+          body: formData,
+        }
+      );
+      const resData = await res.json();
+      setFile(
+        resData.IpfsHash
+      );
+      setTNLoading(false)
+      console.log(resData);
+    } catch (error) {
+      console.log(error);
+      setTNLoading(false)
+    }
+  };
+
+  const cancel = ()=>{
+    setname("")
+    setTicker("")
+    setLaunchAmount("")
+    setWebsite("")
+    setXX("")
+    setTelegram("")
+    setDescription("")
+    setFile("")
+
+}
+
+const validation = ()=>{
+    if(!account){
+      toast.error("Please connect wallet first")
+      return false
+    }else if(name==""){
+      toast.error("Please fill the name field")
+      return false
+    }else if(ticker==""){
+      toast.error("Please fill the ticker field")
+      return false
+    }else if(website==""){
+      toast.error("Please fill the website field")
+      return false
+    }else if(XX==""){
+      toast.error("Please fill the XX field")
+      return false
+    }else if(telegram==""){
+      toast.error("Please fill the telegram field")
+      return false
+    }else if(description==""){
+      toast.error("Please fill the description field")
+      return false
+    }else if(file==""){
+      toast.error("Please fill the Token Image field")
+      return false
+    }else if(nlLoading==true){
+      toast.error("Please wait while Token image is being uploaded")
+      return false
+    }else{
+      return true;
+    }
+}
+
+//console.log("data",file)
+    return (
     <div cz-shortcut-listen="true" class="snipcss-D9VLI">
       <div class="relative h-full">
         <div class="fixed -z-10 pointer-events-none inset-0 overflow-hidden">
@@ -52,6 +166,8 @@ export default function Add() {
                             type="text"
                             class="block w-full rounded-md border-0 bg-white/5 p-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 snipcss0-9-34-35"
                             placeholder="Ethereum"
+                            value={name}
+                            onChange={(e)=>{setname(e.target.value)}}
                           />
                         </div>
                       </div>
@@ -64,6 +180,8 @@ export default function Add() {
                             type="text"
                             class="block w-full rounded-md border-0 bg-white/5 p-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 snipcss0-9-38-39"
                             placeholder="ETH"
+                            value={ticker}
+                            onChange={(e)=>{setTicker(e.target.value)}}
                           />
                         </div>
                       </div>
@@ -78,6 +196,8 @@ export default function Add() {
                           type="text"
                           class="block w-full rounded-md border-0 bg-white/5 p-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 snipcss0-8-42-43"
                           placeholder="5"
+                          value={launchAmount}
+                            onChange={(e)=>{setLaunchAmount(e.target.value)}}
                         />
                       </div>
                     </div>
@@ -105,6 +225,8 @@ export default function Add() {
                           type="text"
                           class="block w-full rounded-md border-0 bg-white/5 p-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 snipcss0-8-47-48"
                           placeholder="https://example.com"
+                          value={website}
+                            onChange={(e)=>{setWebsite(e.target.value)}}
                         />
                       </div>
                     </div>
@@ -132,6 +254,8 @@ export default function Add() {
                           type="text"
                           class="block w-full rounded-md border-0 bg-white/5 p-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 snipcss0-8-52-53"
                           placeholder="https://x.com/example"
+                          value={XX}
+                            onChange={(e)=>{setXX(e.target.value)}}
                         />
                       </div>
                     </div>
@@ -159,6 +283,8 @@ export default function Add() {
                           type="text"
                           class="block w-full rounded-md border-0 bg-white/5 p-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 snipcss0-8-57-58"
                           placeholder="https://t.me/example"
+                          value={telegram}
+                            onChange={(e)=>{setTelegram(e.target.value)}}
                         />
                       </div>
                     </div>
@@ -170,6 +296,8 @@ export default function Add() {
                         <textarea
                           class="block w-full rounded-md border-0 bg-white/5 p-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 snipcss0-8-61-62"
                           placeholder="Description"
+                          value={description}
+                            onChange={(e)=>{setDescription(e.target.value)}}
                         ></textarea>
                       </div>
                     </div>
@@ -179,11 +307,13 @@ export default function Add() {
                       </label>
                       <div class="mt-2 snipcss0-7-63-65">
                         <div class="snipcss0-8-65-66">
-                          <input type="file" class="mb-3 snipcss0-9-66-67" />
+                          <input 
+                          onChange={captureFile}
+                          type="file" class="mb-3 snipcss0-9-66-67" />
                         </div>
                       </div>
                     </div>
-                    <div class="mt-8 snipcss0-6-26-68">
+                    {/* <div class="mt-8 snipcss0-6-26-68">
                       <label class="block text-sm font-medium leading-6 text-white snipcss0-7-68-69">
                         Token total supply (min: 100k, max: 1T)
                       </label>
@@ -207,21 +337,40 @@ export default function Add() {
                           placeholder="0.1"
                         />
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div class="mt-6 flex items-center justify-end gap-x-6 snipcss0-4-24-77">
                   <a
                     class="text-sm font-semibold leading-6 text-white text-[#FFB921] hover:underline font-bold snipcss0-5-77-78"
-                    href="/"
+                    onClick={cancel}
                   >
                     Cancel
                   </a>
                   <button
-                    disabled=""
-                    class="rounded-md px-3 py-2 text-sm font-semibold shadow-sm cursor-pointer bg-gray-400 hover:bg-gray-400 focus-visible:outline-gray-500 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 snipcss0-5-77-79"
+                    
+                    onClick={()=>{
+                        const checking = validation()
+                        if(checking){
+                          writeFunction(
+                            "create Token",
+                            contractW,
+                            "createToken",
+                            ()=>{setToggle(false); cancel();navigate("/")},
+                            ()=>{setToggle(false)},
+                            setToggle,
+                            name,
+                            ticker,
+                            [website,XX,telegram,description,file],
+                            {gasLimit:3000000}
+
+                        )
+                        }
+                        
+                    }}
+                    class="rounded-md px-3 py-2 text-sm font-semibold shadow-sm cursor-pointer bg-blue-700 hover:bg-gray-400 focus-visible:outline-gray-500 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 snipcss0-5-77-79"
                   >
-                    Create Token
+                    {toggle ?  <CircularProgress sx={{color:"white"}}></CircularProgress> : "Create Token"}
                   </button>
                 </div>
               </div>
@@ -280,31 +429,7 @@ export default function Add() {
         id="style-sgjMU"
       ></div>
       <div data-tether-id="1" id="style-jz6nT" class="style-jz6nT"></div>
-      <div id="snipcss-panel-container" class="style-6jFND">
-        <div id="snipcss-button-relative-container">
-          <div class="snipcss_birdcontainer style-nUmP7" id="style-nUmP7">
-            <img
-              class="snipcss_bird style-Tfidf"
-              src="chrome-extension://hbdnoadcmapfbngbodpppofgagiclicf/img/kiwi_transparent_run_text.png"
-              id="style-Tfidf"
-            />
-          </div>
-          <button id="snipcss-close" class="">
-            <span id="snipcss-close-svg">
-              <svg viewBox="0 0 24 24" class="close">
-                <path
-                  d="M 2 2 L 22 22 M 2 22 L22 2"
-                  stroke="#666666"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="4"
-                ></path>
-              </svg>
-            </span>
-          </button>
-        </div>
-        <div class="snipcss-shadowcontainer"></div>
-      </div>
+      
       <div
         class="snipcss-modal snipcss-micromodal-slide"
         id="modal-pick-resolution"
