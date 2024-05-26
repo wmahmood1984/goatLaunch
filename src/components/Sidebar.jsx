@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./Home.css"
 import { Link } from 'react-router-dom'
-import logo from "../assets/logo.jpeg"
+import logo from "../assets/logo.png"
 
 export default function Sidebar({selected,setSelected}) {
 //   console.log("sele",selected)
@@ -13,7 +13,8 @@ export default function Sidebar({selected,setSelected}) {
           <div class="flex h-32 shrink-0 items-center">
             <a href="/">
               <img
-                class="h-16 w-auto"
+                style={{width:"200px",height:"150px"}}
+                class="h-16"
                 src={logo}
                 alt="BaseJump"
               />
@@ -113,7 +114,7 @@ export default function Sidebar({selected,setSelected}) {
                 <ul role="list" class="-mx-2 space-y-1">
                   <li>
                     <a
-                      href="https://twitter.com/basejumpdotpro"
+                      href="https://x.com/goatpad_?s=11"
                       class="text-gray-400 hover:text-white hover:bg-black/25 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                     >
                       <span class="h-6 w-6 shrink-0" aria-hidden="true">
@@ -138,7 +139,7 @@ export default function Sidebar({selected,setSelected}) {
                   </li>
                   <li>
                     <a
-                      href="https://t.me/basejumppro"
+                      href="https://t.me/+PpZPlFZB4ItmODIx"
                       class="text-gray-400 hover:text-white hover:bg-black/25 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                     >
                       <span class="h-6 w-6 shrink-0" aria-hidden="true">
