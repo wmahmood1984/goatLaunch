@@ -3,7 +3,7 @@ import "./Details.css";
 import { useLocation } from "react-router";
 import Search from "./Search";
 import { Contract, ethers } from "ethers";
-import { writeFunction } from "./writeFun";
+import { etw, fN,  writeFunction, wte } from "./writeFun";
 import { useWeb3React } from "@web3-react/core";
 import {
   LaunchAbi,
@@ -49,7 +49,9 @@ export default function Details() {
   const [holders, setHolders] = useState();
   const [supply, setsupply] = useState();
   const [chatData, setChatData] = useState([]);
-
+  const [tokensToMint, setTokenstoMint] = useState(0);
+  const [expectedEth, setExpectedEth] = useState(0);
+  const [ethThreshold, setEthThreshold] = useState(0);
   const updateChat = async () => {
     setToggle(true);
     try {
@@ -65,7 +67,11 @@ export default function Details() {
       setToggle(false);
     }
   };
-  console.log("chat data", state.data[10]);
+  
+  
+  console.log("chat data", holders);
+  
+  
   useEffect(() => {
     const abc = async () => {
       const _data = await contractR.methods.getTokens().call();
@@ -83,10 +89,28 @@ export default function Details() {
         .getchats(state.data[10])
         .call();
       setChatData(_chatData);
+
+      const _ethThreshold = await contractR.methods.ethThreshold().call();
+      setEthThreshold(ethers.utils.formatEther(_ethThreshold));
     };
 
     abc();
   }, [account, toggle]);
+
+
+  useEffect(() => {
+    const abc = async () => {
+      const _tokensToMint = await contractR.methods.getEthToTokens(etw(amount),state.data[10]).call();
+      setTokenstoMint(wte(_tokensToMint));
+
+      const _expectedEth = await contractR.methods.getTokenToEth(etw(amount),state.data[10]).call();
+      setExpectedEth(wte(_expectedEth));
+
+
+    };
+
+    abc();
+  }, [amount]);
 
 
   const validation = () => {
@@ -115,15 +139,17 @@ export default function Details() {
             "sellTokens",
             () => {
               setToggle(false);
+              setAmount(0)
             },
             () => {
               setToggle(false);
+              setAmount(0)
             },
             setToggle,
             data[10],
             ethers.utils.parseEther(amount.toString()),
             {
-              gasLimit: 300000,
+              gasLimit: 3000000,
             }
           );
         },
@@ -147,14 +173,16 @@ export default function Details() {
         "buyTokens",
         () => {
           setToggle(false);
+          setAmount(0)
         },
         () => {
           setToggle(false);
+          setAmount(0)
         },
         setToggle,
         data[10],
         {
-          gasLimit: 300000,
+          gasLimit: 3000000,
           value: ethers.utils.parseEther(amount.toString()),
         }
       );
@@ -168,10 +196,10 @@ export default function Details() {
   const formatTime = (_time)=>{
     const now = new Date().getTime()/1000
     const diff = now-_time;
-    console.log("diff",diff,now,_time)
-    console.log("seconds",diff/60)
-    console.log("minutes",diff/(60*60))
-    console.log("hours",diff/(60*60*24))
+    // console.log("diff",diff,now,_time)
+    // console.log("seconds",diff/60)
+    // console.log("minutes",diff/(60*60))
+    // console.log("hours",diff/(60*60*24))
     if(diff/60<1){
 
         return "less than a minute"       
@@ -186,6 +214,8 @@ export default function Details() {
         return `${Math.floor(diff/(60*60*24))} days`
     }
   }
+
+  
 
   return (
     data && (
@@ -375,13 +405,13 @@ export default function Details() {
                     </p>
                     <div class="mb-5">
                       Total bought:{" "}
-                      {ethers.utils.formatEther(data.ethCollected)} / 3 ETH
+                      {ethers.utils.formatEther(data.ethCollected)} / {ethThreshold} ETH
                     </div>
                     <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
                       <div
                         style={{
                           width: `${
-                            (ethers.utils.formatEther(data.ethCollected) / 3) *
+                            (ethers.utils.formatEther(data.ethCollected) / ethThreshold) *
                             100
                           }%`,
                         }}
@@ -389,7 +419,7 @@ export default function Details() {
                         id="style-Ff8Mx"
                       >
                         {`${Number(
-                          (ethers.utils.formatEther(data.ethCollected) / 3) *
+                          (ethers.utils.formatEther(data.ethCollected) / ethThreshold) *
                             100
                         ).toFixed(2)}%`}
                       </div>
@@ -399,6 +429,7 @@ export default function Details() {
                         <button
                           onClick={() => {
                             setBuySale("Buy");
+                            setExpectedEth(0)
                           }}
                           class={`btn btn-wide bg-green-500 p-2 rounded-md text-black font-bold w-32 ${
                             buySale == "Sale" ? "opacity-20" : ""
@@ -409,6 +440,7 @@ export default function Details() {
                         <button
                           onClick={() => {
                             setBuySale("Sale");
+                            setTokenstoMint(0)
                           }}
                           class={`btn btn-wide bg-red-500 p-2 rounded-md text-black font-bold w-32 ${
                             buySale == "Buy" ? "opacity-20" : ""
@@ -431,7 +463,7 @@ export default function Details() {
                           ETH
                         </span>
                       </div>
-                      <div class="ml-2 mt-2 text-sm font-bold "></div>
+                      <div class="ml-2 mt-2 text-sm font-bold ">{buySale=="Buy" ? `You will get ${fN(tokensToMint,2)} tokens` : `you will get ${Number(expectedEth).toFixed(6)} eth` }</div>
                       <button
                         onClick={buySale == "Buy" ? buyFunc : saleFunc}
                         class="btn btn-wide w-full max-w-xs mt-4 text-black bg-green-500 hover:bg-green-600"
@@ -469,7 +501,7 @@ export default function Details() {
                                   </a>
                                 </div>
                                 <div class="text-yellow-400 font-bold text-left">
-                                  {(ethers.utils.formatEther(v.balance) /
+                                  {v.balance=="0"? "0": (ethers.utils.formatEther(v.balance) /
                                     supply) *
                                     100}{" "}
                                   %

@@ -1,4 +1,4 @@
-import { Contract } from "ethers"
+import { Contract, ethers } from "ethers"
 
 export const writeFunction = async (name,contract,functionName,callBack,callBackError,setToggle,...args)=>{
     console.log("first",...args)
@@ -13,6 +13,30 @@ export const writeFunction = async (name,contract,functionName,callBack,callBack
         console.log(`Error in ${name}`,error)
         callBackError()
     }
+}
+
+
+export const getContract = (library, account,add,abi) => {
+	const signer = library?.getSigner(account).connectUnchecked();
+	var contract = new Contract(add,abi, signer);
+	return contract;
+};
+
+export const etw = (v)=>{
+    return ethers.utils.parseEther(v)
+}
+
+export const wte = (v)=>{
+    return ethers.utils.formatEther(v)
+}
+
+export const fN = (x,d)=> {
+
+    var y = Number(x).toFixed(d)
+
+    var z =  y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    return z
 }
 
 

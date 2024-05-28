@@ -13,6 +13,7 @@ import Sidebar from "./components/Sidebar";
 import Details from "./components/Details";
 import { useWeb3React } from "@web3-react/core";
 import { Buffer } from 'buffer';
+import Admin from "./components/Admin";
 
 function App() {
   const {account} = useWeb3React()
@@ -52,7 +53,8 @@ function App() {
       <Sidebar selected={selected} setSelected={setSelected}/>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="add" element={<Add />}></Route>
+        <Route path="add" element={<Add selected={selected} setSelected={setSelected}/>}></Route>
+        <Route path="adminpanel" element={<Admin />}></Route>
         <Route path="details/:id" element={<Details />}></Route>
 
       </Routes>

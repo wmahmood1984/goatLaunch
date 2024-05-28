@@ -14,13 +14,15 @@ export default function Home() {
   const web3 = new Web3(new Web3.providers.HttpProvider(defaultRpc))
   const contractR = new web3.eth.Contract(LaunchAbi,LaunchAddress)
   const [data,setData] = useState()
+  const [ethThreshold, setEthThreshold] = useState(0);
   
   useEffect(()=>{
       const abc = async ()=>{
 
           const _data = await contractR.methods.getTokens().call()
           setData(_data)  
-  
+          const _ethThreshold = await contractR.methods.ethThreshold().call();
+          setEthThreshold(ethers.utils.formatEther(_ethThreshold));
 
   
 
@@ -30,7 +32,8 @@ export default function Home() {
       abc()
   
   
-    },[account])
+  },[account])
+  
   //  console.log("data",data)
   return (data && 
     <div class="relative h-full snipcss-oFsOI">
@@ -548,12 +551,12 @@ export default function Home() {
               {data && data.map((v,e)=>
               <div class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem]">
               <div class="flex gap-x-4 mt-1 justify-center">
-                {/* <a
+                <a
                   class="  truncate text-3xl text-green-400  text-[#FFB921] hover:underline font-bold  "
                   href="viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac"
                 >
                   {v[0]}
-                </a> */}
+                </a>
                 {/* <div class="text-yellow-400 text-xs">
                   <svg
                     aria-hidden="true"
@@ -577,7 +580,7 @@ export default function Home() {
                 <div class="flex gap-x-4">
                   <div class="min-w-0 flex-auto">
                     <div class="mt-1">
-                      <div class="text-sm">{ethers.utils.formatEther(v.ethCollected)} / 3 ETH</div>
+                      <div class="text-sm">{ethers.utils.formatEther(v.ethCollected)} / {ethThreshold} ETH</div>
                     </div>
                   </div>
                 </div>
@@ -654,11 +657,11 @@ export default function Home() {
               </div>
               <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
                 <div
-                  style={{width:`${ethers.utils.formatEther(v.ethCollected)/3*100}%`}}
+                  style={{width:`${ethers.utils.formatEther(v.ethCollected)/ethThreshold*100}%`}}
                   class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-8UWQr"
                   id="style-8UWQr"
                 >
-                  {`${ethers.utils.formatEther(v.ethCollected)/3*100}%`}
+                  {`${ethers.utils.formatEther(v.ethCollected)/ethThreshold*100}%`}
                 </div>
               </div>
               <a

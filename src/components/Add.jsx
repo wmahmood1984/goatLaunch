@@ -8,6 +8,7 @@ import { LaunchAbi, LaunchAddress } from "../config";
 import { Contract } from "ethers";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { CircularProgress } from "@mui/material";
 
 export const getContract = (library, account,add,abi) => {
 	const signer = library?.getSigner(account).connectUnchecked();
@@ -15,7 +16,7 @@ export const getContract = (library, account,add,abi) => {
 	return contract;
 };
 
-export default function Add() {
+export default function Add({selected,setSelected}) {
   const navigate = useNavigate()
   const [name,setname] = useState("")
   const [ticker,setTicker] = useState("")
@@ -186,7 +187,7 @@ const validation = ()=>{
                         </div>
                       </div>
                     </div>
-                    <div class="mt-8 snipcss0-6-26-40">
+                    {/* <div class="mt-8 snipcss0-6-26-40">
                       <label class="block text-sm font-medium leading-6 text-white snipcss0-7-40-41">
                         Launch amount (in ETH). This token will be tradeable in
                         Uniswap when this amount is reached
@@ -200,7 +201,7 @@ const validation = ()=>{
                             onChange={(e)=>{setLaunchAmount(e.target.value)}}
                         />
                       </div>
-                    </div>
+                    </div> */}
                     <div class="mt-8 snipcss0-6-26-44">
                       <label class="block text-sm font-medium leading-6 text-white snipcss0-7-44-45">
                         <svg
@@ -356,7 +357,7 @@ const validation = ()=>{
                             "create Token",
                             contractW,
                             "createToken",
-                            ()=>{setToggle(false); cancel();navigate("/")},
+                            ()=>{setToggle(false); cancel();navigate("/");setSelected(0) },
                             ()=>{setToggle(false)},
                             setToggle,
                             name,
