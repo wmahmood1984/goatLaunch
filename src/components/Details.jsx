@@ -49,9 +49,9 @@ export default function Details() {
   const [holders, setHolders] = useState();
   const [supply, setsupply] = useState();
   const [chatData, setChatData] = useState([]);
-  const [tokensToMint, setTokenstoMint] = useState(0);
-  const [expectedEth, setExpectedEth] = useState(0);
-  const [ethThreshold, setEthThreshold] = useState(0);
+  const [tokensToMint, setTokenstoMint] = useState("0");
+  const [expectedEth, setExpectedEth] = useState("0");
+  const [ethThreshold, setEthThreshold] = useState("0");
   const updateChat = async () => {
     setToggle(true);
     try {
@@ -136,7 +136,7 @@ export default function Details() {
           writeFunction(
             "Sale",
             contractW,
-            "sellTokens",
+            "sellToken",
             () => {
               setToggle(false);
               setAmount(0)

@@ -7,6 +7,7 @@ import { LaunchAbi, LaunchAddress, defaultRpc, defualtChain } from "../config";
 import Web3 from "web3";
 import { ethers } from "ethers";
 import { Link } from "react-router-dom";
+import { wte } from "./writeFun";
 
 export default function Home() {
   const {activate,deactivate,account,library,chainId} = useWeb3React()
@@ -15,6 +16,8 @@ export default function Home() {
   const contractR = new web3.eth.Contract(LaunchAbi,LaunchAddress)
   const [data,setData] = useState()
   const [ethThreshold, setEthThreshold] = useState(0);
+  const [Events, setEvents] = useState();
+  const [saleEvents, setSaleEvents] = useState();
   
   useEffect(()=>{
       const abc = async ()=>{
@@ -24,17 +27,39 @@ export default function Home() {
           const _ethThreshold = await contractR.methods.ethThreshold().call();
           setEthThreshold(ethers.utils.formatEther(_ethThreshold));
 
-  
+          const _block = await web3.eth.getBlockNumber()
 
+          const _events = await contractR.getPastEvents("TokensPurchased",{fromBlock:`${_block-5000}`,toBlock:`${_block}`})
 
-      }
+          const _eventsF = _events.map((v,e)=>{return {data:v.returnValues,blockNumber:v.blockNumber}})
+          setEvents(_eventsF)
+
+          const _Saleevents = await contractR.getPastEvents("TokensSold",{fromBlock:`${_block-5000}`,toBlock:`${_block}`})
+          const _seventsF = _Saleevents.map((v,e)=>{return {data:v.returnValues,blockNumber:v.blockNumber}})
+          setSaleEvents(_seventsF)
+        }
   
       abc()
-  
-  
+   
   },[account])
-  
-  //  console.log("data",data)
+
+
+  const combinedArray = Events && saleEvents && [...Events,...saleEvents]
+
+
+  Events && saleEvents && combinedArray.sort((a, b) => parseFloat(a.blockNumber) - parseFloat(b.blockNumber));  
+
+
+  const findname = (add)=>{
+      const item = data.filter(e=>e[10].toLowerCase()==add.toLowerCase())
+      console.log("block ",item)      
+      return {pic:`https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${item[0][9][4]}`,name:item[0][0]}
+      //return {pic:`https://aquamarine-confident-planarian-104.mypinata.cloud/ipfs/${item[9][4]}`, name:item[0]}
+   
+  }
+
+ 
+
   return (data && 
     <div class="relative h-full snipcss-oFsOI">
       <div class="fixed -z-10 pointer-events-none inset-0 overflow-hidden">
@@ -60,141 +85,73 @@ export default function Home() {
           <div class="px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="flex flex-col gap-y-4 text-xs mb-5 text-black items-center">
               <div class="flex gap-x-4">
-                <div class="items-center flex gap-2 bg-green-200 p-1 pl-2 pr-3 rounded-3xl">
-                  <img
-                    src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg"
-                    class="rounded-full h-8 w-8"
-                    alt="Token Image"
-                  />
-                  <div>
-                    <a
-                      class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  "
-                      href="profile?address=0x3c39F1E1F53Dd4a8B0A19B82B42781AFf2d7E4E6"
-                    >
-                      d7E4E6
-                    </a>
-                    <span class="font-semibold">0.01</span> ETH of
-                    <a
-                      class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  "
-                      href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac"
-                    >
-                      SPELL
-                    </a>
+                {Events && saleEvents && combinedArray.map((v,e)=>{
+                  if(v.data.buyer){
+
+
+                    return <div class="items-center flex gap-2 bg-green-200 p-1 pl-2 pr-3 rounded-3xl">
+                    <img
+                      src={findname(v.data.tokenAddress).pic}
+                      class="rounded-full h-8 w-8"
+                      alt="Token Image"
+                    />
+                    <div>
+                      <a
+                        class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  "
+                        href="profile?address=0x3c39F1E1F53Dd4a8B0A19B82B42781AFf2d7E4E6"
+                      >
+                        {`${v.data.buyer.slice(0,4)}...${v.data.buyer.slice(-5)}`}
+                      </a>
+                      <span class="font-semibold">{wte(v.data.ethPaid)}</span> ETH of
+                      <a
+                        class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  "
+                        href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac"
+                      >
+                        {findname(v.data.tokenAddress).name}
+                      </a>
+                    </div>
+                    <img
+                      src={findname(v.data.tokenAddress).pic}
+                      class="rounded-full h-8 w-8"
+                      alt="Token Image"
+                    />
                   </div>
-                  <img
-                    src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png"
-                    class="rounded-full h-8 w-8"
-                    alt="Token Image"
-                  />
-                </div>
-                <div class="items-center flex gap-2 bg-red-200 p-1 pl-2 pr-3 rounded-3xl">
-                  <img
-                    src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg"
-                    class="rounded-full h-8 w-8"
-                    alt="Token Image"
-                  />
-                  <div>
-                    <a
-                      class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  "
-                      href="profile?address=0x9de614630f2e756Fb731A789EC64dDe2F99Ef379"
-                    >
-                      9Ef379
-                    </a>
-                    <span class="font-semibold">0.05</span> ETH of
-                    <a
-                      class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  "
-                      href="/viewpresale?tokenAddress=0x0b4B6b641fe9151BeB3e733C05BB60Ad7d0a4D0e"
-                    >
-                      $DOGHARAMBE
-                    </a>
+                  }else{
+                    return                 <div class="items-center flex gap-2 bg-red-200 p-1 pl-2 pr-3 rounded-3xl">
+                    <img
+                      src={findname(v.data.tokenAddress).pic}
+                      class="rounded-full h-8 w-8"
+                      alt="Token Image"
+                    />
+                    <div>
+                      <a
+                        class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  "
+                        href="profile?address=0x9de614630f2e756Fb731A789EC64dDe2F99Ef379"
+                      >
+                        {`${v.data.seller.slice(0,4)}...${v.data.seller.slice(-5)}`}
+                      </a>
+                      <span class="font-semibold">{wte(v.data.ethReceived)}</span> ETH of
+                      <a
+                        class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  "
+                        href="/viewpresale?tokenAddress=0x0b4B6b641fe9151BeB3e733C05BB60Ad7d0a4D0e"
+                      >
+                        {findname(v.data.tokenAddress).name}
+                      </a>
+                    </div>
+                    <img
+                      src={findname(v.data.tokenAddress).pic}
+                      class="rounded-full h-8 w-8"
+                      alt="Token Image"
+                    />
                   </div>
-                  <img
-                    src="https://api.basejump.pro:4000/static/tkn_0x137af2fad1b168f94691ff15874ba91f69f4c01e3bd4b105fa00c7e949db8476.jpg"
-                    class="rounded-full h-8 w-8"
-                    alt="Token Image"
-                  />
-                </div>
-                <div class="items-center flex gap-2 bg-green-200 p-1 pl-2 pr-3 rounded-3xl">
-                  <img
-                    src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg"
-                    class="rounded-full h-8 w-8"
-                    alt="Token Image"
-                  />
-                  <div>
-                    <a
-                      class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  "
-                      href="profile?address=0x7E42E58d76F0214272b845979466B7d9e34FAcF3"
-                    >
-                      4FAcF3
-                    </a>
-                    <span class="font-semibold">&lt;0.01</span> ETH of
-                    <a
-                      class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  "
-                      href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac"
-                    >
-                      SPELL
-                    </a>
-                  </div>
-                  <img
-                    src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png"
-                    class="rounded-full h-8 w-8"
-                    alt="Token Image"
-                  />
-                </div>
-                <div class="items-center flex gap-2 bg-green-200 p-1 pl-2 pr-3 rounded-3xl">
-                  <img
-                    src="https://www.basejump.pro/_next/static/media/placeholder.b3bdd483.jpg"
-                    class="rounded-full h-8 w-8"
-                    alt="Token Image"
-                  />
-                  <div>
-                    <a
-                      class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  "
-                      href="profile?address=0x498ff8B3E0Bba856b7D2F037DefA008708339e67"
-                    >
-                      339e67
-                    </a>
-                    <span class="font-semibold">0.02</span> ETH of
-                    <a
-                      class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  "
-                      href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac"
-                    >
-                      SPELL
-                    </a>
-                  </div>
-                  <img
-                    src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png"
-                    class="rounded-full h-8 w-8"
-                    alt="Token Image"
-                  />
-                </div>
-                <div class="items-center flex gap-2 bg-green-200 p-1 pl-2 pr-3 rounded-3xl">
-                  <img
-                    src="https://api.basejump.pro:4000/static/0x7a8E815e5e9753c433b011148a4DD18a3b70F98A-1715446448662.png"
-                    class="rounded-full h-8 w-8"
-                    alt="Token Image"
-                  />
-                  <div>
-                    <a
-                      class=" text-black font-semibold mr-1  text-[#FFB921] hover:underline font-bold  "
-                      href="profile?address=0x7a8E815e5e9753c433b011148a4DD18a3b70F98A"
-                    >
-                      Chokooos
-                    </a>
-                    <span class="font-semibold">0.04</span> ETH of
-                    <a
-                      class=" text-black font-semibold ml-1  text-[#FFB921] hover:underline font-bold  "
-                      href="/viewpresale?tokenAddress=0x91DeB06aA91d13A5ab572e62495FeceA2c8053Ac"
-                    >
-                      SPELL
-                    </a>
-                  </div>
-                  <img
-                    src="https://api.basejump.pro:4000/static/tkn_0xe1993802dc981b1b2eb8311804985e17afb846e9a58fce07406241757af13a33.png"
-                    class="rounded-full h-8 w-8"
-                    alt="Token Image"
-                  />
-                </div>
+                  }
+                })
+
+                }
+                
+                
+
+ 
               </div>
             </div>
             <div class="relative isolate mb-6">
