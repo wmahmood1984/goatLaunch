@@ -2,12 +2,14 @@ import React from "react";
 import "./Card.css";
 import { Link } from "react-router-dom";
 import { ethers } from "ethers";
+import {isMobile} from 'react-device-detect';
 
 export default function Card({ v, ethThreshold }) {
   return (
     <div 
-    //style={{maxWidth:"32%",marginRight:"2%",marginTop:"2%"}}
-    class="block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem] snipcss-t3jpt">
+    style={isMobile? {maxWidth:"100%",marginRight:"2%",marginTop:"2%"}:{}}
+    className={isMobile ? "":"block bg-neutral-600/25 rounded-3xl overflow-hidden shrink-0 flex-1 p-8 sm:min-w-[20rem] snipcss-t3jpt"}
+    >
       <div class="flex gap-x-4 mt-1 justify-center">
         <Link
           to={`details/${v[10]}`}

@@ -451,7 +451,7 @@ html {
     box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
 } 
 
-@media (min-width: 540px){ 
+@media (min-width: 640px){ 
   .sm\:gap-x-6 { 
     -moz-column-gap: 1.5rem; 
     column-gap: 1.5rem;
@@ -579,7 +579,7 @@ button {
     margin-right: auto;
 } 
 
-@media (min-width: 540px){ 
+@media (min-width: 640px){ 
   .sm\:px-6 { 
     padding-left: 1.5rem;
   } 
@@ -693,7 +693,7 @@ input {
     color: rgb(229 231 235/var(--tw-text-opacity));
 } 
 
-@media (min-width: 540px){ 
+@media (min-width: 640px){ 
   .sm\:text-sm { 
     font-size: .875rem; 
     line-height: 1.25rem;
@@ -742,12 +742,9 @@ input {
     gap: 1.5rem;
 } 
 
-@media (min-width: 540px){ 
+@media (min-width: 640px){ 
   
-  .mobile {
-    flex-direction: row;    
-    justify-content: space-between;
-  }
+
     .sm\:flex-row { 
     flex-direction: row;
   } 
@@ -825,7 +822,7 @@ input {
     --tw-ring-color: hsla(0,0%,100%,.1);
 } 
 
-@media (min-width: 540px){ 
+@media (min-width: 640px){ 
   .sm\:p-4 { 
     padding: 1rem;
   } 
@@ -879,7 +876,7 @@ input {
     padding: 2rem;
 } 
 
-@media (min-width: 540px){ 
+@media (min-width: 640px){ 
   .sm\:min-w-\[20rem\] { 
     min-width: 20rem;
   } 
@@ -971,7 +968,7 @@ h2 {
     color: rgb(255 255 255/var(--tw-text-opacity));
 } 
 
-@media (min-width: 540px){ 
+@media (min-width: 640px){ 
   .sm\:text-2xl { 
     font-size: 1.5rem; 
     line-height: 2rem;
@@ -1109,7 +1106,7 @@ h2 {
     width: 2rem;
 } 
 
-@media (min-width: 540px){ 
+@media (min-width: 640px){ 
   .sm\:text-3xl { 
     font-size: 1.875rem; 
     line-height: 2.25rem;
@@ -1133,7 +1130,7 @@ h2 {
     flex-shrink: 0;
 } 
 
-@media (min-width: 540px){ 
+@media (min-width: 640px){ 
   .sm\:items-end { 
     align-items: flex-end;
   } 
