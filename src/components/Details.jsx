@@ -416,7 +416,7 @@ export default function Details() {
                             100
                           }%`,
                         }}
-                        class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-Ff8Mx"
+                        class="bg-blue-700 p-1.5 text-center text-xs font-medium leading-none text-white style-Ff8Mx"
                         id="style-Ff8Mx"
                       >
                         {`${Number(

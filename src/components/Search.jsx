@@ -1,6 +1,7 @@
 import { useWeb3React } from "@web3-react/core";
 import React, { useState } from "react";
 import { injected } from "../connectors/connectors";
+import "./Home.css"
 
 export default function Search() {
   const {activate,account} = useWeb3React()
@@ -69,15 +70,15 @@ export default function Search() {
             aria-hidden="true"
           ></div>
           <div>
-            <button class="relative inline-flex h-12 overflow-hidden rounded-full p-[1px]">
+            <button class="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] text-green-400">
               <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"></span>
               <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 text-sm font-medium text-white backdrop-blur-3xl  hover:bg-black/50">
               <a
               onMouseEnter={()=>{setHovered(true)}}
               onMouseLeave={()=>{setHovered(false)}}
               onClick={()=>{activate(injected)}}   
-              style={{opacity:hovered? "0.5" : "1", background:"black",zIndex:9,height:"95%",width:"95%",    borderRadius: "9999px", padding:"10px 16px 0px 12px"}}
-              className="p-4">{account? `${account.slice(0,4)}...${account.slice(-5)}`: "Connect"}</a>
+              style={{opacity:hovered? "0.5" : "1", background:"black",zIndex:9,height:"95%",width:"95%",borderRadius: "9999px", padding:"10px 16px 0px 12px"}}
+              className="p-4 text-[#FFB921]">{account? `${account.slice(0,4)}...${account.slice(-5)}`: "Connect"}</a>
               </span>
             </button>
           </div>

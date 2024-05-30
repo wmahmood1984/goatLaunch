@@ -78,7 +78,9 @@ export default function Home() {
   console.log("block ", isMobile);
   return (
     data && (
-      <div class="relative h-full snipcss-oFsOI">
+      <div
+      style={{backgroundImage:`url("./assets/backg.png")`}}
+      class="relative h-full snipcss-oFsOI">
         <div class="fixed -z-10 pointer-events-none inset-0 overflow-hidden">
           <div class="absolute top-0 left-0 right-0 -u-z-10">
             <img
@@ -107,7 +109,10 @@ export default function Home() {
                     combinedArray.map((v, e) => {
                       if (v.data.buyer) {
                         return (
-                          <div class="items-center flex gap-2 bg-green-200 p-1 pl-2 pr-3 rounded-3xl">
+                          <div 
+                          
+                          style={{backgroundColor:"#50F6F4"}}
+                          class="items-center flex gap-2 bg-green-200 p-1 pl-2 pr-3 rounded-3xl">
                             <img
                               src={findname(v.data.tokenAddress).pic}
                               class="rounded-full h-8 w-8"
@@ -143,7 +148,9 @@ export default function Home() {
                         );
                       } else {
                         return (
-                          <div class="items-center flex gap-2 bg-red-200 p-1 pl-2 pr-3 rounded-3xl">
+                          <div 
+                          style={{backgroundColor:"#F9DC8B"}}
+                          class="items-center flex gap-2 bg-red-200 p-1 pl-2 pr-3 rounded-3xl">
                             <img
                               src={findname(v.data.tokenAddress).pic}
                               class="rounded-full h-8 w-8"
@@ -309,7 +316,7 @@ export default function Home() {
                     </div>
                     <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
                       <div
-                        class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-O1xiV"
+                        class="bg-blue-700 p-1.5 text-center text-xs font-medium leading-none text-white style-O1xiV"
                         id="style-O1xiV"
                       >
                         61.98%

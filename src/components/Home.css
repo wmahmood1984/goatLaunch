@@ -1137,7 +1137,7 @@ h2 {
 }     
 
 .bg-blue-700\/50 { 
-    background-color: rgba(29,78,216,.5);
+    background-color: #F76f0b;
 } 
 
 .p-1\.5 { 
@@ -1517,5 +1517,5 @@ svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa {
 
 
 .bg-blue-700{
-    background-color: rgba(29, 78, 216, .5);
+    background-color: #f76f0b;
 }

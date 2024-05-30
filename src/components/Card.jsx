@@ -2,9 +2,11 @@ import React from "react";
 import "./Card.css";
 import { Link } from "react-router-dom";
 import { ethers } from "ethers";
-import {isMobile} from 'react-device-detect';
+import { useMediaQuery } from 'react-responsive'
 
 export default function Card({ v, ethThreshold }) {
+  
+  const isMobile = useMediaQuery({ query: '(max-width: 600px)' })
   return (
     <div 
     style={isMobile? {maxWidth:"100%",marginRight:"2%",marginTop:"2%"}:{}}
@@ -104,7 +106,7 @@ export default function Card({ v, ethThreshold }) {
               (ethers.utils.formatEther(v.ethCollected) / ethThreshold) * 100
             }%`,
           }}
-          class="bg-blue-700/50 p-1.5 text-center text-xs font-medium leading-none text-white style-HciqI"
+          class="bg-blue-700 p-1.5 text-center text-xs font-medium leading-none text-white style-HciqI"
           id="style-HciqI"
         >
           {`${
