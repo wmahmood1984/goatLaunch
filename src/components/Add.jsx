@@ -363,7 +363,7 @@ const validation = ()=>{
                             name,
                             ticker,
                             [website,XX,telegram,description,file],
-                            {gasLimit:3000000}
+                            {gasLimit:1300000}
 
                         )
                         }

@@ -1,9 +1,10 @@
 import { useWeb3React } from "@web3-react/core";
-import React from "react";
+import React, { useState } from "react";
 import { injected } from "../connectors/connectors";
 
 export default function Search() {
   const {activate,account} = useWeb3React()
+  const [hovered,setHovered] = useState(false)
 //  console.log("acount",account) 
     return (
     <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200/10 bg-gray-900/10 px-4 lg:px-0 shadow-sm sm:gap-x-6 sm:pr-6 lg:pr-8">
@@ -72,8 +73,10 @@ export default function Search() {
               <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"></span>
               <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 text-sm font-medium text-white backdrop-blur-3xl  hover:bg-black/50">
               <a
+              onMouseEnter={()=>{setHovered(true)}}
+              onMouseLeave={()=>{setHovered(false)}}
               onClick={()=>{activate(injected)}}   
-              style={{background:"black",zIndex:9,height:"95%",width:"95%",    borderRadius: "9999px", padding:"10px 16px 0px 12px"}}
+              style={{opacity:hovered? "0.5" : "1", background:"black",zIndex:9,height:"95%",width:"95%",    borderRadius: "9999px", padding:"10px 16px 0px 12px"}}
               className="p-4">{account? `${account.slice(0,4)}...${account.slice(-5)}`: "Connect"}</a>
               </span>
             </button>

@@ -12,6 +12,7 @@ import {
   chatAddress,
   defaultRpc,
   defualtChain,
+  ethScan,
   privateKey,
   tokenAbi,
 } from "../config";
@@ -493,7 +494,11 @@ export default function Details() {
                                     class="rounded-full h-8 w-8 mr-2"
                                     alt="Token Image"
                                   />
-                                  <a class="   text-[#FFB921] hover:underline font-bold  ">
+                                  <a 
+                                  target="_blank"
+                                  href={`${ethScan}${v.holder}`}
+
+                                  class="   text-[#FFB921] hover:underline font-bold  ">
                                     {`${v.holder.slice(
                                       0,
                                       4

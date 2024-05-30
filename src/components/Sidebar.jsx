@@ -38,7 +38,7 @@ export default function Sidebar({selected,setSelected}) {
           <div class="flex h-32 shrink-0 items-center">
             <a href="/">
               <img
-                style={{width:"200px",height:"150px"}}
+                style={{width:"200px",height:"auto"}}
                 class="h-16"
                 src={logo}
                 alt="BaseJump"
