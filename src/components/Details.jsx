@@ -3,7 +3,7 @@ import "./Details.css";
 import { useLocation } from "react-router";
 import Search from "./Search";
 import { Contract, ethers } from "ethers";
-import { etw, fN,  writeFunction, wte } from "./writeFun";
+import { etw, fN, writeFunction, wte } from "./writeFun";
 import { useWeb3React } from "@web3-react/core";
 import {
   LaunchAbi,
@@ -29,7 +29,7 @@ export const getContract = (library, account, add, abi) => {
 export default function Details() {
   const { state } = useLocation();
 
-//  console.log("props", state.data);
+  //  console.log("props", state.data);
   const [amount, setAmount] = useState(0);
   const [toggle, setToggle] = useState(false);
   const [buySale, setBuySale] = useState("Buy");
@@ -53,26 +53,27 @@ export default function Details() {
   const [tokensToMint, setTokenstoMint] = useState("0");
   const [expectedEth, setExpectedEth] = useState("0");
   const [ethThreshold, setEthThreshold] = useState("0");
+  const [tokenName, setTokenName] = useState("");
+  const [tokenBalance, setTokenBalance] = useState("0");
+
   const updateChat = async () => {
     setToggle(true);
     try {
       const tx1 = await chatcontract.methods
         .update(text, account, state.data[10])
-        .send({ from: wallet.address,gasLimit:500000 })
+        .send({ from: wallet.address, gasLimit: 500000 })
         .on("confirmation", (e, r) => {
           setToggle(false);
-          setText("")
+          setText("");
         });
     } catch (error) {
-        console.log("error in update",error)
+      console.log("error in update", error);
       setToggle(false);
     }
   };
-  
-  
+
   console.log("chat data", holders);
-  
-  
+
   useEffect(() => {
     const abc = async () => {
       const _data = await contractR.methods.getTokens().call();
@@ -93,26 +94,35 @@ export default function Details() {
 
       const _ethThreshold = await contractR.methods.ethThreshold().call();
       setEthThreshold(ethers.utils.formatEther(_ethThreshold));
+
+      const _tokenName = await tokenContractR.methods.name().call();
+      setTokenName(_tokenName);
+      if (account) {
+        const _tokenBalance = await tokenContractR.methods
+          .balanceOf(account)
+          .call();
+        setTokenBalance(ethers.utils.formatEther(_tokenBalance));
+      }
     };
 
     abc();
   }, [account, toggle]);
 
-
   useEffect(() => {
     const abc = async () => {
-      const _tokensToMint = await contractR.methods.getEthToTokens(etw(amount),state.data[10]).call();
+      const _tokensToMint = await contractR.methods
+        .getEthToTokens(etw(amount), state.data[10])
+        .call();
       setTokenstoMint(wte(_tokensToMint));
 
-      const _expectedEth = await contractR.methods.getTokenToEth(etw(amount),state.data[10]).call();
+      const _expectedEth = await contractR.methods
+        .getTokenToEth(etw(amount), state.data[10])
+        .call();
       setExpectedEth(wte(_expectedEth));
-
-
     };
 
     abc();
   }, [amount]);
-
 
   const validation = () => {
     if (!account) {
@@ -140,11 +150,11 @@ export default function Details() {
             "sellToken",
             () => {
               setToggle(false);
-              setAmount(0)
+              setAmount(0);
             },
             () => {
               setToggle(false);
-              setAmount(0)
+              setAmount(0);
             },
             setToggle,
             data[10],
@@ -174,11 +184,11 @@ export default function Details() {
         "buyTokens",
         () => {
           setToggle(false);
-          setAmount(0)
+          setAmount(0);
         },
         () => {
           setToggle(false);
-          setAmount(0)
+          setAmount(0);
         },
         setToggle,
         data[10],
@@ -190,37 +200,34 @@ export default function Details() {
     }
   };
 
-
-
-  
-
-  const formatTime = (_time)=>{
-    const now = new Date().getTime()/1000
-    const diff = now-_time;
+  const formatTime = (_time) => {
+    const now = new Date().getTime() / 1000;
+    const diff = now - _time;
     // console.log("diff",diff,now,_time)
     // console.log("seconds",diff/60)
     // console.log("minutes",diff/(60*60))
     // console.log("hours",diff/(60*60*24))
-    if(diff/60<1){
-
-        return "less than a minute"       
-    }else if(diff/(60*60)<1){
- 
-        return `${Math.floor(diff/(60))} minutes`
-    }else if(diff/(60*60*24)<1){
-
-        return `${Math.floor(diff/(60*60))} hours`        
-    }else{
-
-        return `${Math.floor(diff/(60*60*24))} days`
+    if (diff / 60 < 1) {
+      return "less than a minute";
+    } else if (diff / (60 * 60) < 1) {
+      return `${Math.floor(diff / 60)} minutes`;
+    } else if (diff / (60 * 60 * 24) < 1) {
+      return `${Math.floor(diff / (60 * 60))} hours`;
+    } else {
+      return `${Math.floor(diff / (60 * 60 * 24))} days`;
     }
-  }
+  };
 
-  
+  const divStyle = {
+    backgroundImage: `url("./assets/backg.png") !important`,
+  };
 
   return (
     data && (
-      <div cz-shortcut-listen="true" class="snipcss-qdNqy">
+      <div
+        //cz-shortcut-listen="true"
+        class="snipcss-qdNqy"
+      >
         <div class="relative h-full">
           <div class="fixed -z-10 pointer-events-none inset-0 overflow-hidden">
             <div class="absolute top-0 left-0 right-0 -u-z-10">
@@ -242,8 +249,11 @@ export default function Details() {
           <div class="lg:pl-72">
             <Search />
 
-            <main class="py-10 relative">
-              <div class="px-4 sm:px-6 lg:px-8 mx-auto">
+            <main
+              style={{ backgroundImage: `url("./assets/backg.png") !important` }}
+              class="py-10 relative"
+            >
+              <div style={divStyle} class="px-4 sm:px-6 lg:px-8 mx-auto">
                 <div class="flex flex-col xl:flex-row gap-4 p-4 relative">
                   <div class="flex-grow">
                     <div
@@ -271,10 +281,14 @@ export default function Details() {
                                 />
                                 <div class="ml-3 bg-green-300 rounded-md pl-1 pr-1 text-black">
                                   <a href="profile?address=0x498ff8B3E0Bba856b7D2F037DefA008708339e67">
-                                    {`${v._user.slice(0,4)}...${v._user.slice(-5)}`}
+                                    {`${v._user.slice(0, 4)}...${v._user.slice(
+                                      -5
+                                    )}`}
                                   </a>
                                 </div>
-                                <div class="ml-3 text-xs">{formatTime(v.time)}</div>
+                                <div class="ml-3 text-xs">
+                                  {formatTime(v.time)}
+                                </div>
                               </div>
                               <div class="flex items-center">
                                 <div class="mt-3 text-sm font-mono overflow-hidden break-words">
@@ -298,7 +312,11 @@ export default function Details() {
                           disabled=""
                           class="mr-5 rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer"
                         >
-                          {toggle? <CircularProgress sx={{color:"white"}}/> :"Send"}
+                          {toggle ? (
+                            <CircularProgress sx={{ color: "white" }} />
+                          ) : (
+                            "Send"
+                          )}
                         </button>
                         {/* <div class="mt-2">
                         <input class="mb-3" type="file" />
@@ -406,13 +424,15 @@ export default function Details() {
                     </p>
                     <div class="mb-5">
                       Total bought:{" "}
-                      {ethers.utils.formatEther(data.ethCollected)} / {ethThreshold} ETH
+                      {ethers.utils.formatEther(data.ethCollected)} /{" "}
+                      {ethThreshold} ETH
                     </div>
                     <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
                       <div
                         style={{
                           width: `${
-                            (ethers.utils.formatEther(data.ethCollected) / ethThreshold) *
+                            (ethers.utils.formatEther(data.ethCollected) /
+                              ethThreshold) *
                             100
                           }%`,
                         }}
@@ -420,7 +440,8 @@ export default function Details() {
                         id="style-Ff8Mx"
                       >
                         {`${Number(
-                          (ethers.utils.formatEther(data.ethCollected) / ethThreshold) *
+                          (ethers.utils.formatEther(data.ethCollected) /
+                            ethThreshold) *
                             100
                         ).toFixed(2)}%`}
                       </div>
@@ -430,7 +451,7 @@ export default function Details() {
                         <button
                           onClick={() => {
                             setBuySale("Buy");
-                            setExpectedEth(0)
+                            setExpectedEth(0);
                           }}
                           class={`btn btn-wide bg-green-500 p-2 rounded-md text-black font-bold w-32 ${
                             buySale == "Sale" ? "opacity-20" : ""
@@ -441,7 +462,7 @@ export default function Details() {
                         <button
                           onClick={() => {
                             setBuySale("Sale");
-                            setTokenstoMint(0)
+                            setTokenstoMint(0);
                           }}
                           class={`btn btn-wide bg-red-500 p-2 rounded-md text-black font-bold w-32 ${
                             buySale == "Buy" ? "opacity-20" : ""
@@ -461,13 +482,59 @@ export default function Details() {
                           }}
                         />
                         <span class="p-2 bg-[#282c33] rounded-r border-l">
-                          ETH
+                          {buySale == "Buy" ? "ETH" : `${tokenName}`}
                         </span>
                       </div>
-                      <div class="ml-2 mt-2 text-sm font-bold ">{buySale=="Buy" ? `You will get ${fN(tokensToMint,2)} tokens` : `you will get ${Number(expectedEth).toFixed(6)} eth` }</div>
+                      {buySale == "Sale" ? (
+                        <div>
+                          <button
+                            onClick={() => {
+                              setAmount(tokenBalance * 0.25);
+                            }}
+                            style={{ marginLeft: "10%", fontWeight: "bold" }}
+                          >
+                            25%
+                          </button>
+                          <button
+                            onClick={() => {
+                              setAmount(tokenBalance * 0.5);
+                            }}
+                            style={{ marginLeft: "10%", fontWeight: "bold" }}
+                          >
+                            50%
+                          </button>
+                          <button
+                            onClick={() => {
+                              setAmount(tokenBalance * 0.75);
+                            }}
+                            style={{ marginLeft: "10%", fontWeight: "bold" }}
+                          >
+                            75%
+                          </button>
+                          <button
+                            onClick={() => {
+                              setAmount(tokenBalance * 1);
+                            }}
+                            style={{ marginLeft: "10%", fontWeight: "bold" }}
+                          >
+                            100%
+                          </button>
+                        </div>
+                      ) : null}
+                      <div class="ml-2 mt-2 text-sm font-bold ">
+                        {buySale == "Buy"
+                          ? `You will get ${fN(tokensToMint, 2)} tokens`
+                          : `you will get ${Number(expectedEth).toFixed(
+                              6
+                            )} eth`}
+                      </div>
                       <button
                         onClick={buySale == "Buy" ? buyFunc : saleFunc}
-                        class="btn btn-wide w-full max-w-xs mt-4 text-black bg-green-500 hover:bg-green-600"
+                        class={`btn btn-wide w-full max-w-xs mt-4 text-black ${
+                          buySale == "Buy"
+                            ? "bg-green-500 hover:bg-green-600"
+                            : "bg-red-500 hover:bg-red-600"
+                        } `}
                         disabled=""
                       >
                         {toggle ? (
@@ -494,11 +561,11 @@ export default function Details() {
                                     class="rounded-full h-8 w-8 mr-2"
                                     alt="Token Image"
                                   />
-                                  <a 
-                                  target="_blank"
-                                  href={`${ethScan}${v.holder}`}
-
-                                  class="   text-[#FFB921] hover:underline font-bold  ">
+                                  <a
+                                    target="_blank"
+                                    href={`${ethScan}${v.holder}`}
+                                    class="   text-[#FFB921] hover:underline font-bold  "
+                                  >
                                     {`${v.holder.slice(
                                       0,
                                       4
@@ -506,9 +573,11 @@ export default function Details() {
                                   </a>
                                 </div>
                                 <div class="text-yellow-400 font-bold text-left">
-                                  {v.balance=="0"? "0": (ethers.utils.formatEther(v.balance) /
-                                    supply) *
-                                    100}{" "}
+                                  {v.balance == "0"
+                                    ? "0"
+                                    : (ethers.utils.formatEther(v.balance) /
+                                        supply) *
+                                      100}{" "}
                                   %
                                 </div>
                               </div>
@@ -540,60 +609,6 @@ export default function Details() {
             </main>
           </div>
         </div>
-        <div class="Toastify"></div>
-        <next-route-announcer
-          id="style-WiFGD"
-          class="style-WiFGD"
-        ></next-route-announcer>
-        <iframe
-          id="verify-api"
-          src="https://verify.walletconnect.com/e7ba0da4ac18303153e8cf4f2e34b2ad"
-          class="style-TAvWK"
-        ></iframe>
-      
-        <div
-          class="snipcss-modal snipcss-micromodal-slide"
-          id="modal-pick-resolution"
-        ></div>
-        <div
-          class="edge_builder edge_builder_top style-fmCaI"
-          id="style-fmCaI"
-        ></div>
-        <div
-          class="edge_builder edge_builder_right style-OFhVd"
-          id="style-OFhVd"
-        ></div>
-        <div
-          class="edge_builder edge_builder_bottom style-Cacac"
-          id="style-Cacac"
-        ></div>
-        <div
-          class="edge_builder edge_builder_left style-Z57sg"
-          id="style-Z57sg"
-        ></div>
-        <div
-          class="edge_builder2 edge_builder_top style-nweoc"
-          id="style-nweoc"
-        ></div>
-        <div
-          class="edge_builder2 edge_builder_right style-vd9te"
-          id="style-vd9te"
-        ></div>
-        <div
-          class="edge_builder2 edge_builder_bottom style-yditB"
-          id="style-yditB"
-        ></div>
-        <div
-          class="edge_builder2 edge_builder_left style-DlHRj"
-          id="style-DlHRj"
-        ></div>
-        <div data-tether-id="1" id="style-dQ5nN" class="style-dQ5nN"></div>
-        <canvas
-          width="70"
-          height="70"
-          id="snipcss-kiwi"
-          class="style-G8GJW"
-        ></canvas>
       </div>
     )
   );

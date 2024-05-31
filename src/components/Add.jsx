@@ -120,7 +120,9 @@ const validation = ()=>{
 
 //console.log("data",file)
     return (
-    <div cz-shortcut-listen="true" class="snipcss-D9VLI">
+    <div 
+    style={{backgroundImage:`url("./assets/backg.png")`}}
+    cz-shortcut-listen="true" class="snipcss-D9VLI">
       <div class="relative h-full">
         <div class="fixed -z-10 pointer-events-none inset-0 overflow-hidden">
           <div class="absolute top-0 left-0 right-0 -u-z-10">

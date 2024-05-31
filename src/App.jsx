@@ -48,7 +48,10 @@ function App() {
 // <button type="button" onClick={abc}>Sign-In with Ethereum</button>
 // <p class="alert">Result:<span id="siweResult"></span></p>
 //     </div>
-    <>  
+    <div
+  
+
+    >  
     <ToastContainer/>
       <Sidebar selected={selected} setSelected={setSelected}/>
       <Routes>
@@ -58,7 +61,7 @@ function App() {
         <Route path="details/:id" element={<Details />}></Route>
 
       </Routes>
-    </>
+    </div>
   );
 }
 

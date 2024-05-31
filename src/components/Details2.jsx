@@ -12,7 +12,7 @@ import Card from "./Card";
 
 import { useMediaQuery } from 'react-responsive'
 
-export default function Home() {
+export default function Details() {
   
   const isMobile = useMediaQuery({ query: '(max-width: 600px)' })
   const { activate, deactivate, account, library, chainId } = useWeb3React();
@@ -79,7 +79,7 @@ export default function Home() {
   return (
     data && (
       <div
-      style={{backgroundImage:`url("./assets/backg.png")`}}
+      style={{backgroundImage:`url("/assets/backg.png")`}}
       class="relative h-full snipcss-oFsOI">
         <div class="fixed -z-10 pointer-events-none inset-0 overflow-hidden">
           <div class="absolute top-0 left-0 right-0 -u-z-10">
@@ -102,12 +102,8 @@ export default function Home() {
           <Search />
           <main class="py-10 relative">
             <div class="px-4 sm:px-6 lg:px-8 mx-auto">
-              <div 
-              style={{overflow:"hidden"}}
-              class="flex flex-col gap-y-4 text-xs mb-5 text-black items-center">
-                <div 
-
-                class="flex gap-x-4">
+              <div class="flex flex-col gap-y-4 text-xs mb-5 text-black items-center">
+                <div class="flex gap-x-4">
                   {Events &&
                     saleEvents &&
                     combinedArray.map((v, e) => {
