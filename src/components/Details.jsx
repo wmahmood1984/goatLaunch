@@ -575,9 +575,9 @@ export default function Details() {
                                 <div class="text-yellow-400 font-bold text-left">
                                   {v.balance == "0"
                                     ? "0"
-                                    : (ethers.utils.formatEther(v.balance) /
+                                    : (Number(ethers.utils.formatEther(v.balance) /
                                         supply) *
-                                      100}{" "}
+                                      100).toFixed(2)}{" "}
                                   %
                                 </div>
                               </div>
