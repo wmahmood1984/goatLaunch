@@ -9,14 +9,26 @@ import { Contract } from "ethers";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { CircularProgress } from "@mui/material";
+import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react'
+import { BrowserProvider, } from 'ethers'
 
-export const getContract = (library, account,add,abi) => {
-	const signer = library?.getSigner(account).connectUnchecked();
-	var contract = new Contract(add,abi, signer);
-	return contract;
-};
+// export const getContract = (library, account,add,abi) => {
+// 	const signer = library?.getSigner(account).connectUnchecked();
+// 	var contract = new Contract(add,abi, signer);
+// 	return contract;
+// };
+
+export const getContract = async (conAdd,conAbi,walletProvider)=>{
+  const ethersProvider = new BrowserProvider(walletProvider)
+  const signer = await ethersProvider.getSigner()
+  // The Contract object
+  const contract = new Contract(conAdd, conAbi, signer)
+  return contract
+}
 
 export default function Add({selected,setSelected}) {
+  const { address, chainId, isConnected } = useWeb3ModalAccount()
+  const { walletProvider } = useWeb3ModalProvider()
   const navigate = useNavigate()
   const [name,setname] = useState("")
   const [ticker,setTicker] = useState("")
@@ -30,8 +42,8 @@ export default function Add({selected,setSelected}) {
   const [fileName,setFileName] = useState("")
   const [toggle,setToggle] = useState(false)
 
-  const {account,library,chainId} = useWeb3React()
-  const contractW = getContract(library,account,LaunchAddress,LaunchAbi)
+  // const {account,library,chainId} = useWeb3React()
+
 
   const captureFile = async (e) => {
     setTNLoading(true)
@@ -86,7 +98,7 @@ export default function Add({selected,setSelected}) {
 }
 
 const validation = ()=>{
-    if(!account){
+    if(!address){
       toast.error("Please connect wallet first")
       return false
     }else if(name==""){
@@ -352,9 +364,10 @@ const validation = ()=>{
                   </a>
                   <button
                     
-                    onClick={()=>{
+                    onClick={async ()=>{
                         const checking = validation()
                         if(checking){
+                          const contractW = await getContract(LaunchAddress,LaunchAbi,walletProvider)
                           writeFunction(
                             "create Token",
                             contractW,

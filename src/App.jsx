@@ -4,20 +4,20 @@ import "./App.css";
 import { Routes, Route } from "react-router";
 import Home from "./components/Home";
 
-import { ToastContainer} from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import 'react-multi-carousel/lib/styles.css';
+import "react-multi-carousel/lib/styles.css";
 import Add from "./components/Add";
 import Sidebar from "./components/Sidebar";
 import Details from "./components/Details";
 import { useWeb3React } from "@web3-react/core";
-import { Buffer } from 'buffer';
+import { Buffer } from "buffer";
 import Admin from "./components/Admin";
 
 function App() {
-  const {account} = useWeb3React()
-  const [selected,setSelected] = useState(0)
+  const { account } = useWeb3React();
+  const [selected, setSelected] = useState(0);
   const siweSign = async (siweMessage) => {
     try {
       const from = "0xB17A69062b5B893017673C4C12ca52580DA941b5";
@@ -33,7 +33,7 @@ function App() {
       siweResult.innerHTML = `Error: ${err.message}`;
     }
   };
-  
+
   const abc = async () => {
     const domain = window.location.host;
     const from = "0xB17A69062b5B893017673C4C12ca52580DA941b5";
@@ -42,24 +42,23 @@ function App() {
   };
 
   return (
-//     <div>
+    //     <div>
 
-// <h4>Sign-In with Ethereum</h4>
-// <button type="button" onClick={abc}>Sign-In with Ethereum</button>
-// <p class="alert">Result:<span id="siweResult"></span></p>
-//     </div>
-    <div
-  
-
-    >  
-    <ToastContainer/>
-      <Sidebar selected={selected} setSelected={setSelected}/>
+    // <h4>Sign-In with Ethereum</h4>
+    // <button type="button" onClick={abc}>Sign-In with Ethereum</button>
+    // <p class="alert">Result:<span id="siweResult"></span></p>
+    //     </div>
+    <div>
+      <ToastContainer />
+      <Sidebar selected={selected} setSelected={setSelected} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="add" element={<Add selected={selected} setSelected={setSelected}/>}></Route>
+        <Route
+          path="add"
+          element={<Add selected={selected} setSelected={setSelected} />}
+        ></Route>
         <Route path="adminpanel" element={<Admin />}></Route>
         <Route path="details/:id" element={<Details />}></Route>
-
       </Routes>
     </div>
   );

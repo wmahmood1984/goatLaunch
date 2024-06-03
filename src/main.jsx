@@ -7,50 +7,55 @@ import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 
 
-// import { createWeb3Modal } from '@web3modal/wagmi/react'
-// import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
+import { defaultRpc, defualtChain } from './config.js';
 
-// import { WagmiProvider } from 'wagmi'
-// import { arbitrum, mainnet } from 'wagmi/chains'
-// import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+// 1. Get projectId
+const projectId = 'b27a2874021a4091a9123942dd0b075f'
 
-// // 0. Setup queryClient
-// const queryClient = new QueryClient()
+// 2. Set chains
+const mainnet = {
+  chainId: Number(defualtChain),
+  name: 'Spolia',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+//  rpcUrl: 'https://cloudflare-eth.com'
+rpcUrl :  defaultRpc
+}
 
-// // 1. Get projectId at https://cloud.walletconnect.com
-// const projectId = 'b27a2874021a4091a9123942dd0b075f'
+// 3. Create a metadata object
+const metadata = {
+  name: 'My Website',
+  description: 'My Website description',
+  url: 'http://localhost:5173/', // origin must match your domain & subdomain
+  icons: ['https://avatars.mywebsite.com/']
+}
 
-// // 2. Create wagmiConfig
-// const metadata = {
-//   name: 'Web3Modal',
-// //  description: 'Web3Modal Example',
-//   url: 'https://web3edulabs.surge.sh/#', // origin must match your domain & subdomain
-//   icons: ['https://avatars.githubusercontent.com/u/37784886']
-// }
+// 4. Create Ethers config
+const ethersConfig = defaultConfig({
+  /*Required*/
+  metadata,
 
-// const chains = [mainnet, arbitrum]
-// const config = defaultWagmiConfig({
-//   chains,
-//   projectId,
-//   metadata,
+  /*Optional*/
+  enableEIP6963: true, // true by default
+  enableInjected: true, // true by default
+  enableCoinbase: true, // true by default
+  rpcUrl: '...', // used for the Coinbase SDK
+  defaultChainId: 1 // used for the Coinbase SDK
+})
 
-// })
-
-// // 3. Create modal
-// createWeb3Modal({
-//   wagmiConfig: config,
-//   projectId,
-//   enableAnalytics: true, // Optional - defaults to your Cloud configuration
-//   enableOnramp: true // Optional - false as default
-// })
-
-// export function Web3ModalProvider({ children }) {
-//   return (
-//     <WagmiProvider config={config}>
-//       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-//     </WagmiProvider>
-//   )
-// }
+// 5. Create a Web3Modal instance
+createWeb3Modal({
+  ethersConfig,
+  chains: [mainnet],
+  projectId,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+  ,themeVariables: {
+    '--w3m-color-mix': 'black',
+    '--w3m-color-mix-strength': 80,
+    '--w3m-accent': "grey"
+  }
+})
 
 function getLibrary(provider) {
   const library = new Web3Provider(provider);
@@ -62,9 +67,9 @@ function getLibrary(provider) {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
       <Router>
-      <Web3ReactProvider getLibrary={getLibrary}>
+      {/* <Web3ReactProvider getLibrary={getLibrary}> */}
       <App />
-      </Web3ReactProvider>
+      {/* </Web3ReactProvider> */}
        
       </Router>
   

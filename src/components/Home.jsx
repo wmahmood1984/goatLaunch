@@ -5,7 +5,7 @@ import Search from "./Search";
 import { useWeb3React } from "@web3-react/core";
 import { LaunchAbi, LaunchAddress, defaultRpc, defualtChain } from "../config";
 import Web3 from "web3";
-import { ethers } from "ethers";
+import { ethers, formatEther } from "ethers";
 import { Link } from "react-router-dom";
 import { wte } from "./writeFun";
 import Card from "./Card";
@@ -32,7 +32,7 @@ export default function Home() {
       setData(_data);
       setFilteredData(_data);
       const _ethThreshold = await contractR.methods.ethThreshold().call();
-      setEthThreshold(ethers.utils.formatEther(_ethThreshold));
+      setEthThreshold(formatEther(_ethThreshold));
 
       const _block = await web3.eth.getBlockNumber();
 
@@ -582,7 +582,7 @@ export default function Home() {
                     //           <div class="min-w-0 flex-auto">
                     //             <div class="mt-1">
                     //               <div class="text-sm">
-                    //                 {ethers.utils.formatEther(v.ethCollected)} /{" "}
+                    //                 {formatEther(v.ethCollected)} /{" "}
                     //                 {ethThreshold} ETH
                     //               </div>
                     //             </div>
@@ -663,7 +663,7 @@ export default function Home() {
                     //         <div
                     //           style={{
                     //             width: `${
-                    //               (ethers.utils.formatEther(v.ethCollected) /
+                    //               (formatEther(v.ethCollected) /
                     //                 ethThreshold) *
                     //               100
                     //             }%`,
@@ -672,7 +672,7 @@ export default function Home() {
                     //           id="style-8UWQr"
                     //         >
                     //           {`${
-                    //             (ethers.utils.formatEther(v.ethCollected) /
+                    //             (formatEther(v.ethCollected) /
                     //               ethThreshold) *
                     //             100
                     //           }%`}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Details.css";
 import { useLocation } from "react-router";
 import Search from "./Search";
-import { Contract, ethers } from "ethers";
+import { Contract, ethers, formatEther, parseEther } from "ethers";
 import { etw, fN, writeFunction, wte } from "./writeFun";
 import { useWeb3React } from "@web3-react/core";
 import {
@@ -11,7 +11,7 @@ import {
   chatAbi,
   chatAddress,
   defaultRpc,
-  defualtChain,
+  defualtChain, 
   ethScan,
   privateKey,
   tokenAbi,
@@ -19,14 +19,26 @@ import {
 import Web3 from "web3";
 import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
+import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react'
+import { BrowserProvider, } from 'ethers'
 
-export const getContract = (library, account, add, abi) => {
-  const signer = library?.getSigner(account).connectUnchecked();
-  var contract = new Contract(add, abi, signer);
-  return contract;
-};
+// export const getContract = (library, account, add, abi) => {
+//   const signer = library?.getSigner(account).connectUnchecked();
+//   var contract = new Contract(add, abi, signer);
+//   return contract;
+// };
+
+export const getContract = async (conAdd,conAbi,walletProvider)=>{
+  const ethersProvider = new BrowserProvider(walletProvider)
+  const signer = await ethersProvider.getSigner()
+  // The Contract object
+  const contract = new Contract(conAdd, conAbi, signer)
+  return contract
+}
 
 export default function Details() {
+  const { address, chainId, isConnected } = useWeb3ModalAccount()
+  const { walletProvider } = useWeb3ModalProvider()
   const { state } = useLocation();
 
   //  console.log("props", state.data);
@@ -35,9 +47,9 @@ export default function Details() {
   const [buySale, setBuySale] = useState("Buy");
   const [text, setText] = useState();
 
-  const { account, library, chainId } = useWeb3React();
-  const contractW = getContract(library, account, LaunchAddress, LaunchAbi);
-  const tokenContract = getContract(library, account, state.data[10], tokenAbi);
+  // const { account, library, chainId } = useWeb3React();
+  // const contractW = getContract(library, account, LaunchAddress, LaunchAbi);
+ // const tokenContract = getContract(library, account, state.data[10], tokenAbi);
 
   const wchain = chainId ? chainId : defualtChain;
   const web3 = new Web3(new Web3.providers.HttpProvider(defaultRpc));
@@ -60,7 +72,7 @@ export default function Details() {
     setToggle(true);
     try {
       const tx1 = await chatcontract.methods
-        .update(text, account, state.data[10])
+        .update(text, address, state.data[10])
         .send({ from: wallet.address, gasLimit: 500000 })
         .on("confirmation", (e, r) => {
           setToggle(false);
@@ -85,7 +97,7 @@ export default function Details() {
       setHolders(_holders);
 
       const _totalSupply = await tokenContractR.methods.totalSupply().call();
-      setsupply(ethers.utils.formatEther(_totalSupply));
+      setsupply(formatEther(_totalSupply));
 
       const _chatData = await chatcontract.methods
         .getchats(state.data[10])
@@ -93,20 +105,20 @@ export default function Details() {
       setChatData(_chatData);
 
       const _ethThreshold = await contractR.methods.ethThreshold().call();
-      setEthThreshold(ethers.utils.formatEther(_ethThreshold));
+      setEthThreshold(formatEther(_ethThreshold));
 
       const _tokenName = await tokenContractR.methods.name().call();
       setTokenName(_tokenName);
-      if (account) {
+      if (address) {
         const _tokenBalance = await tokenContractR.methods
-          .balanceOf(account)
+          .balanceOf(address)
           .call();
-        setTokenBalance(ethers.utils.formatEther(_tokenBalance));
+        setTokenBalance(formatEther(_tokenBalance));
       }
     };
 
     abc();
-  }, [account, toggle]);
+  }, [address, toggle]);
 
   useEffect(() => {
     const abc = async () => {
@@ -125,7 +137,7 @@ export default function Details() {
   }, [amount]);
 
   const validation = () => {
-    if (!account) {
+    if (!address) {
       toast.error("Please connect wallet first");
       return false;
     } else if (amount < 0.001) {
@@ -138,6 +150,8 @@ export default function Details() {
 
   const saleFunc = async () => {
     const check = validation();
+    const tokenContract = await getContract(state.data[10], tokenAbi,walletProvider)
+    const contractW = await getContract(LaunchAddress, LaunchAbi,walletProvider);
     if (check) {
       writeFunction(
         "approve",
@@ -158,7 +172,7 @@ export default function Details() {
             },
             setToggle,
             data[10],
-            ethers.utils.parseEther(amount.toString()),
+            parseEther(amount.toString()),
             {
               gasLimit: 3000000,
             }
@@ -169,14 +183,16 @@ export default function Details() {
         },
         setToggle,
         LaunchAddress,
-        ethers.utils.parseEther(amount.toString()),
+        parseEther(amount.toString()),
         { gasLimit: 300000 }
       );
     }
   };
 
-  const buyFunc = async () => {
+  const buyFunc = async (e) => {
+    e.preventDefault()
     const check = validation();
+    const contractW = await getContract(LaunchAddress, LaunchAbi,walletProvider);
     if (check) {
       writeFunction(
         "Buy",
@@ -194,7 +210,7 @@ export default function Details() {
         data[10],
         {
           gasLimit: 3000000,
-          value: ethers.utils.parseEther(amount.toString()),
+          value: parseEther(amount.toString()),
         }
       );
     }
@@ -424,14 +440,14 @@ export default function Details() {
                     </p>
                     <div class="mb-5">
                       Total bought:{" "}
-                      {ethers.utils.formatEther(data.ethCollected)} /{" "}
+                      {formatEther(data.ethCollected)} /{" "}
                       {ethThreshold} ETH
                     </div>
                     <div class="w-full bg-neutral-600/25 rounded-md overflow-hidden shrink-0 mb-4">
                       <div
                         style={{
                           width: `${
-                            (ethers.utils.formatEther(data.ethCollected) /
+                            (formatEther(data.ethCollected) /
                               ethThreshold) *
                             100
                           }%`,
@@ -440,7 +456,7 @@ export default function Details() {
                         id="style-Ff8Mx"
                       >
                         {`${Number(
-                          (ethers.utils.formatEther(data.ethCollected) /
+                          (formatEther(data.ethCollected) /
                             ethThreshold) *
                             100
                         ).toFixed(2)}%`}
@@ -575,7 +591,7 @@ export default function Details() {
                                 <div class="text-yellow-400 font-bold text-left">
                                   {v.balance == "0"
                                     ? "0"
-                                    : (Number(ethers.utils.formatEther(v.balance) /
+                                    : (Number(formatEther(v.balance) /
                                         supply) *
                                       100).toFixed(2)}{" "}
                                   %

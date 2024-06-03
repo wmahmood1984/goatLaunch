@@ -1,7 +1,7 @@
 import React from "react";
 import "./Card.css";
 import { Link } from "react-router-dom";
-import { ethers } from "ethers";
+import { ethers, formatEther } from "ethers";
 import { useMediaQuery } from 'react-responsive'
 
 export default function Card({ v, ethThreshold }) {
@@ -45,7 +45,7 @@ export default function Card({ v, ethThreshold }) {
           <div class="min-w-0 flex-auto">
             <div class="mt-1">
               <div class="text-sm">
-                {ethers.utils.formatEther(v.ethCollected)} / {ethThreshold} ETH
+                {formatEther(v.ethCollected)} / {ethThreshold} ETH
               </div>
             </div>
           </div>
@@ -103,14 +103,14 @@ export default function Card({ v, ethThreshold }) {
         <div
           style={{
             width: `${
-              (ethers.utils.formatEther(v.ethCollected) / ethThreshold) * 100
+              (formatEther(v.ethCollected) / ethThreshold) * 100
             }%`,
           }}
           class="bg-blue-700 p-1.5 text-center text-xs font-medium leading-none text-white style-HciqI"
           id="style-HciqI"
         >
           {`${
-            (ethers.utils.formatEther(v.ethCollected) / ethThreshold) * 100
+            (formatEther(v.ethCollected) / ethThreshold) * 100
           }%`}
         </div>
       </div>

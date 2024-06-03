@@ -1,4 +1,4 @@
-import { Contract, ethers } from "ethers"
+import { Contract, formatEther, parseEther,  } from "ethers"
 
 export const writeFunction = async (name,contract,functionName,callBack,callBackError,setToggle,...args)=>{
     console.log("first",...args)
@@ -23,11 +23,11 @@ export const getContract = (library, account,add,abi) => {
 };
 
 export const etw = (v)=>{
-    return ethers.utils.parseEther(v)
+    return parseEther(v)
 }
 
 export const wte = (v)=>{
-    return ethers.utils.formatEther(v)
+    return formatEther(v)
 }
 
 export const fN = (x,d)=> {
