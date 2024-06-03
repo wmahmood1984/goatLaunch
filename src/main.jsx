@@ -27,7 +27,7 @@ rpcUrl :  defaultRpc
 const metadata = {
   name: 'My Website',
   description: 'My Website description',
-  url: 'http://localhost:5173/', // origin must match your domain & subdomain
+  url: 'https://goatlaunch.netlify.app/', // origin must match your domain & subdomain
   icons: ['https://avatars.mywebsite.com/']
 }
 
